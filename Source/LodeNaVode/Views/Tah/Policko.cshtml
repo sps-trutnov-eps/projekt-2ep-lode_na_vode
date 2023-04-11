@@ -1,0 +1,21 @@
+﻿@{
+    int sirka = 10;
+    int vyska = 15;
+    int cislo = 0;
+}
+
+<table>
+    @for (int x = 0; x < sirka; x++)
+        {
+            <tr>
+            @for (int y = 0; y < vyska; y++, cislo++)
+                {
+                   <td>
+                        <form action="/Tah/Policko/@cislo">
+                            <input type="submit" value="X"/>
+                        </form>
+                   </td> 
+                }
+            </tr>
+        }
+</table>

@@ -3,10 +3,10 @@
 namespace main_api {
     public class Engine {
 
-        Log GetLog;
+        private Log GetLog;
         public List<Hrac> Hraci;
         public List<Lod> Lode;
-        GeneratorLodi LodneGenerator;
+        private GeneratorLodi LodneGenerator;
 
         /// <summary>
         /// Tady v tomhle budete mít tu hru.
@@ -19,15 +19,15 @@ namespace main_api {
             // načíst Log objekt
             GetLog = new Log(cestaKHlaskamLodi,cestaKNalepkam);
 
+            // inicializovat lode
+            Lode = new List<Lod>();
+            LodneGenerator = new GeneratorLodi(cestaKLodim);
+
             // načíst jednotlive hrace jako structy
             Hraci = new List<Hrac>();
             foreach (string[] hrac in hraci) {
                 Hraci.Add(new Hrac() { Jmeno = hrac[0], Tym = hrac[1] });
             }
-
-            // inicializovat lode
-            Lode = new List<Lod>();
-            GeneratorLodi LodneGenerator = new GeneratorLodi(cestaKLodim);
         }
 
         public void Strelba(int x, int y) { 
@@ -44,7 +44,8 @@ namespace main_api {
         /// <param name="ucitel">kdo na ni jede</param>
         /// <exception cref="NotImplementedException"></exception>
         public void UmistitLod(int x, int y, string tvar , string hrac, string ucitel) {
-            Lode.Add(LodneGenerator.NovaLod());
+						Console.WriteLine(x.ToString()+" "+y.ToString()+" "+tvar+" "+hrac+" "+ucitel);
+            Lode.Add(LodneGenerator.NovaLod(x, y, tvar ,hrac, ucitel));
         }
 
         public void PohybLode() {

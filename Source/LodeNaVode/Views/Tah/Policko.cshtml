@@ -1,21 +1,45 @@
-﻿@{
+﻿@model LodeNaVode.Controllers.TypPolicka[,];
+
+@{
     int sirka = 10;
     int vyska = 15;
     int cislo = 0;
 }
 
 <table>
-    @for (int x = 0; x < sirka; x++)
-        {
-            <tr>
-            @for (int y = 0; y < vyska; y++, cislo++)
-                {
-                   <td>
-                        <form action="/Tah/Policko/@cislo">
-                            <input type="submit" value="X"/>
-                        </form>
-                   </td> 
-                }
-            </tr>
-        }
+    @for (int y = 0; y < Model.GetLength(0); y++)
+    {
+        <tr>
+            @for (int x = 0; x < Model.GetLength(1); x++, cislo++)
+            {
+                <td>
+
+                    @if (Model[y, x] == LodeNaVode.Controllers.TypPolicka.Lod)
+                    {
+                        <a href="/Tah/Policko/@cislo">L</a>
+                    }
+                    @if (Model[y, x] == LodeNaVode.Controllers.TypPolicka.ZasahLod)
+                    {
+                        <a href="/Tah/Policko/@cislo">Z</a>
+                    }
+                    @if (Model[y, x] == LodeNaVode.Controllers.TypPolicka.ZasahMimo)
+                    {
+                        <a href="/Tah/Policko/@cislo">M</a>
+                    }
+                    @if (Model[y, x] == LodeNaVode.Controllers.TypPolicka.LodPotopena)
+                    {
+                        <a href="/Tah/Policko/@cislo">P</a>
+                    }
+                    else if (Model[y, x] == LodeNaVode.Controllers.TypPolicka.Voda)
+                    {
+                        <a href="/Tah/Policko/@cislo">V</a>
+                    }
+                    @{
+                        ;
+                    }
+
+                </td>
+            }
+        </tr>
+    }
 </table>

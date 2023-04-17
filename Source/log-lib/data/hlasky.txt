@@ -1,0 +1,3 @@
+lod1
+	trefa;cool trefa;AAAAAAA
+	pohyb;cool pohyb;bbbbbbb

@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 namespace log_lib {
     public struct Lod { 
         string jmeno;
-        string[] hitHlasky;
-        string[] moveHlasky;
+        public string[] hitHlasky;
+        public string[] moveHlasky;
         public Lod(string jmeno, string[] hit, string[] move)
         {
             this.jmeno = jmeno;
@@ -39,7 +39,6 @@ namespace log_lib {
 
         }
         public Lod GetHlasky(string jmenoLodi) {
-            string jmeno = jmenoLodi;
             string[] hitHlasky = new string[10];
             string[] moveHlasky = new string[10];
             while (hlaskySR.ReadLine() != null) {
@@ -53,7 +52,7 @@ namespace log_lib {
             return lod;
         }
         public string GetHracBarva(string jmenoHrace) {
-
+            return "a";
         }
 
     }

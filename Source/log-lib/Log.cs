@@ -29,7 +29,7 @@ namespace log_lib {
 
         public string GetLodMovement(Hrac hrac, Lod lod) {
             string message;
-            string miss = lod.hitHlasky[rnd.Next(0, lod.hitHlasky.Length)];
+            string miss = lod.moveHlasky[rnd.Next(0, lod.hitHlasky.Length)];
             message = hrac.jmeno + ":" + miss;
             EntireLog.Add(message);
             return message;

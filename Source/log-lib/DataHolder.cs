@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace log_lib {
     public struct Lod { 
-        string jmeno;
+        public string jmeno;
         public string[] hitHlasky;
         public string[] moveHlasky;
         public Lod(string jmeno, string[] hit, string[] move)
@@ -22,7 +23,7 @@ namespace log_lib {
         public string barva;
     }
 
-    internal class DataHolder {
+    public class DataHolder {
 
         List<Lod> Lode;
         List<Hrac> Hraci;
@@ -34,18 +35,20 @@ namespace log_lib {
         public DataHolder(string cestakLodim,string cestaKNalepkam){
             Lode = new List<Lod>();
             Hraci = new List<Hrac>();
-            StreamReader hlaskySR = new StreamReader(cestakLodim);
-            StreamReader nalepkySR = new StreamReader(cestaKNalepkam);
-
+            hlaskySR = new StreamReader(Path.GetFullPath(cestakLodim));
+            nalepkySR = new StreamReader(Path.GetFullPath(cestaKNalepkam));
         }
         public Lod GetHlasky(string jmenoLodi) {
+            bool read = true;
             string[] hitHlasky = new string[10];
             string[] moveHlasky = new string[10];
-            while (hlaskySR.ReadLine() != null) {
-                if (hlaskySR.ReadLine() == jmenoLodi)
+            while (read) {
+                string line = hlaskySR.ReadLine();              
+                if (line == jmenoLodi)
                 {
                     hitHlasky = hlaskySR.ReadLine().Split(";");
                     moveHlasky = hlaskySR.ReadLine().Split(";");
+                    read = false;
                 }
             }
             Lod lod = new Lod(jmenoLodi, hitHlasky, moveHlasky);

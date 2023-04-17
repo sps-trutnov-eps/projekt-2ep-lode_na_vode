@@ -6,7 +6,7 @@ namespace log_lib {
     public class Log {
 
         private List<string> EntireLog;
-        private DataHolder Lode;
+        public DataHolder Lode;
         private Random rnd;
 
         public Log(string cestaKLodim, string cestaKNalepkam) {
@@ -18,7 +18,7 @@ namespace log_lib {
         public string GetHitMessage(Hrac hrac, Lod lod) {
             string message;
             string hit = lod.hitHlasky[rnd.Next(0, lod.hitHlasky.Length)];
-            message = hrac.jmeno + " " + hit;
+            message = hrac.jmeno + ":" + hit;
             EntireLog.Add(message);
             return message;
         }
@@ -30,17 +30,18 @@ namespace log_lib {
         public string GetLodMovement(Hrac hrac, Lod lod) {
             string message;
             string miss = lod.hitHlasky[rnd.Next(0, lod.hitHlasky.Length)];
-            message = hrac.jmeno + " " + miss;
+            message = hrac.jmeno + ":" + miss;
             EntireLog.Add(message);
             return message;
         }
 
         public string MissStreak(string jmenoHrace, ushort pocetMisu) {
-            return "missstreak"
+            return "missstreak";
         }
 
         public string[] GetNalepky() {
-            return "a";
+            string[] a = new string[5];
+            return a;
         }
 
         public string ActivateNalepka(string jmenoHrace, string Nalepka) {

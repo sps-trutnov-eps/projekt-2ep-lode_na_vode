@@ -14,27 +14,27 @@ namespace log_lib {
         }
 
         public string GetHitMessage(string jmenoHrace, string jmenoLodi) {
-
+            throw new NotImplementedException();
         }
 
         public string[] GetEntireLog() {
-
+            throw new NotImplementedException();
         }
 
         public string GetLodMovement(string jmenoHrace, string jmenoLodi) {
-
+            throw new NotImplementedException();
         }
 
         public string MissStreak(string jmenoHrace, ushort pocetMisu) {
-
+            throw new NotImplementedException();
         }
 
         public string[] GetNalepky() {
-
+            throw new NotImplementedException();
         }
 
         public string ActivateNalepka(string jmenoHrace, string Nalepka) {
-
+            throw new NotImplementedException();
         }
 
     }

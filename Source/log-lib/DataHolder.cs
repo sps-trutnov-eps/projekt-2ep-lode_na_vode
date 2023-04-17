@@ -19,18 +19,19 @@ namespace log_lib {
 
         List<Lod> Lode;
         List<Hrac> Hraci;
-        List<string> nalepky;
+        List<string> Nalepky;
 
         public DataHolder(string cestakLodim,string cestaKNalepkam){
             Lode = new List<Lod>();
             Hraci = new List<Hrac>();
+            Nalepky = new List<string>();
         }
         public string[] GetHlasky(string jmenoLodi) {
-
+            throw new NotImplementedException();
         }
 
         public string GetHracBarva(string jmenoHrace) {
-
+            throw new NotImplementedException();
         }
 
     }

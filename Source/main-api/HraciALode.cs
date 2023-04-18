@@ -16,6 +16,7 @@ namespace main_api {
         public string Typ;
         public string Ucitel;
         public string Hrac;
+				public string Tym;
 
         public int[] CentralneBod; // X,Y,funkčno (1/0)
         public int[][] ZbytekBodu;
@@ -91,7 +92,7 @@ namespace main_api {
 				//////////////////
 				// get nova lod //
 				//////////////////
-        public Lod NovaLod(int x, int y, string tvar , string hrac, string ucitel) {
+        public Lod NovaLod(int x, int y, string tvar , string hrac, string ucitel,string tym) {
 					// check for ship in shipyard || something
 					int shipIndex = -1;
 					for (int i = 0; i < LodneHolrery.Count; i++)
@@ -104,7 +105,7 @@ namespace main_api {
 						throw new Exception("Ha-Ha Loď v loděnici nieje. Užijte si debugování!!!");
 
 					// postavit loďku dle plánu
-					Lod titanic = new Lod() {Typ = LodneHolrery[shipIndex].Typ, Ucitel = ucitel, Hrac = hrac,
+					Lod titanic = new Lod() {Typ = LodneHolrery[shipIndex].Typ, Ucitel = ucitel, Hrac = hrac, Tym = tym,
 					 	CentralneBod = new int[] {x,y,1}, ZbytekBodu = LodneHolrery[shipIndex].ZbytekBodu.ToArray()};
 
 					// otestovat, jestli je v limitach

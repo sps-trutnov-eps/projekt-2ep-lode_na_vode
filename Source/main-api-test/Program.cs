@@ -18,6 +18,7 @@ namespace main_api_test {
             }
 
 						engine.UmistitLod(10,10,"L","TenOravnyKidZeŠtvrtéTriddy","Jan Ámos Komendský");
+						engine.UmistitLod(3,7,"P","Sigmar Stefinsson","Severus Snape");
 
 						Console.WriteLine(engine.StrelbaNaLod(-37,-37));
 						Console.WriteLine(engine.StrelbaNaLod(10,10));
@@ -27,21 +28,19 @@ namespace main_api_test {
 						Lod L = engine.Lode[0];
 						Console.WriteLine(L.Typ+" "+L.Ucitel+" "+L.Hrac);
 						Console.WriteLine(L.CentralneBod[0].ToString()+" "+L.CentralneBod[1].ToString()+" "+L.CentralneBod[2].ToString());
-						foreach (int[] þ in L.ZbytekBodu){
-						Console.WriteLine(þ[0].ToString()+" "+þ[1].ToString()+" "+þ[2].ToString());
+						foreach (int[] þ in L.ZbytekBodu)
+							Console.WriteLine(þ[0].ToString()+" "+þ[1].ToString()+" "+þ[2].ToString());
 
 						Console.WriteLine();
 
-						Console.WriteLine(engine.DejMiAktualnehoHrace().Jmeno);
-						engine.DalseHrac();
-						Console.WriteLine(engine.DejMiAktualnehoHrace().Jmeno);
-						engine.DalseHrac();
-						Console.WriteLine(engine.DejMiAktualnehoHrace().Jmeno);
-						engine.DalseHrac();
-						Console.WriteLine(engine.DejMiAktualnehoHrace().Jmeno);
-						engine.DalseHrac();
-						Console.WriteLine(engine.DejMiAktualnehoHrace().Jmeno);
-						}
+						Console.WriteLine(engine.VyhralNekdo());
+						engine.StrelbaNaLod(3,7);
+						Console.WriteLine(engine.VyhralNekdo());
+						Console.WriteLine(engine.ZiskatVytezneTym());
+
+						foreach (string i in engine.ZiskatVytezneHrace())
+							Console.Write(i + " ");
+						Console.WriteLine();
         }
     }
 }

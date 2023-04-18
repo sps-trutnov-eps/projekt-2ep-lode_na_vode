@@ -48,7 +48,7 @@ namespace main_api {
         /// <exception cref="NotImplementedException"></exception>
         public void UmistitLod(int x, int y, string tvar , string hrac, string ucitel) {
 						Console.WriteLine(x.ToString()+" "+y.ToString()+" "+tvar+" "+hrac+" "+ucitel);
-            Lode.Add(LodneGenerator.NovaLod(x, y, tvar ,hrac, ucitel));
+            Lode.Add(LodneGenerator.NovaLod(x, y, tvar ,hrac, ucitel,ZiskatTymZHraceStringu(hrac)));
         }
 
 				public bool StrelbaNaLod(int x, int y) {
@@ -116,6 +116,47 @@ namespace main_api {
 					return Hraci[IndexHraceAktualneHrajiciho];
 				}
 
+				public bool VyhralNekdo(){
+					string? firstTeam = null;
+					// projdu lodě
+					foreach (Lod bot in Lode){
+						// když první loďka, zapiš tým
+						if (firstTeam == null)
+							firstTeam = bot.Tym;
+						// jinak když je jiný tým, tak ještě nikdo nevyhrál
+						else if (firstTeam != bot.Tym)
+							return false;
+					}
+
+					// Pokud se našal jen jeden tým, pak ale někdo vyhrál (nejspíš ten tým)
+					return true;
+				}
+
+				public string ZiskatVytezneTym(){
+					return Lode[0].Tym;
+				}
+
+				public string[] ZiskatVytezneHrace(){
+					string tym = ZiskatVytezneTym();
+					List<string> navratka = new List<string>();
+
+					// projdu hrace a pridam ty se schodným týmem
+					foreach (Hrac H in Hraci)
+						if (H.Tym == tym)
+							navratka.Add(H.Jmeno);
+
+					// a navrátit návratku
+					return navratka.ToArray();
+				}
+
+				private string ZiskatTymZHraceStringu(string hrac){
+					foreach (Hrac H in Hraci){
+						if (H.Jmeno == hrac)
+							return H.Tym;
+					}
+
+					throw new Exception("Hráč nepůsobí zrovna validně...");
+				}
 
 
 

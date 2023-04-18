@@ -7,6 +7,7 @@ namespace main_api {
         public List<Hrac> Hraci {get;}
         public List<Lod> Lode {get;}
         private GeneratorLodi LodneGenerator;
+				private int IndexHraceAktualneHrajiciho = 0;
 
         /// <summary>
         /// Tady v tomhle budete mít tu hru.
@@ -105,10 +106,15 @@ namespace main_api {
             throw new NotImplementedException();
         }
 
-        public void DalseHrac() {
-            throw new NotImplementedException();
-        }
-        
+				public void DalseHrac(){
+					IndexHraceAktualneHrajiciho++;
+					if (IndexHraceAktualneHrajiciho > Hraci.Count-1)
+						IndexHraceAktualneHrajiciho = 0;
+				}
+
+				public Hrac DejMiAktualnehoHrace(){
+					return Hraci[IndexHraceAktualneHrajiciho];
+				}
 
 
 

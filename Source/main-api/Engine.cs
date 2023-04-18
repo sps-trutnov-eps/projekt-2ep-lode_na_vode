@@ -33,10 +33,6 @@ namespace main_api {
             }
         }
 
-        public void Strelba(int x, int y) { 
-            throw new NotImplementedException();
-        }
-
         /// <summary>
         /// prida lod ty magor
         /// </summary>
@@ -102,10 +98,6 @@ namespace main_api {
 					}
 				}
 
-        public void PohybLode() {
-            throw new NotImplementedException();
-        }
-
 				public void DalseHrac(){
 					IndexHraceAktualneHrajiciho++;
 					if (IndexHraceAktualneHrajiciho > Hraci.Count-1)
@@ -158,6 +150,44 @@ namespace main_api {
 					throw new Exception("Hráč nepůsobí zrovna validně...");
 				}
 
+        public bool PohybLode(int index, string smer) { // sever/vychod/jih/zapad
+					switch (smer){
+						case "sever":
+							Lode[index].CentralneBod[1]--;
+							if (!LodneGenerator.JeLodVMape(Lode[index])){
+								Lode[index].CentralneBod[1]++;
+								return false;
+							}
+							return true;
+
+						case "vychod":
+							Lode[index].CentralneBod[0]++;
+							if (!LodneGenerator.JeLodVMape(Lode[index])){
+								Lode[index].CentralneBod[0]--;
+								return false;
+							}
+							return true;
+
+						case "jih":
+							Lode[index].CentralneBod[1]++;
+							if (!LodneGenerator.JeLodVMape(Lode[index])){
+								Lode[index].CentralneBod[1]--;
+								return false;
+							}
+							return true;
+
+						case "zapad":
+							Lode[index].CentralneBod[0]--;
+							if (!LodneGenerator.JeLodVMape(Lode[index])){
+								Lode[index].CentralneBod[0]++;
+								return false;
+							}
+							return true;
+
+						default:
+							throw new Exception("Špatná svetová strana šohajku!");
+					}
+        }
 
 
 

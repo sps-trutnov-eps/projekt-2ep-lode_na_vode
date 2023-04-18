@@ -109,21 +109,29 @@ namespace main_api {
 					 	CentralneBod = new int[] {x,y,1}, ZbytekBodu = LodneHolrery[shipIndex].ZbytekBodu.ToArray()};
 
 					// otestovat, jestli je v limitach
-					// centralne bod
-					if (!(titanic.CentralneBod[0] >= 0 && titanic.CentralneBod[0] <= MaxX
-					   && titanic.CentralneBod[1] >= 0 && titanic.CentralneBod[1] <= MaxY))
-					      throw new Exception("Ha! Tvoje Loď je úplně mimo herní plochu.");
-
-					// zbytek bodů
-					foreach (int[] bod in titanic.ZbytekBodu)
-						if (!(titanic.CentralneBod[0]+bod[0] >= 0 && titanic.CentralneBod[0]+bod[0] <= MaxX
-						   && titanic.CentralneBod[1]+bod[1] >= 0 && titanic.CentralneBod[1]+bod[1] <= MaxY))
-							throw new Exception("Ha! Tvoje Loď je úplně mimo herní plochu.");
+					if (!JeLodVMape(titanic))
+						throw new Exception("Ha! Tvoje Loď je úplně mimo herní plochu.");
 
 					// vrátit
 					Console.WriteLine(MaxX.ToString()+ " " + MaxY,ToString());
 					 return titanic;
         }
+
+				public bool JeLodVMape(Lod lodka){
+					// centralne bod
+					if (!(lodka.CentralneBod[0] >= 0 && lodka.CentralneBod[0] <= MaxX
+					   && lodka.CentralneBod[1] >= 0 && lodka.CentralneBod[1] <= MaxY))
+					      return false;
+
+					// zbytek bodů
+					foreach (int[] bod in lodka.ZbytekBodu)
+						if (!(lodka.CentralneBod[0]+bod[0] >= 0 && lodka.CentralneBod[0]+bod[0] <= MaxX
+						   && lodka.CentralneBod[1]+bod[1] >= 0 && lodka.CentralneBod[1]+bod[1] <= MaxY))
+						      return false;
+
+					// jinak
+					return true;
+				}
     }
 
 }

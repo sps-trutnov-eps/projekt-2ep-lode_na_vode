@@ -18,6 +18,11 @@ namespace main_api_test {
 
 						engine.UmistitLod(10,10,"L","TenOravnyKidZeŠtvrtéTriddy","Jan Ámos Komendský");
 
+						Console.WriteLine(engine.StrelbaNaLod(-37,-37));
+						Console.WriteLine(engine.StrelbaNaLod(10,10));
+						Console.WriteLine(engine.StrelbaNaLod(11,11));
+						Console.WriteLine(engine.StrelbaNaLod(13,12));
+
 						Lod L = engine.Lode[0];
 						Console.WriteLine(L.Typ+" "+L.Ucitel+" "+L.Hrac);
 						Console.WriteLine(L.CentralneBod[0].ToString()+" "+L.CentralneBod[1].ToString()+" "+L.CentralneBod[2].ToString());

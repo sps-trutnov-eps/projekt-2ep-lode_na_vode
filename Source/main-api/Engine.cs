@@ -48,6 +48,57 @@ namespace main_api {
             Lode.Add(LodneGenerator.NovaLod(x, y, tvar ,hrac, ucitel));
         }
 
+				public bool StrelbaNaLod(int x, int y) {
+					// projdu lodi a zkontroluju, zda není hit
+					for (int i = 0; i < Lode.Count; i++){
+
+						// zkusím centrálné bod
+						if (Lode[i].CentralneBod[0] == x && Lode[i].CentralneBod[1] == y){
+							// když již zničen
+							if (Lode[i].CentralneBod[2] == 0)
+								return false;
+							// jinak zničit
+							else{
+								Lode[i].CentralneBod[2] = 0;
+								ZkusitZnicitLod(i);
+								return true;
+							}
+						}
+
+						// zkusím vedlejší body
+						for (int j = 0; j < Lode[i].ZbytekBodu.Length; j++){
+							if (Lode[i].ZbytekBodu[j][0]+Lode[i].CentralneBod[0] == x
+									&& Lode[i].ZbytekBodu[j][1]+Lode[i].CentralneBod[1] == y){
+								// když zničeno
+								if (Lode[i].ZbytekBodu[j][2] == 0)
+									return false;
+								// když nezničeno
+								else {
+									Lode[i].ZbytekBodu[j][2] = 0;
+									ZkusitZnicitLod(i);
+									return true;
+								}
+							}
+						}
+					}
+
+					// když netrefilo žádnou loď
+					return false;
+				}
+
+				// toto tu je protože z důvodů neznámích vědě se M**rosoft rozhodl
+				// neimplementovat možnost samostatných funkcí
+				private void ZkusitZnicitLod(int indexLode){
+					if (Lode[indexLode].CentralneBod[2] == 0){
+
+						foreach (int[] þþ in Lode[indexLode].ZbytekBodu)
+							if (þþ[2] != 0)
+								return;
+
+						Lode.RemoveAt(indexLode);
+					}
+				}
+
         public void PohybLode() {
             throw new NotImplementedException();
         }

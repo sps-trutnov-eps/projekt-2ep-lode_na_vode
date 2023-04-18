@@ -4,24 +4,26 @@ namespace main_api {
     public class Engine {
 
         private Log GetLog;
-        public List<Hrac> Hraci;
-        public List<Lod> Lode;
+        public List<Hrac> Hraci {get;}
+        public List<Lod> Lode {get;}
         private GeneratorLodi LodneGenerator;
 
         /// <summary>
         /// Tady v tomhle budete mít tu hru.
         /// </summary>
         /// <param name="hraci">pole polí stringů, [jmeno, tym]</param>
+        /// <param name="maxX">maximální hodnota X, které lze dosáhnout</param>
+        /// <param name="maxY">maximální hodnota Y, které lze dosáhnout</param>
         /// <param name="cestaKHlaskamLodi">cesta k jmenum a hlaskam lodi</param>
         ///  <param name="cestaKLodim">jo</param>
         /// <param name="cestaKNalepkam">cesta k hlaskam hracu</param>
-        public Engine(string[][] hraci,string cestaKLodim , string cestaKHlaskamLodi,string cestaKNalepkam) {
+        public Engine(string[][] hraci, int maxX, int maxY, string cestaKLodim, string cestaKHlaskamLodi, string cestaKNalepkam) {
             // načíst Log objekt
             GetLog = new Log(cestaKHlaskamLodi,cestaKNalepkam);
 
             // inicializovat lode
             Lode = new List<Lod>();
-            LodneGenerator = new GeneratorLodi(cestaKLodim);
+            LodneGenerator = new GeneratorLodi(maxX,maxY,cestaKLodim);
 
             // načíst jednotlive hrace jako structy
             Hraci = new List<Hrac>();

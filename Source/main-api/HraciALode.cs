@@ -28,9 +28,14 @@ namespace main_api {
     }
 
     public class GeneratorLodi {
-        private List<LodHolder> LodneHolrery;
 
-        public GeneratorLodi(string cesta) {
+        private List<LodHolder> LodneHolrery;
+				public int MaxX;
+				public int MaxY;
+
+        public GeneratorLodi(int maxx, int maxy,string cesta) {
+						MaxX = maxx               ;
+										MaxY = maxy      ;
             // pokusím se načíst něco
             string[] file;
             try {
@@ -99,9 +104,24 @@ namespace main_api {
 						throw new Exception("Ha-Ha Loď v loděnici nieje. Užijte si debugování!!!");
 
 					// postavit loďku dle plánu
-					Lod aaaa = new Lod() {Typ = LodneHolrery[shipIndex].Typ, Ucitel = ucitel, Hrac = hrac,
+					Lod titanic = new Lod() {Typ = LodneHolrery[shipIndex].Typ, Ucitel = ucitel, Hrac = hrac,
 					 	CentralneBod = new int[] {x,y,1}, ZbytekBodu = LodneHolrery[shipIndex].ZbytekBodu.ToArray()};
-					 return aaaa;
+
+					// otestovat, jestli je v limitach
+					// centralne bod
+					if (!(titanic.CentralneBod[0] >= 0 && titanic.CentralneBod[0] <= MaxX
+					   && titanic.CentralneBod[1] >= 0 && titanic.CentralneBod[1] <= MaxY))
+					      throw new Exception("Ha! Tvoje Loď je úplně mimo herní plochu.");
+
+					// zbytek bodů
+					foreach (int[] bod in titanic.ZbytekBodu)
+						if (!(titanic.CentralneBod[0]+bod[0] >= 0 && titanic.CentralneBod[0]+bod[0] <= MaxX
+						   && titanic.CentralneBod[1]+bod[1] >= 0 && titanic.CentralneBod[1]+bod[1] <= MaxY))
+							throw new Exception("Ha! Tvoje Loď je úplně mimo herní plochu.");
+
+					// vrátit
+					Console.WriteLine(MaxX.ToString()+ " " + MaxY,ToString());
+					 return titanic;
         }
     }
 

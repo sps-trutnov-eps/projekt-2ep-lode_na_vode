@@ -9,7 +9,7 @@ namespace main_api_test {
             hraci[1] = new string[] {"Sigmar Stefinsson","O"};
             hraci[2] = new string[] {"Kája","O"};
 
-            Engine engine = new Engine(hraci,"tvary-lodi.TEXT","fddf","dgfg");
+            Engine engine = new Engine(hraci,12,18,"tvary-lodi.TEXT","fddf","dgfg");
 
             Console.WriteLine(engine.Hraci.Count.ToString(),"ff");
             foreach (Hrac h in engine.Hraci) {

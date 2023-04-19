@@ -92,7 +92,7 @@ namespace main_api {
 				//////////////////
 				// get nova lod //
 				//////////////////
-        public Lod NovaLod(int x, int y, string tvar , string hrac, string ucitel,string tym) {
+        public Lod NovaLod(int x, int y, string tvar , string hrac, string ucitel,string tym, List<Lod> vsechnyLodi) {
 					// check for ship in shipyard || something
 					int shipIndex = -1;
 					for (int i = 0; i < LodneHolrery.Count; i++)
@@ -111,6 +111,8 @@ namespace main_api {
 					// otestovat, jestli je v limitach
 					if (!JeLodVMape(titanic))
 						throw new Exception("Ha! Tvoje Loď je úplně mimo herní plochu.");
+					if (JeLodVLodi(titanic, vsechnyLodi))
+						throw new Exception("Jaksi máš loď v lodi a více rozměrů ti sem programovat fakt nechci. Prosím, pořešte si to na vaší straně.");
 
 					// vrátit
 					Console.WriteLine(MaxX.ToString()+ " " + MaxY,ToString());
@@ -131,6 +133,38 @@ namespace main_api {
 
 					// jinak
 					return true;
+				}
+
+				public bool JeLodVLodi(Lod lodka, List<Lod> vsechnyLodi){
+					// sestavím soupis pozic všech kusů lodi na mapě, nikoliv relativně k centru lodi
+					List<int[]> LodneKusy = new List<int[]>(){lodka.CentralneBod};
+					foreach (int[] i in lodka.ZbytekBodu)
+						LodneKusy.Add(new int[]{i[0]+lodka.CentralneBod[0], i[1]+lodka.CentralneBod[1]});
+
+					// projdu všemi lodmi
+					foreach (Lod kandidat in vsechnyLodi){
+						// přezkočím tu loď, se kterou porovnávám
+						// předpokládám, že jeden hráč může mít jednoho učitele jen jednou
+						if (kandidat.Hrac == lodka.Hrac && kandidat.Ucitel == lodka.Ucitel)
+							continue;
+
+						// jinak porovnám proti centrálním bodům
+						foreach (int[] bodyLodky in LodneKusy){
+							if (bodyLodky[0] == kandidat.CentralneBod[0]
+							 && bodyLodky[1] == kandidat.CentralneBod[1])
+								return true;
+
+							// a pak i proti zbytku kandidata
+							foreach (int[] kandidatneBod in kandidat.ZbytekBodu)
+									if (bodyLodky[0] == kandidatneBod[0] + kandidat.CentralneBod[0]
+									 && bodyLodky[1] == kandidatneBod[1] + kandidat.CentralneBod[1])
+										return true;
+						}
+
+					}
+
+					// kdiž žádná kolize
+					return false;
 				}
     }
 

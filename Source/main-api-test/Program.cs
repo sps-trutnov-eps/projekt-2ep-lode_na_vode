@@ -17,7 +17,7 @@ namespace main_api_test {
             }
 
 						engine.UmistitLod(10,10,"L","TenOravnyKidZeŠtvrtéTriddy","Jan Ámos Komendský");
-						engine.UmistitLod(3,7,"P","Sigmar Stefinsson","Severus Snape");
+						engine.UmistitLod(10,11,"P","Sigmar Stefinsson","Severus Snape");
 
 						Console.WriteLine(engine.StrelbaNaLod(-37,-37));
 						Console.WriteLine(engine.StrelbaNaLod(10,10));

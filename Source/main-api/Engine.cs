@@ -49,7 +49,7 @@ namespace main_api {
         /// <exception cref="NotImplementedException"></exception>
         public void UmistitLod(int x, int y, string tvar , string hrac, string ucitel) {
 						Console.WriteLine(x.ToString()+" "+y.ToString()+" "+tvar+" "+hrac+" "+ucitel);
-            Lode.Add(LodneGenerator.NovaLod(x, y, tvar ,hrac, ucitel,ZiskatTymZHraceStringu(hrac)));
+            Lode.Add(LodneGenerator.NovaLod(x, y, tvar ,hrac, ucitel,ZiskatTymZHraceStringu(hrac), Lode));
         }
 
 				public bool StrelbaNaLod(int x, int y) {
@@ -180,7 +180,7 @@ namespace main_api {
 					switch (smer){
 						case "sever":
 							Lode[index].CentralneBod[1]--;
-							if (!LodneGenerator.JeLodVMape(Lode[index])){
+							if ((!LodneGenerator.JeLodVMape(Lode[index])) || LodneGenerator.JeLodVLodi(Lode[index],Lode)){
 								Lode[index].CentralneBod[1]++;
 								return false;
 							}
@@ -188,7 +188,7 @@ namespace main_api {
 
 						case "vychod":
 							Lode[index].CentralneBod[0]++;
-							if (!LodneGenerator.JeLodVMape(Lode[index])){
+							if ((!LodneGenerator.JeLodVMape(Lode[index])) || LodneGenerator.JeLodVLodi(Lode[index],Lode)){
 								Lode[index].CentralneBod[0]--;
 								return false;
 							}
@@ -196,7 +196,7 @@ namespace main_api {
 
 						case "jih":
 							Lode[index].CentralneBod[1]++;
-							if (!LodneGenerator.JeLodVMape(Lode[index])){
+							if ((!LodneGenerator.JeLodVMape(Lode[index])) || LodneGenerator.JeLodVLodi(Lode[index],Lode)){
 								Lode[index].CentralneBod[1]--;
 								return false;
 							}
@@ -204,7 +204,7 @@ namespace main_api {
 
 						case "zapad":
 							Lode[index].CentralneBod[0]--;
-							if (!LodneGenerator.JeLodVMape(Lode[index])){
+							if ((!LodneGenerator.JeLodVMape(Lode[index])) || LodneGenerator.JeLodVLodi(Lode[index],Lode)){
 								Lode[index].CentralneBod[0]++;
 								return false;
 							}

@@ -22,6 +22,7 @@ namespace main_api_test {
 						Console.WriteLine(engine.StrelbaNaLod(-37,-37));
 						Console.WriteLine(engine.StrelbaNaLod(10,10));
 						Console.WriteLine(engine.StrelbaNaLod(11,11));
+						Console.WriteLine(engine.StrelbaNaLod(11,11));
 						Console.WriteLine(engine.StrelbaNaLod(13,12));
 
 						Lod L = engine.Lode[0];
@@ -39,6 +40,9 @@ namespace main_api_test {
 						Console.WriteLine(L.CentralneBod[0].ToString()+" "+L.CentralneBod[1].ToString()+" "+L.CentralneBod[2].ToString());
 						foreach (int[] þ in L.ZbytekBodu)
 							Console.WriteLine(þ[0].ToString()+" "+þ[1].ToString()+" "+þ[2].ToString());
+
+						foreach (int[] i in engine.ZasazenePozice)
+							Console.WriteLine(i[0].ToString()+" "+i[1].ToString());
 
         }
     }

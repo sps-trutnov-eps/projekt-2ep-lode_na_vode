@@ -3,9 +3,11 @@
 namespace main_api {
     public class Engine {
 
-        private Log GetLog;
+        public Log GetLog;
         public List<Hrac> Hraci {get;}
         public List<Lod> Lode {get;}
+				public List<int[]> ZasazenePozice;
+
         private GeneratorLodi LodneGenerator;
 				private int IndexHraceAktualneHrajiciho = 0;
 
@@ -25,6 +27,9 @@ namespace main_api {
             // inicializovat lode
             Lode = new List<Lod>();
             LodneGenerator = new GeneratorLodi(maxX,maxY,cestaKLodim);
+
+						// načíst i tohle
+						ZasazenePozice = new List<int[]>();
 
             // načíst jednotlive hrace jako structy
             Hraci = new List<Hrac>();
@@ -48,6 +53,27 @@ namespace main_api {
         }
 
 				public bool StrelbaNaLod(int x, int y) {
+					// přidám do Listu, pokud již není
+					int[] posArray = new int[]{x,y};
+					// .Contains doesn't work for some reason
+					bool addToArray = true;
+					foreach(int[] i in ZasazenePozice)
+						
+						// i == posArray taky nefunguje
+						// a pak mi říkejte, že tohle je použitelnej jazyk
+						// Jako jó, porovnávat kam ukazujou se taky může hodit, ale je to array, né pointer
+						// kdybych chtěl porovnávat pointery, tak z toho udělám pointery
+						// tipnul bych si, že potřeba porovnat obsah arraý je častější problematika, než jejich identičnost.
+						// Když porovnám dva stringy, taky porovnávám jejich obsah
+						// Možná přidat možnost si vytáhnout z arraye adresu, pokud tohle považujete za podstatné
+						// ale né tohle
+						if (i[0] == posArray[0] && i[1] == posArray[1]){
+							addToArray = false;
+							break;
+						}
+					if (addToArray)
+						ZasazenePozice.Add(posArray);
+
 					// projdu lodi a zkontroluju, zda není hit
 					for (int i = 0; i < Lode.Count; i++){
 

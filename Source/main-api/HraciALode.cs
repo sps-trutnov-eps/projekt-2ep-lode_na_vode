@@ -160,9 +160,7 @@ namespace main_api {
 									 && bodyLodky[1] == kandidatneBod[1] + kandidat.CentralneBod[1])
 										return true;
 						}
-
 					}
-
 					// kdiž žádná kolize
 					return false;
 				}

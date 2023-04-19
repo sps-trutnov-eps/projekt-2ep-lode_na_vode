@@ -241,6 +241,32 @@ namespace main_api {
 					return true;
 				}
 
+				public bool OtoceniVpravo(int LodneIndex){
+					int x,y;
+					foreach (int[] part in Lode[LodneIndex].ZbytekBodu){
+						x = part[0];
+						y = part[1];
+
+						// převedu prohodím a převrátím souřadnice
+						part[0] = -y;
+						part[1] = x;
+
+					}
+					// testnu pro komplikace
+					if ((!LodneGenerator.JeLodVMape(Lode[LodneIndex])) || LodneGenerator.JeLodVLodi(Lode[LodneIndex],Lode)){
+						// vrátit na zpět a ohlásit chybu
+						foreach (int[] part in Lode[LodneIndex].ZbytekBodu){
+							x = part[0];
+							y = part[1];
+							part[0] = y;
+							part[1] = -x;
+						}
+						return false;
+					}
+					// není li
+					return true;
+				}
+
 
 
 

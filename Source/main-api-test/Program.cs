@@ -34,7 +34,7 @@ namespace main_api_test {
 						Console.WriteLine();
 
 						Console.WriteLine("-----------------------");
-						Console.WriteLine(engine.OtoceniVlevo(0));
+						Console.WriteLine(engine.OtoceniVpravo(0));
 
 						L = engine.Lode[0];
 						Console.WriteLine(L.Typ+" "+L.Ucitel+" "+L.Hrac);
@@ -43,7 +43,7 @@ namespace main_api_test {
 							Console.WriteLine(þ[0].ToString()+" "+þ[1].ToString()+" "+þ[2].ToString());
 
 						Console.WriteLine("-----------------------");
-						Console.WriteLine(engine.OtoceniVlevo(0));
+						Console.WriteLine(engine.OtoceniVpravo(0));
 
 						L = engine.Lode[0];
 						Console.WriteLine(L.Typ+" "+L.Ucitel+" "+L.Hrac);
@@ -51,7 +51,7 @@ namespace main_api_test {
 						foreach (int[] þ in L.ZbytekBodu)
 							Console.WriteLine(þ[0].ToString()+" "+þ[1].ToString()+" "+þ[2].ToString());
 
-						Console.WriteLine(engine.OtoceniVlevo(0));
+						Console.WriteLine(engine.OtoceniVpravo(0));
 						Console.WriteLine("-----------------------");
 
 						L = engine.Lode[0];
@@ -61,7 +61,7 @@ namespace main_api_test {
 							Console.WriteLine(þ[0].ToString()+" "+þ[1].ToString()+" "+þ[2].ToString());
 
 
-						Console.WriteLine(engine.OtoceniVlevo(0));
+						Console.WriteLine(engine.OtoceniVpravo(0));
 						Console.WriteLine("-----------------------");
 
 						L = engine.Lode[0];

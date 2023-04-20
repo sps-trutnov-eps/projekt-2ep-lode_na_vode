@@ -12,4 +12,10 @@
     <ProjectReference Include="..\main-api\main-api.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="tvary-lodi.TEXT">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

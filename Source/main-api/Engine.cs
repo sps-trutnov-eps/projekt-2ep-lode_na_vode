@@ -3,8 +3,17 @@
 namespace main_api {
     public class Engine {
 
+		/// <summary>
+		/// je to log. chovej se k němu jako k logu
+		/// </summary>
         public Log GetLog;
+		/// <summary>
+		/// zde su hraci
+		/// </summary>
         public List<Hrac> Hraci {get;}
+		/// <summary>
+		/// a zde lode
+		/// </summary>
         public List<Lod> Lode {get;}
 				public List<int[]> ZasazenePozice;
 
@@ -52,6 +61,12 @@ namespace main_api {
             Lode.Add(LodneGenerator.NovaLod(x, y, tvar ,hrac, ucitel,ZiskatTymZHraceStringu(hrac), Lode));
         }
 
+		/// <summary>
+		/// dáš pozici a vystřelíš
+		/// </summary>
+		/// <param name="x">?</param>
+		/// <param name="y">??</param>
+		/// <returns>true když něco trefeno</returns>
 				public bool StrelbaNaLod(int x, int y) {
 					// přidám do Listu, pokud již není
 					int[] posArray = new int[]{x,y};
@@ -124,16 +139,28 @@ namespace main_api {
 					}
 				}
 
+		/// <summary>
+		/// posune na dalsiho hrace
+		/// </summary>
 				public void DalseHrac(){
 					IndexHraceAktualneHrajiciho++;
 					if (IndexHraceAktualneHrajiciho > Hraci.Count-1)
 						IndexHraceAktualneHrajiciho = 0;
 				}
 
+
+		/// <summary>
+		/// navrátí hrajícího hráče
+		/// </summary>
+		/// <returns>toho hráče</returns>
 				public Hrac DejMiAktualnehoHrace(){
 					return Hraci[IndexHraceAktualneHrajiciho];
 				}
 
+		/// <summary>
+		/// zkontroluje, zda již někdo vyhral
+		/// </summary>
+		/// <returns>true když někdo vyhral</returns>
 				public bool VyhralNekdo(){
 					string? firstTeam = null;
 					// projdu lodě
@@ -150,10 +177,18 @@ namespace main_api {
 					return true;
 				}
 
+		/// <summary>
+		/// vrátí název týmu, jenž vyhrál
+		/// </summary>
+		/// <returns>hádej</returns>
 				public string ZiskatVytezneTym(){
 					return Lode[0].Tym;
 				}
 
+		/// <summary>
+		/// vrátí list hráčů, kteří vyhráli
+		/// </summary>
+		/// <returns>kecám, je to array!</returns>
 				public string[] ZiskatVytezneHrace(){
 					string tym = ZiskatVytezneTym();
 					List<string> navratka = new List<string>();
@@ -176,6 +211,13 @@ namespace main_api {
 					throw new Exception("Hráč nepůsobí zrovna validně...");
 				}
 
+		/// <summary>
+		/// pohne lodí (nebo se o to alespoň pokusí)
+		/// </summary>
+		/// <param name="index">index lodi, kterou hejbeš</param>
+		/// <param name="smer">kam jí hejbeš (sever/vychod/jih/zapad)</param>
+		/// <returns>true když nic nebylo v cestě</returns>
+		/// <exception cref="Exception"> asi je</exception>
         public bool PohybLode(int index, string smer) { // sever/vychod/jih/zapad
 					switch (smer){
 						case "sever":
@@ -215,6 +257,11 @@ namespace main_api {
 					}
         }
 
+		/// <summary>
+		/// otočí lodí vlevo
+		/// </summary>
+		/// <param name="LodneIndex">index lodi, kterou otáčíš</param>
+		/// <returns>true pokud se podařilo otočit</returns>
 				public bool OtoceniVlevo(int LodneIndex){
 					int x,y;
 					foreach (int[] part in Lode[LodneIndex].ZbytekBodu){
@@ -241,6 +288,11 @@ namespace main_api {
 					return true;
 				}
 
+		/// <summary>
+		/// otočí lodí vpravo
+		/// </summary>
+		/// <param name="LodneIndex">index lodi, kterou otáčíš</param>
+		/// <returns>true pokud se podařilo otočit</returns>
 				public bool OtoceniVpravo(int LodneIndex){
 					int x,y;
 					foreach (int[] part in Lode[LodneIndex].ZbytekBodu){
@@ -266,7 +318,6 @@ namespace main_api {
 					// není li
 					return true;
 				}
-
 
 
 

@@ -6,12 +6,12 @@ namespace log_lib {
     public class Log {
 
         private List<string> EntireLog;
-        public DataHolder Lode;
+        public DataHolder data;
         private Random rnd;
 
         public Log(string cestaKLodim, string cestaKNalepkam) {
             EntireLog = new List<string>();
-            Lode = new DataHolder(cestaKLodim,cestaKNalepkam);
+            data = new DataHolder(cestaKLodim,cestaKNalepkam);            
             rnd = new Random();
         }
 
@@ -28,15 +28,16 @@ namespace log_lib {
         }
 
         public string GetLodMovement(Hrac hrac, Lod lod) {
-            string message;
             string miss = lod.moveHlasky[rnd.Next(0, lod.hitHlasky.Length)];
-            message = hrac.jmeno + ":" + miss;
+            string message = hrac.jmeno + ":" + miss;
             EntireLog.Add(message);
             return message;
         }
 
         public string MissStreak(string jmenoHrace, ushort pocetMisu) {
-            return "missstreak";
+            string message = String.Format("{0} už {1}krát minul, ukažte si na něj!", jmenoHrace, pocetMisu);
+            EntireLog.Add(message);
+            return message;
         }
 
         public string[] GetNalepky() {

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,11 +48,11 @@ namespace log_lib {
                 {
                     hitHlasky = hlaskySR.ReadLine().Split(";");
                     moveHlasky = hlaskySR.ReadLine().Split(";");
-                    read = false;
+                    read = false;             
                 }
-            }
-            Lod lod = new Lod(jmenoLodi, hitHlasky, moveHlasky);
-            return lod;
+           }
+           Lod jmenolodi = new Lod(jmenoLodi, hitHlasky, moveHlasky);
+           return jmenolodi;
         }
         public string GetHracBarva(string jmenoHrace) {
             return "a";

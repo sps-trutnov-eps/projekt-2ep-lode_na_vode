@@ -1,3 +1,6 @@
 lod1
 trefa;cool trefa;AAAAAAA
 pohyb;cool pohyb;bbbbbbb
+lod2
+btrefa;bcool trefa;bAAAAAAA
+bpohyb;bcool pohyb;aaaabbbbbbb

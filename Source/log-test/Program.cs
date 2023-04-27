@@ -17,6 +17,7 @@ namespace log_test {
             Console.WriteLine(hitMessage);
             Console.WriteLine(moveMessage);
             Console.WriteLine(missStreakMessage);
+            Console.WriteLine(log.data.nalepky[1]);
         }
     }
 }

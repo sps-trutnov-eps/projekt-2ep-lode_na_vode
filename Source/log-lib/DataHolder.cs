@@ -1,10 +1,11 @@
-using System;
+﻿using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using System.Net.Http.Headers;
 
 namespace log_lib {
     public struct Lod { 
@@ -27,7 +28,7 @@ namespace log_lib {
 
         List<Lod> Lode;
         List<Hrac> Hraci;
-        List<string> nalepky;
+        public List<string> nalepky;
 
         StreamReader hlaskySR;
         StreamReader nalepkySR;
@@ -37,6 +38,8 @@ namespace log_lib {
             Hraci = new List<Hrac>();
             hlaskySR = new StreamReader(Path.GetFullPath(cestakLodim));
             nalepkySR = new StreamReader(Path.GetFullPath(cestaKNalepkam));
+
+            nalepky = getNalepky();
         }
         public Lod GetHlasky(string jmenoLodi) {
             bool read = true;
@@ -58,5 +61,25 @@ namespace log_lib {
             return "a";
         }
 
+        public List<string> getNalepky(){
+            List<string> nalepky = new List<string>();
+            bool read = true;
+            string nalepka = "";
+            
+            while(read){
+                string line = nalepkySR.ReadLine();
+
+                if (line == null)
+                    read = false;
+                else if (line != ";")
+                    nalepka += line + "\n";
+                else
+                {
+                    nalepky.Add(nalepka);
+                    nalepka = "";
+                }                               
+            }
+            return nalepky;
+        }
     }
 }

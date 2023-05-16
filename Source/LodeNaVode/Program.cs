@@ -1,3 +1,4 @@
+using LodeNaVode.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace LodeNaVode
@@ -11,7 +12,8 @@ namespace LodeNaVode
             builder.Services.AddControllersWithViews();
             builder.Services.AddDbContext<LobbyDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("LobbyConnection")));
-
+            builder.Services.AddDbContext<PlayerDbContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("PlayerConnection")));
             var app = builder.Build();
 
             app.UseStaticFiles();

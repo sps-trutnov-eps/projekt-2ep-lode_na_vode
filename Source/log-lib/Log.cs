@@ -1,52 +1,47 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text.Json.Serialization;
 
 namespace log_lib {
     public class Log {
 
-        private List<string> EntireLog;
-        public DataHolder data;
-        private Random rnd;
+        private List<string> entireLog;
+        public DataHolder Data;
+        private string message;
 
         public Log(string cestaKLodim, string cestaKNalepkam) {
-            EntireLog = new List<string>();
-            data = new DataHolder(cestaKLodim,cestaKNalepkam);            
-            rnd = new Random();
+            entireLog = new List<string>();
+            Data = new DataHolder(cestaKLodim,cestaKNalepkam);            
         }
 
-        public string GetHitMessage(Hrac hrac, Lod lod) {
-            string message;
-            string hit = lod.hitHlasky[rnd.Next(0, lod.hitHlasky.Length)];
-            message = hrac.jmeno + ":" + hit;
-            EntireLog.Add(message);
+        public string GetHitMessage(string jmenoHrace, string jmenoLodi) {
+            string hit = Data.GetHlaska(jmenoLodi,true);
+            message = jmenoHrace + ":" + hit;
+            entireLog.Add(message);
             return message;
         }
 
         public List<string> GetEntireLog() {
-            return EntireLog;
+            return entireLog;
         }
 
-        public string GetLodMovement(Hrac hrac, Lod lod) {
-            string miss = lod.moveHlasky[rnd.Next(0, lod.hitHlasky.Length)];
-            string message = hrac.jmeno + ":" + miss;
-            EntireLog.Add(message);
+        public string GetLodMovement(string jmenoHrace, string jmenoLodi) {
+            string miss = Data.GetHlaska(jmenoLodi, false);
+            message = jmenoHrace + ":" + miss;
+            entireLog.Add(message);
             return message;
         }
 
         public string MissStreak(string jmenoHrace, ushort pocetMisu) {
-            string message = String.Format("{0} už {1}krát minul, ukažte si na něj!", jmenoHrace, pocetMisu);
-            EntireLog.Add(message);
+            message = String.Format("{0} už {1}krát minul, ukažte si na něj!", jmenoHrace, pocetMisu);
+            entireLog.Add(message);
             return message;
         }
-
-        public string[] GetNalepky() {
-            string[] a = new string[5];
-            return a;
-        }
-
-        public string ActivateNalepka(string jmenoHrace, string Nalepka) {
-            return "a";
+        public string ActivateNalepka(string jmenoHrace, int nalepkaIndex){
+            message = jmenoHrace + ":\n" + Data.nalepky[nalepkaIndex];
+            entireLog.Add(message);
+            return message;
         }
 
     }

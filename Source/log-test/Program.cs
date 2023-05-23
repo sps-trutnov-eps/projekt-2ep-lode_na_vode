@@ -4,9 +4,9 @@ namespace log_test {
     internal class Program {
         static void Main(string[] args) {
             Console.WriteLine("Hello, World!");
-            Log log = new Log("hlasky.txt", "nalepky.txt");
+            Log log = new Log("../../../data/hlasky.txt", "../../../data/nalepky.txt");
             
-            string hitMessage = log.GetHitMessage("hrac1", "lod5");
+            string hitMessage = log.GetHitMessage("hrac1", "lod1");
             Console.WriteLine(hitMessage);
 
             string moveMessage = log.GetLodMovement("hrac1", "lod1");

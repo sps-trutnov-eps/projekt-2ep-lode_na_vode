@@ -40,11 +40,10 @@ namespace log_lib {
                     hlaskySR.DiscardBufferedData();
                 }
            }
-           }
            if (hitHlaska)
-            return hitHlasky[Rnd.Next(0,hitHlasky.Length)];
+                return hitHlasky[Rnd.Next(0, hitHlasky.Length)];         
            else
-            return moveHlasky[Rnd.Next(0, moveHlasky.Length)];
+                return moveHlasky[Rnd.Next(0, moveHlasky.Length)];
         
         }
         public string GetHracBarva(string jmenoHrace) {

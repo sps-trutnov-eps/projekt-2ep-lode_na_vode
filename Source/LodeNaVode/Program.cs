@@ -12,8 +12,11 @@ namespace LodeNaVode
             builder.Services.AddControllersWithViews();
             builder.Services.AddDbContext<LobbyDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("LobbyConnection")));
-            builder.Services.AddDbContext<PlayerDbContext>(options =>
-                options.UseSqlServer(builder.Configuration.GetConnectionString("PlayerConnection")));
+            builder.Services.AddSession(options => {
+                options.Cookie.Name = "lodeId";
+                options.Cookie.IsEssential = true;
+                options.IdleTimeout = TimeSpan.FromMinutes(60);
+            });
             var app = builder.Build();
 
             app.UseStaticFiles();

@@ -16,15 +16,15 @@
 
                     @if (Model[y, x] == LodeNaVode.Controllers.TypPolicka.Lod)
                     {
-                        <a href="/Tah/Policko/@cislo">L</a>
+                        <a href="/Tah/Policko/@cislo">
+                            <div class="centerLod">
+                                L
+                            </div>    
+                        </a>
                     }
                     @if (Model[y, x] == LodeNaVode.Controllers.TypPolicka.ZasahLod)
                     {
                         <a href="/Tah/Policko/@cislo">Z</a>
-                    }
-                    @if (Model[y, x] == LodeNaVode.Controllers.TypPolicka.ZasahMimo)
-                    {
-                        <a href="/Tah/Policko/@cislo">M</a>
                     }
                     @if (Model[y, x] == LodeNaVode.Controllers.TypPolicka.LodPotopena)
                     {

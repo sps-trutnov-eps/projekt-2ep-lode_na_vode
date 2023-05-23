@@ -15,10 +15,19 @@ html {
 
 body {
   margin-bottom: 60px;
+  background-image: url('textury/mlha-na-mori.png');
+  background-repeat: repeat;
+}
+footer {
+    background-color: white;
+}
+
+table {
+    margin: auto auto;
 }
 
 .policko {
-    border: solid 1px black;
+    border: solid 1px gray;
     border-collapse:collapse;
     width: 24px;
     height: 24px;

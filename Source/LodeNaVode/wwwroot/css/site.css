@@ -16,3 +16,11 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.curr {
+    border:2px red solid;
+    padding:.2em;
+}
+.tvojeMama {
+    font-size: 1.3em;
+}

@@ -7,6 +7,5 @@ namespace LodeNaVode.Models
     {
         [Key]
         public string ID { get; set; }
-        [Required]
     }
 }

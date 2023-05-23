@@ -1,1 +1,46 @@
 ﻿<h1>LOBBY</h1>
+<p>Vítejte v LOBBY!</p>
+
+<h2>Zde vyberte herní mód:</h2>
+<div id="lobby">
+    <button type="button" id="mode1Button" class="game-mode-button">Herní mód 1</button>
+    <button type="button" id="mode2Button" class="game-mode-button">Herní mód 2</button>
+    <button type="button" id="mode3Button" class="game-mode-button">Herní mód 3</button>
+    <button type="button" id="mode4Button" class="game-mode-button">Herní mód 4</button>
+</div>
+<div id="exit">
+    <button type="button" id="exitButton" class="exit-button">Opustit LOBBY</button>
+</div>
+<style>
+    .game-mode-button {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-right: 10px;
+    }
+
+    #mode2Button {
+        background-color: #800080;
+    }
+    
+    #mode3Button {
+        background-color: #28a745;
+    }
+
+    #mode4Button {
+        background-color: #ffc107;
+    }
+
+    .exit-button {
+        background-color: #dc3545;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-top: 20px;
+    }
+</style>

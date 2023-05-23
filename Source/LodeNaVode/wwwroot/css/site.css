@@ -16,3 +16,34 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.policko {
+    border: solid 1px black;
+    border-collapse:collapse;
+    width: 24px;
+    height: 24px;
+}
+.policko a {
+    text-align:center;
+    vertical-align:middle;
+    color: rgba(0,0,0,0);
+}
+.policko a div {
+    width: 24px;
+    height: 24px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover
+}
+.pole-mlha {
+    background-image: url('./textury/mlha.png');
+}
+.pole-lod {
+    background-image: url('./textury/1-vor.png');
+}
+.pole-voda {
+    background-image: url('./textury/more.png');
+}
+.pole-mimo {
+    background-image: url('./textury/more.png');
+}

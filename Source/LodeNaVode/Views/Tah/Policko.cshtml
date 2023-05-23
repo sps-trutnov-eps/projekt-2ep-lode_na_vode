@@ -12,31 +12,31 @@
         <tr>
             @for (int x = 0; x < Model.GetLength(1); x++, cislo++)
             {
-                <td>
+                <td class="policko">
 
                     @if (Model[y, x] == LodeNaVode.Controllers.TypPolicka.Lod)
                     {
-                        <a href="/Tah/Policko/@cislo">L</a>
+                        <a href="/Tah/Policko/@cislo"><div class="pole-lod">L</div></a>
                     }
                     @if (Model[y, x] == LodeNaVode.Controllers.TypPolicka.ZasahLod)
                     {
-                        <a href="/Tah/Policko/@cislo">Z</a>
+                        <a href="/Tah/Policko/@cislo"><div class="pole-zasah">Z</div></a>
                     }
                     @if (Model[y, x] == LodeNaVode.Controllers.TypPolicka.ZasahMimo)
                     {
-                        <a href="/Tah/Policko/@cislo">M</a>
+                        <a href="/Tah/Policko/@cislo"><div class="pole-mimo">M</div></a>
                     }
                     @if (Model[y, x] == LodeNaVode.Controllers.TypPolicka.LodPotopena)
                     {
-                        <a href="/Tah/Policko/@cislo">P</a>
+                        <a href="/Tah/Policko/@cislo"><div class="pole-potopena">P</div></a>
                     }
                     else if (Model[y, x] == LodeNaVode.Controllers.TypPolicka.Voda)
                     {
-                        <a href="/Tah/Policko/@cislo">V</a>
+                        <a href="/Tah/Policko/@cislo"><div class="pole-voda">V</div></a>
                     }
                     else if (Model[y, x] == LodeNaVode.Controllers.TypPolicka.Mlha)
                     {
-                        <a href="/Tah/Policko/@cislo">#</a>
+                        <a href="/Tah/Policko/@cislo"><div class="pole-mlha">#</div></a>
                     }
 
                 </td>

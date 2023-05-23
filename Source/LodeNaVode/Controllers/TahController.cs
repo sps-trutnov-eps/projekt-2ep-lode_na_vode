@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
+using main_api;
 
 namespace LodeNaVode.Controllers
 {
@@ -21,6 +22,14 @@ namespace LodeNaVode.Controllers
     {
         public IActionResult Policko(int id)
         {
+            string[][] mojeStringy = new string[][] {
+                new string[] { "a", "b" },
+                new string[] { "c", "d" } 
+            };
+            Engine engine = new Engine(string);
+
+            engine
+
             TypPolicka[,] bojiste = new TypPolicka[15, 11];
 
             for(int y = 0; y < bojiste.GetLength(0); y++)

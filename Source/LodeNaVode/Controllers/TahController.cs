@@ -29,9 +29,6 @@ namespace LodeNaVode.Controllers
                 }
             }
             bojiste[6, 10] = TypPolicka.Lod;
-            bojiste[4, 6] = TypPolicka.LodPotopena;
-            bojiste[0, 10] = TypPolicka.ZasahMimo;
-            bojiste[14, 1] = TypPolicka.ZasahLod;
 
             int cislo = 0;
             for(int y = 0; y < bojiste.GetLength(0); y++)

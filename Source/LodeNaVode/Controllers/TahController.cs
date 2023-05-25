@@ -29,7 +29,7 @@ namespace LodeNaVode.Controllers
                 new string[] { "a", "b" },
                 new string[] { "c", "d" }
             };
-            Engine engine = new Engine(mojeStringy, 15, 11, "../../Data/textury/tvary-lodi.TEXT", "LodeNaVode/Lode/hlasky.txt", "LodeNaVode/Lode/nalepky.txt");
+            Engine engine = new Engine(mojeStringy, 10, 15, "../../Data/textury/tvary-lodi.TEXT", "LodeNaVode/Lode/hlasky.txt", "LodeNaVode/Lode/nalepky.txt");
 
             engine.UmistitLod(2, 5, "L", "a", "d");
 
@@ -65,7 +65,7 @@ namespace LodeNaVode.Controllers
 
             Engine engine = Engin.engine;
 
-            TypPolicka[,] bojiste = new TypPolicka[15, 11];
+            TypPolicka[,] bojiste = new TypPolicka[15, 10];
 
             Redraw(ref bojiste, ref engine);
 
@@ -87,8 +87,8 @@ namespace LodeNaVode.Controllers
 
                         if (policko == TypPolicka.Lod)
                         {
-                            Debug.WriteLine($"{engine.PohybLode(0, "sever")}");
-                            //engine.PohybLode(0, "sever");
+                            //engine.PohybLode(0, "jih");
+                            engine.PohybLode(0, "sever");
                         }
 
                         /*if (policko == TypPolicka.Mlha)

@@ -22,6 +22,10 @@
                             </div>    
                         </a>
                     }
+                    @if (Model[y, x] == LodeNaVode.Controllers.TypPolicka.NepratelskaLod)
+                    {
+                        <a href="/Tah/Policko/@cislo">N</a>
+                    }
                     @if (Model[y, x] == LodeNaVode.Controllers.TypPolicka.ZasahLod)
                     {
                         <a href="/Tah/Policko/@cislo">Z</a>

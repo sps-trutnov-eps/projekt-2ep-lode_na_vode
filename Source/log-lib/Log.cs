@@ -33,6 +33,12 @@ namespace log_lib {
             return message;
         }
 
+        public string GetDestructionMessage(string jmenoHracePotopitele, string jmenoPotopeneLodi) {
+            message = string.Format("{0} násilně potopil loď {1}, jednotky mrtvých!!", jmenoHracePotopitele, jmenoPotopeneLodi);
+            entireLog.Add(message);
+            return message;
+        }
+
         public string MissStreak(string jmenoHrace, ushort pocetMisu) {
             message = String.Format("{0} už {1}krát minul, ukažte si na něj!", jmenoHrace, pocetMisu);
             entireLog.Add(message);

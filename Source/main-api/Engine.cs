@@ -4,6 +4,11 @@ namespace main_api {
     public class Engine {
 
 		/// <summary>
+		/// Je tu sepsáno, jaká loď byla naposledy trefena
+		/// </summary>
+		public string NaposledyTrefenaLod = "Ѿ";
+
+		/// <summary>
 		/// je to log. chovej se k němu jako k logu
 		/// </summary>
         public Log GetLog;
@@ -18,7 +23,7 @@ namespace main_api {
 				public List<int[]> ZasazenePozice;
 
         private GeneratorLodi LodneGenerator;
-				private int IndexHraceAktualneHrajiciho = 0;
+		private int IndexHraceAktualneHrajiciho = 0;
 
         /// <summary>
         /// Tady v tomhle budete mít tu hru.
@@ -94,6 +99,8 @@ namespace main_api {
 
 						// zkusím centrálné bod
 						if (Lode[i].CentralneBod[0] == x && Lode[i].CentralneBod[1] == y){
+					// sepíšu spis
+					NaposledyTrefenaLod = Lode[i].Ucitel;
 							// když již zničen
 							if (Lode[i].CentralneBod[2] == 0)
 								return false;

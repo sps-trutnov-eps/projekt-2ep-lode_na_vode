@@ -40,7 +40,7 @@ namespace main_api {
 
             // inicializovat lode
             Lode = new List<Lod>();
-            LodneGenerator = new GeneratorLodi(maxX,maxY,cestaKLodim);
+            LodneGenerator = new GeneratorLodi(maxX+1,maxY+1,cestaKLodim);
 
 						// načíst i tohle
 						ZasazenePozice = new List<int[]>();

@@ -42,6 +42,24 @@ namespace LodeNaVode.Controllers
 
     public class TahController : Controller
     {
+        public void Redraw(ref TypPolicka[,] bojiste, ref Engine engine)
+        {
+            for (int y = 0; y < bojiste.GetLength(0); y++)
+            {
+                for (int x = 0; x < bojiste.GetLength(1); x++)
+                {
+                    bojiste[y, x] = TypPolicka.Mlha;
+                }
+            }
+
+            for (int i = 0; i < engine.Lode.Count; i++)
+            {
+                var lod = engine.Lode[i];
+
+                bojiste[lod.CentralneBod[1], lod.CentralneBod[0]] = TypPolicka.Lod;
+            }
+        }
+
         public IActionResult Policko(int id)
         {
 
@@ -49,20 +67,7 @@ namespace LodeNaVode.Controllers
 
             TypPolicka[,] bojiste = new TypPolicka[15, 11];
 
-            for(int y = 0; y < bojiste.GetLength(0); y++)
-            {
-                for(int x = 0; x < bojiste.GetLength(1); x++)
-                {
-                    bojiste[y, x] = TypPolicka.Mlha;
-                }
-            }
-
-            for(int i = 0; i < engine.Lode.Count; i++)
-            {
-                var lod = engine.Lode[i];
-
-                bojiste[lod.CentralneBod[1], lod.CentralneBod[0]] = TypPolicka.Lod;
-            }
+            Redraw(ref bojiste, ref engine);
 
             bojiste[2, 6] = TypPolicka.NepratelskaLod;
 
@@ -97,12 +102,7 @@ namespace LodeNaVode.Controllers
                 }
             }
 
-            for (int i = 0; i < engine.Lode.Count; i++)
-            {
-                var lod = engine.Lode[i];
-
-                bojiste[lod.CentralneBod[1], lod.CentralneBod[0]] = TypPolicka.Lod;
-            }
+            Redraw(ref bojiste, ref engine);
 
             Debug.WriteLine(id);
 

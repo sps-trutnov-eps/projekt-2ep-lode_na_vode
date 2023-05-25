@@ -24,3 +24,17 @@ body {
 .tvojeMama {
     font-size: 1.3em;
 }
+h1{
+    text-align: center;
+}
+.btn-go{
+    text-align: center;
+    font-size: 64px;
+    position:fixed;
+    bottom:10%;
+    left: 50%;
+    background-color: navy;
+    padding: 16px;
+    color: greenyellow;
+    
+}

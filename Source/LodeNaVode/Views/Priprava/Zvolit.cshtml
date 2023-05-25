@@ -1,13 +1,15 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model float;
 
-<h1>Nasrat!</h1>
+<h1>Výběr F</h1>
 <div class="tvojeMama">curr <span class="curr">37,5¤</span></div>
 <br />
 
 <div class="btn-go">
-    <a href="#"></a>
+    <a href="#">GO!</a>
+</div>
+
+<div class="lod_vyber">
+    <img src="/img/download.jpg" alt="lod s očima" />
+    <form action="/Priprava/KliknutiPlus"><input type="submit" value="Slovo" /></form>
+    <p>@Model</p>
 </div>

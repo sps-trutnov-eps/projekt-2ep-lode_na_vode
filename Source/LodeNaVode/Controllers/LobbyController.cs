@@ -17,12 +17,25 @@ namespace LodeNaVode.Controllers
         [HttpGet]
         public IActionResult Create(Lobby model)
         {
-            int testplayerid = 1;
-            List<int> players = new List<int> { testplayerid};
+            string lobbyOwnerId = Request.Cookies["playerid"];
+            
+            var lobbyOwner = _lobbyDatabase.Players
+                .Where(p => p.PlayerCookie == lobbyOwnerId)
+                .FirstOrDefault();
+
+            if (lobbyOwner == null)
+            {
+                RedirectToAction("Index");
+            }
+            else 
+            {
+                List<Player> players = new List<Player> { lobbyOwner};
             Lobby newLobby = new Lobby() { Gamemode = "normal", Owner = "userId", Players = players};
 
-            _lobbyDatabase.Add(newLobby);
-            _lobbyDatabase.SaveChanges();
+            _lobbyDatabase.Lobbies.Add(newLobby);
+            _lobbyDatabase.SaveChanges(); 
+            }
+            
 
             return View("~/Views/Lobby/LobbyOwner.cshtml", model);
         }

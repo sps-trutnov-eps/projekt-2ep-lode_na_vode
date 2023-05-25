@@ -40,6 +40,28 @@ namespace LodeNaVode.Controllers
         }
     }
 
+    public static class Paměť
+    {
+
+        public static int lodPolicko = -1;
+
+        private static Engine GetIT()
+        {
+            string[][] mojeStringy = new string[][] {
+                new string[] { "a", "b" },
+                new string[] { "c", "d" }
+            };
+            Engine engine = new Engine(mojeStringy, 10, 15, "../../Data/textury/tvary-lodi.TEXT", "LodeNaVode/Lode/hlasky.txt", "LodeNaVode/Lode/nalepky.txt");
+
+            engine.UmistitLod(2, 5, "L", "a", "d");
+
+            Debug.WriteLine("hi");
+
+            return engine;
+
+        }
+    }
+
     public class TahController : Controller
     {
         public void Redraw(ref TypPolicka[,] bojiste, ref Engine engine)
@@ -62,8 +84,10 @@ namespace LodeNaVode.Controllers
 
         public IActionResult Policko(int id)
         {
+            Debug.WriteLine(id);
 
             Engine engine = Engin.engine;
+            ref int lodId = ref Paměť.lodPolicko;
 
             TypPolicka[,] bojiste = new TypPolicka[15, 10];
 
@@ -87,6 +111,8 @@ namespace LodeNaVode.Controllers
 
                         if (policko == TypPolicka.Lod)
                         {
+                            lodId = cislo;
+                            Debug.WriteLine(lodId);
                             //engine.PohybLode(0, "jih");
                             engine.PohybLode(0, "sever");
                         }
@@ -104,7 +130,7 @@ namespace LodeNaVode.Controllers
 
             Redraw(ref bojiste, ref engine);
 
-            Debug.WriteLine(id);
+            
 
             return View(bojiste);
         }

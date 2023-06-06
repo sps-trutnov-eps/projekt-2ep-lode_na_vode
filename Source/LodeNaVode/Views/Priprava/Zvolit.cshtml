@@ -8,12 +8,27 @@
     <a href="#">HRA!</a>
 </div>
 
-<div class="lod_vyber">
-    <img src="/img/download.jpg" alt="lod s očima" />
-    <form action="/Priprava/KliknutiPlus"><input type="submit" value="Více" /></form>
-    <form action="/Priprava/KliknutiMinus"><input type="submit" value="Méně" /></form>
-    <p>@Model</p>
 
+<div class="lodicky">
+    <h2>Malé</h2>
+    <div class="card">
+        <div class="contentik">
+            <img src="/img/download.jpg" alt="lod s očima" />
+        </div>
+        <div class="tlacitka">
+            <form action="/Priprava/KliknutiPlus"><input class="plus" type="submit" value="+" /></form>
+            <form action="/Priprava/KliknutiMinus"><input class="minus" type="submit" value="-" /></form>
+            <p>@Model</p>
+        </div>
+        <div class="nazev">
+            <p> SS Krteček</p>
+        </div>
+        <div class="cena">
+            <p>7 000 000$</p>
+        </div>
+    </div>
 </div>
+
+
 
 

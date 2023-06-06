@@ -12,16 +12,18 @@ namespace LodeNaVode.Controllers
         [HttpGet]
         public IActionResult Zvolit()
         {
-            Debug.WriteLine("Zvolit");
-            Debug.WriteLine(pocetLodi);
             return View(pocetLodi);
         }
 
         public IActionResult KliknutiPlus()
         {
-            Debug.WriteLine("KliknutiPlus");
-            pocetLodi ++;
-            Debug.WriteLine(pocetLodi);
+            pocetLodi++;
+            return View("Zvolit", pocetLodi);
+        }
+
+        public IActionResult KliknutiMinus()
+        {
+            pocetLodi--;
             return View("Zvolit", pocetLodi);
         }
 

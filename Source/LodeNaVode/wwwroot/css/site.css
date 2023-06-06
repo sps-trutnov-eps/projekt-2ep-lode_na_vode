@@ -18,23 +18,48 @@ body {
 }
 
 .curr {
-    border:2px red solid;
+    font-weight: 900;
     padding:.2em;
 }
-.tvojeMama {
+.mena {
     font-size: 1.3em;
+    text-align: center;
+    padding-top: 40px;
 }
 h1{
     text-align: center;
 }
-.btn-go{
-    text-align: center;
-    font-size: 64px;
-    position:fixed;
-    bottom:10%;
-    left: 50%;
-    background-color: navy;
-    padding: 16px;
-    color: greenyellow;
+.btn-go {
+    width: 240px;
     
+    font-size: 64px;
+    position: fixed;
+    bottom: 10%;
+    left: 45%;
+    padding: 16px;
+    color: white;
+    border-radius: 25px;
+    text-decoration: none;
+    background-color: deepskyblue;
+    transition: .5s;
+    text-align: center;
+   
+}
+
+.btn-go a{
+    color: white;
+    text-decoration: none;
+    margin: 0 auto;
+   
+}
+
+.btn-go:hover{
+   background-color: aquamarine;
+   width: 250px;
+   
+}
+
+.lod-vyber{
+    align-items: center;
+    padding-top: 500px;
 }

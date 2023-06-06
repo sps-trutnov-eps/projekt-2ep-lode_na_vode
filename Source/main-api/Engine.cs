@@ -6,9 +6,14 @@ namespace main_api
     public class Engine
     {
 
-        /// <summary>
-        /// je to log. chovej se k němu jako k logu
-        /// </summary>
+		/// <summary>
+		/// Je tu sepsáno, jaká loď byla naposledy trefena
+		/// </summary>
+		public string NaposledyTrefenaLod = "Ѿ";
+
+		/// <summary>
+		/// je to log. chovej se k němu jako k logu
+		/// </summary>
         public Log GetLog;
         /// <summary>
         /// zde su hraci
@@ -21,7 +26,7 @@ namespace main_api
         public List<int[]> ZasazenePozice;
 
         private GeneratorLodi LodneGenerator;
-        private int IndexHraceAktualneHrajiciho = 0;
+		private int IndexHraceAktualneHrajiciho = 0;
 
         /// <summary>
         /// Tady v tomhle budete mít tu hru.
@@ -39,7 +44,7 @@ namespace main_api
 
             // inicializovat lode
             Lode = new List<Lod>();
-            LodneGenerator = new GeneratorLodi(maxX+1, maxY+1, cestaKLodim);
+            LodneGenerator = new GeneratorLodi(maxX+1,maxY+1,cestaKLodim);
 
             // načíst i tohle
             ZasazenePozice = new List<int[]>();
@@ -100,21 +105,20 @@ namespace main_api
             // projdu lodi a zkontroluju, zda není hit
             for (int i = 0; i < Lode.Count; i++)
             {
-
-                // zkusím centrálné bod
-                if (Lode[i].CentralneBod[0] == x && Lode[i].CentralneBod[1] == y)
-                {
-                    // když již zničen
-                    if (Lode[i].CentralneBod[2] == 0)
-                        return false;
-                    // jinak zničit
-                    else
-                    {
-                        Lode[i].CentralneBod[2] = 0;
-                        ZkusitZnicitLod(i);
-                        return true;
-                    }
-                }
+						// zkusím centrálné bod
+						if (Lode[i].CentralneBod[0] == x && Lode[i].CentralneBod[1] == y){
+					// sepíšu spis
+					NaposledyTrefenaLod = Lode[i].Ucitel;
+							// když již zničen
+							if (Lode[i].CentralneBod[2] == 0)
+								return false;
+							// jinak zničit
+							else{
+								Lode[i].CentralneBod[2] = 0;
+								ZkusitZnicitLod(i);
+								return true;
+							}
+						}
 
                 // zkusím vedlejší body
                 for (int j = 0; j < Lode[i].ZbytekBodu.Length; j++)

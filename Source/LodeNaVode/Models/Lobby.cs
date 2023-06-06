@@ -17,6 +17,6 @@ namespace LodeNaVode.Models
         public string Owner { get; set; }
 
         [Required]
-        public ICollection<Player> Players { get; set; }
+        virtual public ICollection<Player> Players { get; set; }
     }
 }

@@ -7,7 +7,7 @@ namespace LodeNaVode.Controllers
 
     public class PripravaController : Controller
     {
-        public float pocetLodi = 0;
+        static int pocetLodi = 0;
 
         [HttpGet]
         public IActionResult Zvolit()
@@ -15,18 +15,19 @@ namespace LodeNaVode.Controllers
             return View(pocetLodi);
         }
 
+        [HttpGet]
         public IActionResult KliknutiPlus()
         {
             pocetLodi++;
-            return View("Zvolit", pocetLodi);
+            return RedirectToAction("Zvolit");
         }
 
+        [HttpGet]
         public IActionResult KliknutiMinus()
         {
-            pocetLodi--;
-            return View("Zvolit", pocetLodi);
+            if (pocetLodi > 0)
+                pocetLodi--;
+            return RedirectToAction("Zvolit");
         }
-
     }
-
 }

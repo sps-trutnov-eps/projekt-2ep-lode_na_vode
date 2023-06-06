@@ -25,9 +25,7 @@ footer {
 table {
     margin: auto auto;
 }
-
 .policko {
-    border: solid 1px gray;
     border-collapse:collapse;
     width: 24px;
     height: 24px;
@@ -42,7 +40,8 @@ table {
     height: 24px;
     background-position: center;
     background-repeat: no-repeat;
-    background-size: cover
+    background-size: cover;
+    border-radius: 3px;
 }
 
 
@@ -58,4 +57,4 @@ table {
 .rot90 {rotate: 90deg;}
 .rot180 {rotate: 180deg;}
 .rot270 {rotate: 270deg;}
-
+.zasazena {content: url('./textury/dira.png')}

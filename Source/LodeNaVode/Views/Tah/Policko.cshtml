@@ -4,6 +4,8 @@
     int sirka = 10;
     int vyska = 15;
     int cislo = 0;
+
+    bool zobrazOvladani = LodeNaVode.Controllers.Pamet.oznacenaLod;
 }
 
 <table>
@@ -32,3 +34,34 @@
         </tr>
     }
 </table>
+
+<!--
+ Pohyb lodě
+ Negativní id se používá jako ovládání
+ -1 == null
+ -2 otočit levá
+ -3 otočit pravá
+ -4 hore
+ -5 dolů
+-->
+@if (zobrazOvladani)
+{
+    <table>
+        <tr>
+            <td>
+                <a href="/Tah/Policko/-2">L</a>
+            </td>
+            <td>
+                <a href="/Tah/Policko/-3">P</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a href="/Tah/Policko/-4">H</a>
+            </td>
+            <td>
+                <a href="/Tah/Policko/-5">D</a>
+            </td>
+        </tr>
+    </table>
+}

@@ -21,6 +21,7 @@ namespace main_api
         public string Ucitel;
         public string Hrac;
         public string Tym;
+        public string Smer;
 
         public int[] CentralneBod; // X,Y,funkčno (1/0)
         public int[][] ZbytekBodu;
@@ -130,7 +131,8 @@ namespace main_api
                 Hrac = hrac,
                 Tym = tym,
                 CentralneBod = new int[] { x, y, 1 },
-                ZbytekBodu = LodneHolrery[shipIndex].ZbytekBodu.ToArray()
+                ZbytekBodu = LodneHolrery[shipIndex].ZbytekBodu.ToArray(),
+                Smer = "sever"
             };
 
             // otestovat, jestli je v limitach

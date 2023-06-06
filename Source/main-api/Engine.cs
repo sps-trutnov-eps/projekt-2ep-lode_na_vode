@@ -327,6 +327,24 @@ namespace main_api
                 return false;
             }
             // není li
+            // zmenim smer
+            Lod L = Lode[LodneIndex];
+            switch (L.Smer)
+            {
+                case "sever":
+                    L.Smer = "zapad";
+                    break;
+                case "jih":
+                    L.Smer = "vychod";
+                    break;
+                case "zapad":
+                    L.Smer = "jih";
+                    break;
+                default:
+                    L.Smer = "sever";
+                    break;
+            }
+            Lode[LodneIndex] = L;
             return true;
         }
 
@@ -362,10 +380,45 @@ namespace main_api
                 return false;
             }
             // není li
+            // zmenim smer
+            Lod L = Lode[LodneIndex];
+            switch (L.Smer)
+            {
+                case "sever":
+                    L.Smer = "vychod";
+                    break;
+                case "jih":
+                    L.Smer = "zapad";
+                    break;
+                case "zapad":
+                    L.Smer = "sever";
+                    break;
+                default:
+                    L.Smer = "jih";
+                    break;
+            }
+            Lode[LodneIndex] = L;
             return true;
         }
 
+        public bool Kupredu(int index) {
+            return PohybLode(index, Lode[index].Smer);
+        }
 
+        public bool Kuzadu(int index)
+        {
+            switch (Lode[index].Smer)
+            {
+                case "sever":
+                    return PohybLode(index, "jih");
+                case "vychod":
+                    return PohybLode(index, "zapad");
+                case "jih":
+                    return PohybLode(index, "sever");
+                default:
+                    return PohybLode(index, "vychod");
+            }
+        }
 
     }
 }

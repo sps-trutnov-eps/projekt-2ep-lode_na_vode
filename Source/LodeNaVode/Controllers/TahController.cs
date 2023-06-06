@@ -89,11 +89,9 @@ namespace LodeNaVode.Controllers
             // Negativní id se používá jako ovládání
             // -1 == null
             // -2 otočit levá
-            // -3 hore
-            // -4 otočit pravá
-            // -5 levá
-            // -6 dolů
-            // -7 pravá
+            // -3 otočit pravá
+            // -4 hore
+            // -5 dolů
             if(oznacenaLod) {
                 oznacenaLod = false;
                 switch(id)
@@ -107,11 +105,11 @@ namespace LodeNaVode.Controllers
                         break;
 
                     case -4:
-                        engine.PohybLode(lodId, "sever");
+                        engine.Kupredu(lodId);
                         break;
 
                     case -5:
-                        engine.PohybLode(lodId, "jih");
+                        engine.Kuzadu(lodId);
                         break;
                 }
             }

@@ -33,6 +33,7 @@ namespace LodeNaVode.Controllers
             Engine engine = new Engine(mojeStringy, 10, 15, "../../Data/textury/tvary-lodi.TEXT", "LodeNaVode/Lode/hlasky.txt", "LodeNaVode/Lode/nalepky.txt");
 
             engine.UmistitLod(2, 5, "L", "a", "d");
+            engine.UmistitLod(5, 5, "L", "a", "d");
 
             Debug.WriteLine("hi");
 

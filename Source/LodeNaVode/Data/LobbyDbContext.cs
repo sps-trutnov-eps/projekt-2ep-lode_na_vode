@@ -16,7 +16,7 @@ namespace LodeNaVode.Data
                 .HasMany(l => l.Players)
                 .WithOne(p => p.Lobby)
                 .HasForeignKey(p => p.LobbyId)
-                .IsRequired();
+                .IsRequired(false);
         }
     }
 }

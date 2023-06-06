@@ -30,7 +30,7 @@ namespace LodeNaVode.Controllers
             else 
             {
                 List<Player> players = new List<Player> { lobbyOwner};
-            Lobby newLobby = new Lobby() { Gamemode = "normal", Owner = "userId", Players = players};
+            Lobby newLobby = new Lobby() { Gamemode = "normal", Owner = lobbyOwner, Players = players};
 
             _lobbyDatabase.Lobbies.Add(newLobby);
             _lobbyDatabase.SaveChanges(); 

@@ -4,6 +4,7 @@ using LodeNaVode.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LodeNaVode.Migrations
 {
     [DbContext(typeof(LobbyDbContext))]
-    partial class LobbyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230606085453_Iteration1")]
+    partial class Iteration1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -52,6 +55,7 @@ namespace LodeNaVode.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PlayerId"));
 
                     b.Property<int?>("LobbyId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<string>("PlayerCookie")
@@ -69,7 +73,9 @@ namespace LodeNaVode.Migrations
                 {
                     b.HasOne("LodeNaVode.Models.Lobby", "Lobby")
                         .WithMany("Players")
-                        .HasForeignKey("LobbyId");
+                        .HasForeignKey("LobbyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Lobby");
                 });

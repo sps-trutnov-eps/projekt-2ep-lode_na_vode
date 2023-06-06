@@ -17,13 +17,15 @@ namespace LodeNaVode.Controllers
 
         public IActionResult Index()
         {
-            var dice = new Random();
-            int diceresult = dice.Next(1000000000, 2000000000);
-            string newplayeridhashed = BCrypt.Net.BCrypt.HashPassword(diceresult.ToString());
-            Response.Cookies.Append("playerid", newplayeridhashed);
-            Player player = new Player() { PlayerCookie = newplayeridhashed.ToString()};
-            _lobbyDatabase.Players.Add(player);
-            _lobbyDatabase.SaveChanges();
+            if (Request.Cookies["playerid"] == null) {
+                var dice = new Random();
+                int diceresult = dice.Next(1000000000, 2000000000);
+                string newplayeridhashed = BCrypt.Net.BCrypt.HashPassword(diceresult.ToString());
+                Response.Cookies.Append("playerid", newplayeridhashed);
+                Player player = new Player() {PlayerCookie = newplayeridhashed.ToString()};
+                _lobbyDatabase.Players.Add(player);
+                _lobbyDatabase.SaveChanges();
+            }
             return View();
         }
     }

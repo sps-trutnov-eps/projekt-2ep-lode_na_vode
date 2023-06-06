@@ -13,12 +13,7 @@ namespace LodeNaVode.Models
         [Required]
         public string PlayerCookie { get; set; }
 
-        [ForeignKey("Lobby")]
-        [AllowNull]
-        [DefaultValue(0)]
-        public int LobbyId { get; set; }
-        [AllowNull]
-        [DefaultValue(null)]
-        public Lobby Lobby { get; set; }
+        public int? LobbyId { get; set; }
+        public Lobby? Lobby { get; set; }
     }
 }

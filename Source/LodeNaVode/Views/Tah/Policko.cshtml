@@ -21,9 +21,9 @@
 
                     @if (bojiste[y, x] == LodeNaVode.Controllers.TypPolicka.Lod)
                     {
-                        <a href="/Tah/Policko/@cislo"><div class="pole-lod rot0">L</div></a>
+                        <a href="/Tah/Policko/@cislo"><div class="pole-lod @config[y, x]">L</div></a>
                     }
-                    else if (Model[y, x] == LodeNaVode.Controllers.TypPolicka.Voda)
+                    else if (bojiste[y, x] == LodeNaVode.Controllers.TypPolicka.Voda)
                     {
                         <a href="/Tah/Policko/@cislo"><div class="pole-voda">V</div></a>
                     }

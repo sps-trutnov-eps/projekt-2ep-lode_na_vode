@@ -78,10 +78,10 @@ h1{
 }
 
 .lodicky .card{
-    width: 300px;
+    width: 305px;
     height: 350px;
-    background-color: #CEBEA2;
-    
+   /* background-color: #CEBEA2;*/
+    border: 2px solid #CEBEA2;
     
 }
 
@@ -132,6 +132,6 @@ h1{
 .lodicky .cena{
     text-align: center;
     font-size: 18px;
-    color: black;
+    color: red;
     font-weight: 700;
 }

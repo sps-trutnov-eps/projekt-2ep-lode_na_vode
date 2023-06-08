@@ -25,8 +25,9 @@ namespace LodeNaVode.Controllers
         [HttpGet]
         public IActionResult Rozmisteni()
         {
+            List<int[]> L = RozmisteniClass.Rozmisti(pocetLodiKrtecek,pocetLodiMysicka,pocetLodiVB);
+
             return RedirectToAction("Zvolit");
-            ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ;
         }
 
         [HttpGet]

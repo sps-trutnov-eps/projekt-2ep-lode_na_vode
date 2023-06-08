@@ -123,6 +123,14 @@ namespace LodeNaVode.Controllers
                     Debug.WriteLine("-------------");
                     //Debug.WriteLine($"{lod.CentralneBod[0]};{lod.CentralneBod[1]}   {lod.CentralneBod[0] + bx}({bx});{lod.CentralneBod[1] + by}({by})");
                     bojiste[lod.CentralneBod[1] + by, lod.CentralneBod[0] + bx] = TypPolicka.Lod;
+                    if (lod.Smer == "sever")
+                        config[lod.CentralneBod[1] + by, lod.CentralneBod[0] + bx] = "rot0";
+                    else if (lod.Smer == "zapad")
+                        config[lod.CentralneBod[1] + by, lod.CentralneBod[0] + bx] = "rot90";
+                    else if (lod.Smer == "jih")
+                        config[lod.CentralneBod[1] + by, lod.CentralneBod[0] + bx] = "rot180";
+                    else if (lod.Smer == "vychod")
+                        config[lod.CentralneBod[1] + by, lod.CentralneBod[0] + bx] = "rot270";
                 }
             }
             Debug.WriteLine($"RedrawCompleted");

@@ -1,6 +1,7 @@
 ﻿using LodeNaVode.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using LodeNaVode.Lode;
 
 namespace LodeNaVode.Controllers
 {
@@ -19,6 +20,13 @@ namespace LodeNaVode.Controllers
         public IActionResult Zvolit()
         {
             return View(pocetLodiKrtecek);
+        }
+
+        [HttpGet]
+        public IActionResult Rozmisteni()
+        {
+            return RedirectToAction("Zvolit");
+            ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ;
         }
 
         [HttpGet]

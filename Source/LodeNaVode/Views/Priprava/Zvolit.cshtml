@@ -1,7 +1,12 @@
 ﻿@model int;
 
+@{
+    int tokeny = LodeNaVode.Controllers.PripravaController.tokeny;
+    int cenaLodiKrtecek = LodeNaVode.Controllers.PripravaController.cenaLodiKrtecek;
+}
+
 <h1>Výběr lodí⚓</h1>
-<div class="mena">Vaše tokeny<span class="curr"> 37 500 000$</span></div>
+<div class="mena">Vaše tokeny<span class="curr">@tokeny¤</span></div>
 <br />
 
 <div class="btn-go">
@@ -16,15 +21,15 @@
             <img src="/img/download.jpg" alt="lod s očima" />
         </div>
         <div class="tlacitka">
-            <form action="/Priprava/KliknutiPlus"><input class="plus" type="submit" value="+" /></form>
-            <form action="/Priprava/KliknutiMinus"><input class="minus" type="submit" value="-" /></form>
+            <form action="/Priprava/KliknutiPlusKrtecek"><input class="plus" type="submit" value="+" /></form>
+            <form action="/Priprava/KliknutiMinusKrtecek"><input class="minus" type="submit" value="-" /></form>
             <p>@Model</p>
         </div>
         <div class="nazev">
-            <p> SS Krteček</p>
+            <p>Krteček</p>
         </div>
         <div class="cena">
-            <p>7 000 000$</p>
+            <p>@cenaLodiKrtecek¤</p>
         </div>
     </div>
 </div>

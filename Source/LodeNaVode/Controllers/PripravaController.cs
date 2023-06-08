@@ -7,26 +7,35 @@ namespace LodeNaVode.Controllers
 
     public class PripravaController : Controller
     {
-        static int pocetLodi = 0;
+        public static int tokeny = 37_500_000;
+        public static int cenaLodiKrtecek = 7_000_000;
+        public static int pocetLodiKrtecek = 0;
 
         [HttpGet]
         public IActionResult Zvolit()
         {
-            return View(pocetLodi);
+            return View(pocetLodiKrtecek);
         }
 
         [HttpGet]
-        public IActionResult KliknutiPlus()
+        public IActionResult KliknutiPlusKrtecek()
         {
-            pocetLodi++;
+            if (tokeny >= cenaLodiKrtecek)
+            {
+                pocetLodiKrtecek++;
+                tokeny -= cenaLodiKrtecek;
+            }
             return RedirectToAction("Zvolit");
         }
 
         [HttpGet]
-        public IActionResult KliknutiMinus()
+        public IActionResult KliknutiMinusKrtecek()
         {
-            if (pocetLodi > 0)
-                pocetLodi--;
+            if (pocetLodiKrtecek > 0)
+            {
+                pocetLodiKrtecek--;
+                tokeny += cenaLodiKrtecek;
+            }
             return RedirectToAction("Zvolit");
         }
     }

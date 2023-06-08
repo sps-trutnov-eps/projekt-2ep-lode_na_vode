@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using main_api;
+using Microsoft.AspNetCore.Mvc.Formatters;
 
 namespace LodeNaVode.Controllers
 {
@@ -20,6 +21,15 @@ namespace LodeNaVode.Controllers
         LodPotopena,
         Mlha,
     }
+
+
+
+    ////////////////////////
+    // !!!!!NEKOUKAT!!!!! //
+    ////////////////////////
+    // Please I beg you ! //
+    ////////////////////////
+
 
     public class Engin{
 
@@ -44,14 +54,21 @@ namespace LodeNaVode.Controllers
 
     public static class Pamet
     {
+        public static int velikostX = 10;
+        public static int velikostY = 15;
         public static int lodId = -1;
         public static bool oznacenaLod = false;
     }
 
     public class TahController : Controller
     {
-        public void Redraw(ref TypPolicka[,] bojiste, ref Engine engine)
+        public void Redraw(ref Tuple<TypPolicka[,], string[,]> bojisteTuple, ref Engine engine)
         {
+            if (bojisteTuple.Item1 == null) throw new Exception();
+
+            TypPolicka[,] bojiste = bojisteTuple.Item1;
+            string[,] config = bojisteTuple.Item2;
+
             for (int y = 0; y < bojiste.GetLength(0); y++)
             {
                 for (int x = 0; x < bojiste.GetLength(1); x++)
@@ -65,6 +82,14 @@ namespace LodeNaVode.Controllers
                 var lod = engine.Lode[i];
 
                 bojiste[lod.CentralneBod[1], lod.CentralneBod[0]] = TypPolicka.Lod;
+                if (lod.Smer == "sever")
+                    config[lod.CentralneBod[1], lod.CentralneBod[0]] = "rot0";
+                else if (lod.Smer == "zapad")
+                    config[lod.CentralneBod[1], lod.CentralneBod[0]] = "rot90";
+                else if (lod.Smer == "jih")
+                    config[lod.CentralneBod[1], lod.CentralneBod[0]] = "rot180";
+                else if (lod.Smer == "vychod")
+                    config[lod.CentralneBod[1], lod.CentralneBod[0]] = "rot270";
             }
         }
 
@@ -77,9 +102,12 @@ namespace LodeNaVode.Controllers
             ref int lodId = ref Pamet.lodId;
             ref bool oznacenaLod = ref Pamet.oznacenaLod;
 
-            TypPolicka[,] bojiste = new TypPolicka[15, 10];
+            Tuple<TypPolicka[,], string[,]> bojisteTuple = new Tuple<TypPolicka[,], string[,]>(new TypPolicka[Pamet.velikostX, Pamet.velikostY], new string[Pamet.velikostX, Pamet.velikostY]);
 
-            Redraw(ref bojiste, ref engine);
+            Redraw(ref bojisteTuple, ref engine);
+
+            TypPolicka[,] bojiste = bojisteTuple.Item1;
+            string[,] config = bojisteTuple.Item2;
 
             bojiste[2, 6] = TypPolicka.NepratelskaLod;
 
@@ -160,9 +188,9 @@ namespace LodeNaVode.Controllers
                 }
             }
 
-            Redraw(ref bojiste, ref engine);
+            Redraw(ref bojisteTuple, ref engine);
 
-            return View(bojiste);
+            return View(bojisteTuple);
         }
     }
 }

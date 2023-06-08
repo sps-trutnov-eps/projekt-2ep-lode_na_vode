@@ -73,7 +73,14 @@ namespace LodeNaVode.Controllers
             {
                 for (int x = 0; x < bojiste.GetLength(1); x++)
                 {
-                    bojiste[y, x] = TypPolicka.Mlha;
+                    if (bojiste[y, x] == TypPolicka.Voda)
+                    {
+                        bojiste[y, x] = TypPolicka.Voda;
+                        Debug.WriteLine("test1");
+                    }
+                    else
+                        bojiste[y, x] = TypPolicka.Mlha;
+                    //Debug.WriteLine("test");
                 }
             }
 
@@ -93,7 +100,7 @@ namespace LodeNaVode.Controllers
             }
         }
 
-        public IActionResult Policko(int id)
+        public IActionResult Policko(int id = -1)
         {
 
             Debug.WriteLine(id);
@@ -108,8 +115,6 @@ namespace LodeNaVode.Controllers
 
             TypPolicka[,] bojiste = bojisteTuple.Item1;
             string[,] config = bojisteTuple.Item2;
-
-            bojiste[2, 6] = TypPolicka.NepratelskaLod;
 
             int cislo = 0;
             
@@ -152,9 +157,12 @@ namespace LodeNaVode.Controllers
                     {
                         ref TypPolicka policko = ref bojiste[y, x];
 
-                        if (policko == TypPolicka.NepratelskaLod)
+                        if (policko == TypPolicka.Mlha)
                         {
-                            policko = TypPolicka.ZasahLod;
+                            Debug.WriteLine("Výstřel do prázdna");
+                            Debug.WriteLine($"{policko}");
+                            policko = TypPolicka.Voda;
+                            Debug.WriteLine($"{policko}");
                         }
 
                         if (policko == TypPolicka.Lod)
@@ -184,11 +192,13 @@ namespace LodeNaVode.Controllers
 
 
                         //bojiste[y, x] ==
+                        Debug.WriteLine($"{policko}");
                     }
                 }
             }
 
             Redraw(ref bojisteTuple, ref engine);
+            Debug.WriteLine($"{bojiste[0, 0]}");
 
             return View(bojisteTuple);
         }

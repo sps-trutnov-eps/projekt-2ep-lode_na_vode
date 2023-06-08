@@ -18,32 +18,32 @@ body {
 }
 
 .curr {
-    font-weight: 900;
+    color: #5ffa05;
     padding:.2em;
 }
 .mena {
     font-size: 1.3em;
     text-align: center;
     padding-top: 40px;
+    text-transform: uppercase;
+    font-weight: 700;
 }
 h1{
     text-align: center;
 }
 .btn-go {
     width: 240px;
-    
     font-size: 64px;
     position: fixed;
-    bottom: 10%;
-    left: 45%;
+    bottom: 80px;
+    left: 815px;
     padding: 16px;
     color: white;
     border-radius: 25px;
     text-decoration: none;
-    background-color: deepskyblue;
+    background-color: #5ffa05;
     transition: .5s;
     text-align: center;
-   
 }
 
 .btn-go a{
@@ -55,13 +55,16 @@ h1{
 
 .btn-go:hover{
    background-color: aquamarine;
-   width: 250px;
+   
    
 }
 
 .skupina-nazev h2 {
     text-align: center;
     font-size: 32px;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding-bottom: 60px
 }
 
 
@@ -103,7 +106,7 @@ h1{
 }
 
 .lodicky .tlacitka .plus{
-    background-color: green;
+    background-color: #5ffa05;
 
 }
 
@@ -128,4 +131,7 @@ h1{
 
 .lodicky .cena{
     text-align: center;
+    font-size: 18px;
+    color: black;
+    font-weight: 700;
 }

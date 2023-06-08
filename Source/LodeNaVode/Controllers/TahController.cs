@@ -3,6 +3,8 @@ using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using main_api;
 using Microsoft.AspNetCore.Mvc.Formatters;
+using Microsoft.AspNetCore.Routing.Constraints;
+using log_lib;
 
 namespace LodeNaVode.Controllers
 {
@@ -43,8 +45,9 @@ namespace LodeNaVode.Controllers
             Engine engine = new Engine(mojeStringy, 10, 15, "../../Data/textury/tvary-lodi.TEXT", "LodeNaVode/Lode/hlasky.txt", "LodeNaVode/Lode/nalepky.txt");
 
             engine.UmistitLod(2, 5, "L", "a", "c");
-            engine.UmistitLod(5, 5, "L", "a", "c");
-            engine.UmistitLod(0, 1, "L", "c", "c");
+            //engine.UmistitLod(10, 5, "P", "a", "c");
+            //engine.UmistitLod(5, 5, "L", "a", "c");
+            //engine.UmistitLod(0, 1, "L", "c", "c");
 
             Debug.WriteLine("hi");
 
@@ -98,12 +101,34 @@ namespace LodeNaVode.Controllers
                     config[lod.CentralneBod[1], lod.CentralneBod[0]] = "rot180";
                 else if (lod.Smer == "vychod")
                     config[lod.CentralneBod[1], lod.CentralneBod[0]] = "rot270";
-            }
-        }
 
+                for (int x = 0; x < lod.ZbytekBodu.Length; x++)
+                {
+                    int bx = 0;
+                    int by = 0;
+                    int bz = 0;
+                    
+                    for (int y = 0; y < lod.ZbytekBodu[x].Length; y++)
+                    {
+                        Debug.WriteLine($"{x};{y}     {lod.ZbytekBodu[x][y]}");
+
+                        if (y == 0)
+                            bx = lod.ZbytekBodu[x][y];
+                        if (y == 1)
+                            by = lod.ZbytekBodu[x][y];
+
+                        //Debug.WriteLine($"{lod.ZbytekBodu[x][y]}    {lod.CentralneBod[1] + y};{lod.CentralneBod[0] + x}") ;
+                    }
+
+                    Debug.WriteLine("-------------");
+                    //Debug.WriteLine($"{lod.CentralneBod[0]};{lod.CentralneBod[1]}   {lod.CentralneBod[0] + bx}({bx});{lod.CentralneBod[1] + by}({by})");
+                    bojiste[lod.CentralneBod[1] + by, lod.CentralneBod[0] + bx] = TypPolicka.Lod;
+                }
+            }
+            Debug.WriteLine($"RedrawCompleted");
+        }
         public IActionResult Policko(int id = -1)
         {
-
             Debug.WriteLine(id);
 
             Engine engine = Engin.engine;
@@ -194,7 +219,6 @@ namespace LodeNaVode.Controllers
                                     oznacenaLod = true;
                                 }
                             }
-                            Debug.WriteLine("LodID: " + lodId);
                             //engine.PohybLode(0, "jih");
                         }
                         else
@@ -209,13 +233,11 @@ namespace LodeNaVode.Controllers
 
 
                         //bojiste[y, x] ==
-                        Debug.WriteLine($"{policko}");
                     }
                 }
             }
 
             Redraw(ref bojisteTuple, ref engine);
-            Debug.WriteLine($"{bojiste[0, 0]}");
 
             return View(bojisteTuple);
         }

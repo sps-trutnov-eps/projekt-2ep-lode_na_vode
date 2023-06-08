@@ -1,6 +1,7 @@
 ﻿using LodeNaVode.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Proxies;
 
 namespace LodeNaVode.Data
 {
@@ -17,6 +18,13 @@ namespace LodeNaVode.Data
                 .WithOne(p => p.Lobby)
                 .HasForeignKey(p => p.LobbyId)
                 .IsRequired(false);
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            base.OnConfiguring(optionsBuilder);
+
+            optionsBuilder.UseLazyLoadingProxies();
         }
     }
 }

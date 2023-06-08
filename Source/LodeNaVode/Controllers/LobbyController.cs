@@ -1,8 +1,6 @@
 ﻿using LodeNaVode.Data;
 using LodeNaVode.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Razor.Compilation;
-using System.Linq;
 using System.Diagnostics;
 
 namespace LodeNaVode.Controllers
@@ -61,14 +59,14 @@ namespace LodeNaVode.Controllers
                 Debug.WriteLine("Moje lobby:");
                 Debug.WriteLine(correctLobbies.First().LobbyId);
                 Debug.WriteLine("Hráči v lobby:");
-                foreach (Player p in playersOfLobby) 
+                foreach (Player p in playersOfLobby)
                 {
                     Debug.WriteLine(p);
                 }
-                    playersOfLobby.Add(player);
+                playersOfLobby.Add(player);
                 return RedirectToAction("Lobby");
             }
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("JoinLobby", "Home");
         }
 
         public IActionResult LobbyOwner()
@@ -79,6 +77,28 @@ namespace LodeNaVode.Controllers
         public IActionResult Lobby()
         {
             return View();
+        }
+
+        public IActionResult Index(string playerName)
+        {
+            if (HttpContext.Session.IsAvailable)
+            {
+                if (!HttpContext.Session.Keys.Contains("playerid"))
+                {
+                    Debug.WriteLine("oops");
+                }
+            }
+            if (playerName != null && playerName.Trim() != "")
+            {
+                string playerCookie = HttpContext.Session.GetString("playerid");
+                Player player = new Player() { PlayerCookie = playerCookie, PlayerName = playerName };
+                _lobbyDatabase.Players.Add(player);
+                _lobbyDatabase.SaveChanges();
+                return View();
+            }
+            else
+                return RedirectToAction("Index", "Home");
+
         }
     }
 }

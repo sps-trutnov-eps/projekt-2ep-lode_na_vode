@@ -13,7 +13,10 @@ namespace LodeNaVode.Models
         [Required]
         public string PlayerCookie { get; set; }
 
+        [Required]
+        public string PlayerName { get; set; }
+
         public int? LobbyId { get; set; }
-        public Lobby? Lobby { get; set; }
+        virtual public Lobby? Lobby { get; set; }
     }
 }

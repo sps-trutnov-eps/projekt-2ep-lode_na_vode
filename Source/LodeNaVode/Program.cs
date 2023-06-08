@@ -12,13 +12,16 @@ namespace LodeNaVode
             builder.Services.AddControllersWithViews();
             builder.Services.AddDbContext<LobbyDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("LobbyConnection")));
-            builder.Services.AddSession(options => {
-                options.Cookie.Name = "lodeId";
+            builder.Services.AddSession(options =>
+            {
                 options.Cookie.IsEssential = true;
                 options.IdleTimeout = TimeSpan.FromMinutes(60);
             });
+            builder.Services.Configure<CookiePolicyOptions>(options =>
+                options.CheckConsentNeeded = context => false);
             var app = builder.Build();
 
+            app.UseSession();
             app.UseStaticFiles();
             app.UseRouting();
             app.UseAuthorization();

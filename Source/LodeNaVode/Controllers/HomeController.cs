@@ -1,6 +1,6 @@
 ﻿using LodeNaVode.Data;
-using LodeNaVode.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 
 namespace LodeNaVode.Controllers
 {
@@ -17,18 +17,28 @@ namespace LodeNaVode.Controllers
 
         public IActionResult Index()
         {
-            if (Request.Cookies["playerid"] == null)
+            return View();
+        }
+
+        public IActionResult JoinLobby() 
+        {
+            if (HttpContext.Session.GetString("playerid") == null)
             {
                 var dice = new Random();
                 int diceresult = dice.Next(1000000000, 2000000000);
                 string newplayeridhashed = BCrypt.Net.BCrypt.HashPassword(diceresult.ToString());
-                Response.Cookies.Append("playerid", newplayeridhashed);
-                Player player = new Player() { PlayerCookie = newplayeridhashed.ToString() };
-                _lobbyDatabase.Players.Add(player);
-                _lobbyDatabase.SaveChanges();
-                //string playerId = Request.Cookies["playerid"].ToString();
+                HttpContext.Session.SetString("playerid", newplayeridhashed);
+                HttpContext.Session.CommitAsync();
+
+                if (HttpContext.Session.IsAvailable)
+                {
+                    if (HttpContext.Session.Keys.Contains("playerid"))
+                    {
+                        Debug.WriteLine("ok");
+                    }
+                }
             }
-            return View();
+            return RedirectToAction("Index","Lobby");
         }
     }
 }

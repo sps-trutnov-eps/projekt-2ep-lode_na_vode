@@ -10,6 +10,10 @@ namespace LodeNaVode.Controllers
         public static int tokeny = 37_500_000;
         public static int cenaLodiKrtecek = 7_000_000;
         public static int pocetLodiKrtecek = 0;
+        public static int cenaLodiMysicka = 10_000_000;
+        public static int pocetLodiMysicka = 0;
+        public static int cenaLodiVB = 4_000_000;
+        public static int pocetLodiVB = 0;
 
         [HttpGet]
         public IActionResult Zvolit()
@@ -35,6 +39,48 @@ namespace LodeNaVode.Controllers
             {
                 pocetLodiKrtecek--;
                 tokeny += cenaLodiKrtecek;
+            }
+            return RedirectToAction("Zvolit");
+        }
+        [HttpGet]
+        public IActionResult KliknutiPlusMysicka()
+        {
+            if (tokeny >= cenaLodiMysicka)
+            {
+                pocetLodiMysicka++;
+                tokeny -= cenaLodiMysicka;
+            }
+            return RedirectToAction("Zvolit");
+        }
+
+        [HttpGet]
+        public IActionResult KliknutiMinusMysicka()
+        {
+            if (pocetLodiMysicka > 0)
+            {
+                pocetLodiMysicka--; 
+                tokeny += cenaLodiMysicka;
+            }
+            return RedirectToAction("Zvolit");
+        }
+        [HttpGet]
+        public IActionResult KliknutiPlusVB()
+        {
+            if (tokeny >= cenaLodiVB)
+            {
+                pocetLodiVB++;
+                tokeny -= cenaLodiVB;
+            }
+            return RedirectToAction("Zvolit");
+        }
+
+        [HttpGet]
+        public IActionResult KliknutiMinusVB()
+        {
+            if (pocetLodiVB > 0)
+            {
+                pocetLodiVB--;
+                tokeny += cenaLodiVB;
             }
             return RedirectToAction("Zvolit");
         }

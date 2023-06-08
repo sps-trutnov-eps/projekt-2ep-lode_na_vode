@@ -42,8 +42,9 @@ namespace LodeNaVode.Controllers
             };
             Engine engine = new Engine(mojeStringy, 10, 15, "../../Data/textury/tvary-lodi.TEXT", "LodeNaVode/Lode/hlasky.txt", "LodeNaVode/Lode/nalepky.txt");
 
-            engine.UmistitLod(2, 5, "L", "a", "d");
-            engine.UmistitLod(5, 5, "L", "a", "d");
+            engine.UmistitLod(2, 5, "L", "a", "c");
+            engine.UmistitLod(5, 5, "L", "a", "c");
+            engine.UmistitLod(0, 1, "L", "c", "c");
 
             Debug.WriteLine("hi");
 
@@ -74,10 +75,7 @@ namespace LodeNaVode.Controllers
                 for (int x = 0; x < bojiste.GetLength(1); x++)
                 {
                     if (bojiste[y, x] == TypPolicka.Voda)
-                    {
-                        bojiste[y, x] = TypPolicka.Voda;
-                        Debug.WriteLine("test1");
-                    }
+                        continue;
                     else
                         bojiste[y, x] = TypPolicka.Mlha;
                     //Debug.WriteLine("test");
@@ -87,6 +85,9 @@ namespace LodeNaVode.Controllers
             for (int i = 0; i < engine.Lode.Count; i++)
             {
                 var lod = engine.Lode[i];
+
+                if (lod.Hrac != "a")
+                    continue;
 
                 bojiste[lod.CentralneBod[1], lod.CentralneBod[0]] = TypPolicka.Lod;
                 if (lod.Smer == "sever")
@@ -159,10 +160,26 @@ namespace LodeNaVode.Controllers
 
                         if (policko == TypPolicka.Mlha)
                         {
-                            Debug.WriteLine("Výstřel do prázdna");
-                            Debug.WriteLine($"{policko}");
-                            policko = TypPolicka.Voda;
-                            Debug.WriteLine($"{policko}");
+                            if (engine.StrelbaNaLod(x, y))
+                            {
+                                for (int i = 0; i < engine.Lode.Count; i++)
+                                {
+                                    var lod = engine.Lode[i];
+
+                                    if (lod.CentralneBod[0] == x && lod.CentralneBod[1] == y)
+                                    {
+                                        policko = TypPolicka.ZasahLod;
+                                        break;
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                policko = TypPolicka.Voda;                            
+                            }
+                            //Debug.WriteLine("Výstřel do prázdna");
+                            //Debug.WriteLine($"{policko}");
+                            //Debug.WriteLine($"{policko}");
                         }
 
                         if (policko == TypPolicka.Lod)

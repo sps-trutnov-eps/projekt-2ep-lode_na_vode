@@ -17,35 +17,19 @@
         <tr>
             @for (int x = 0; x < bojiste.GetLength(1); x++, cislo++)
             {
-                <td>
+                <td class="policko">
 
                     @if (bojiste[y, x] == LodeNaVode.Controllers.TypPolicka.Lod)
                     {
-                        <a href="/Tah/Policko/@cislo">
-                            <div class="centerLod @config[y, x]">
-                                L
-                            </div>    
-                        </a>
+                        <a href="/Tah/Policko/@cislo"><div class="pole-lod rot0">L</div></a>
                     }
-                    @if (bojiste[y, x] == LodeNaVode.Controllers.TypPolicka.NepratelskaLod)
+                    else if (Model[y, x] == LodeNaVode.Controllers.TypPolicka.Voda)
                     {
-                        <a href="/Tah/Policko/@cislo">N</a>
-                    }
-                    @if (bojiste[y, x] == LodeNaVode.Controllers.TypPolicka.ZasahLod)
-                    {
-                        <a href="/Tah/Policko/@cislo">Z</a>
-                    }
-                    @if (bojiste[y, x] == LodeNaVode.Controllers.TypPolicka.LodPotopena)
-                    {
-                        <a href="/Tah/Policko/@cislo">P</a>
-                    }
-                    else if (bojiste[y, x] == LodeNaVode.Controllers.TypPolicka.Voda)
-                    {
-                        <a href="/Tah/Policko/@cislo">V</a>
+                        <a href="/Tah/Policko/@cislo"><div class="pole-voda">V</div></a>
                     }
                     else if (bojiste[y, x] == LodeNaVode.Controllers.TypPolicka.Mlha)
                     {
-                        <a href="/Tah/Policko/@cislo">#</a>
+                        <a href="/Tah/Policko/@cislo"><div class="pole-mlha">#</div></a>
                     }
 
                 </td>
@@ -68,18 +52,18 @@
     <table>
         <tr>
             <td>
-                <a href="/Tah/Policko/-2">L</a>
+                <a href="/Tah/Policko/-2"><div class="vlevo">L</div></a>
             </td>
             <td>
-                <a href="/Tah/Policko/-3">P</a>
+                <a href="/Tah/Policko/-3"><div class="vpravo">P</div></a>
             </td>
         </tr>
         <tr>
             <td>
-                <a href="/Tah/Policko/-4">H</a>
+                <a href="/Tah/Policko/-4"><div class="nahoru">H</div></a>
             </td>
             <td>
-                <a href="/Tah/Policko/-5">D</a>
+                <a href="/Tah/Policko/-5"><div class="dolu">D</div></a>
             </td>
         </tr>
     </table>

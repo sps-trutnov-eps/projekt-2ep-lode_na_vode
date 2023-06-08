@@ -9,34 +9,22 @@
     string pocetLodiMysicka = LodeNaVode.Controllers.PripravaController.pocetLodiMysicka.ToString("N").Split(",")[0].Split(".")[0];
     string pocetLodiVB = LodeNaVode.Controllers.PripravaController.pocetLodiVB.ToString("N").Split(",")[0].Split(".")[0];
 }
-<body>
-    <h1>Výběr lodí⚓</h1>
-    <div class="mena">Vaše tokeny:  <span class="curr">@tokeny¤</span></div>
-    <br />
 
-    <div class="btn-go">
-        <a href="#">HRA!</a>
-    </div>
-    <div class="skupina-nazev">
-        <h2>Malé</h2>
-    </div>
-    <div class="lodicky">
+<h1>Výběr lodí⚓</h1>
+<div class="mena">Vaše tokeny<span class="curr">@tokeny¤</span></div>
+<br />
+
+<div class="btn-go">
+    <a href="#">HRA!</a>
+</div>
+<div class="skupina-nazev">
+    <h2>Malé</h2>
+</div>
+<div class="lodicky">
    
-        <div class="card">
-            <div class="contentik">
-                <img src="/img/download.jpg" alt="lod s očima" />
-            </div>
-            <div class="tlacitka">
-                <form action="/Priprava/KliknutiPlusKrtecek"><input class="plus" type="submit" value="+" /></form>
-                <form action="/Priprava/KliknutiMinusKrtecek"><input class="minus" type="submit" value="-" /></form>
-                <p>@Model</p>
-            </div>
-            <div class="nazev">
-                <p>Krteček</p>
-            </div>
-            <div class="cena">
-                <p>@cenaLodiKrtecek¤</p>
-            </div>
+    <div class="card">
+        <div class="contentik">
+            <img src="/img/download.jpg" alt="lod s očima" />
         </div>
         <div class="tlacitka">
             <form action="/Priprava/KliknutiPlusKrtecek"><input class="plus" type="submit" value="+" /></form>
@@ -51,21 +39,9 @@
         </div>
     </div>
 
-        <div class="card">
-            <div class="contentik">
-                <img src="/img/download.jpg" alt="lod s očima" />
-            </div>
-            <div class="tlacitka">
-                <form action="/Priprava/KliknutiPlus"><input class="plus" type="submit" value="+" /></form>
-                <form action="/Priprava/KliknutiMinus"><input class="minus" type="submit" value="-" /></form>
-                <p>@Model</p>
-            </div>
-            <div class="nazev">
-                <p>Myšička</p>
-            </div>
-            <div class="cena">
-                <p>10 000 000$</p>
-            </div>
+    <div class="card">
+        <div class="contentik">
+            <img src="/img/download.jpg" alt="lod s očima" />
         </div>
         <div class="tlacitka">
             <form action="/Priprava/KliknutiPlusMysicka"><input class="plus" type="submit" value="+" /></form>
@@ -80,21 +56,9 @@
         </div>
     </div>
 
-        <div class="card">
-            <div class="contentik">
-                <img src="/img/download.jpg" alt="lod s očima" />
-            </div>
-            <div class="tlacitka">
-                <form action="/Priprava/KliknutiPlus"><input class="plus" type="submit" value="+" /></form>
-                <form action="/Priprava/KliknutiMinus"><input class="minus" type="submit" value="-" /></form>
-                <p>@Model</p>
-            </div>
-            <div class="nazev">
-                <p>VB</p>
-            </div>
-            <div class="cena">
-                <p>4 000 000$</p>
-            </div>
+    <div class="card">
+        <div class="contentik">
+            <img src="/img/download.jpg" alt="lod s očima" />
         </div>
         <div class="tlacitka">
             <form action="/Priprava/KliknutiPlusVB"><input class="plus" type="submit" value="+" /></form>
@@ -108,7 +72,7 @@
             <p>@cenaLodiVB¤</p>
         </div>
     </div>
-</body>
+</div>
 
 
 

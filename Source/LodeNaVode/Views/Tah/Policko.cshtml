@@ -1,30 +1,33 @@
-﻿@model LodeNaVode.Controllers.TypPolicka[,];
+﻿@model Tuple<LodeNaVode.Controllers.TypPolicka[,], string[,]>;
 
 @{
-    int sirka = 10;
-    int vyska = 15;
+    int sirka = LodeNaVode.Controllers.Pamet.velikostX;
+    int vyska = LodeNaVode.Controllers.Pamet.velikostY;
     int cislo = 0;
+
+    LodeNaVode.Controllers.TypPolicka[,] bojiste = Model.Item1;
+    string[,] config = Model.Item2;
 
     bool zobrazOvladani = LodeNaVode.Controllers.Pamet.oznacenaLod;
 }
 
 <table>
-    @for (int y = 0; y < Model.GetLength(0); y++)
+    @for (int y = 0; y < bojiste.GetLength(0); y++)
     {
         <tr>
-            @for (int x = 0; x < Model.GetLength(1); x++, cislo++)
+            @for (int x = 0; x < bojiste.GetLength(1); x++, cislo++)
             {
                 <td class="policko">
 
-                    @if (Model[y, x] == LodeNaVode.Controllers.TypPolicka.Lod)
+                    @if (bojiste[y, x] == LodeNaVode.Controllers.TypPolicka.Lod)
                     {
-                        <a href="/Tah/Policko/@cislo"><div class="pole-lod rot0">L</div></a>
+                        <a href="/Tah/Policko/@cislo"><div class="pole-lod @config[y, x]">L</div></a>
                     }
-                    else if (Model[y, x] == LodeNaVode.Controllers.TypPolicka.Voda)
+                    else if (bojiste[y, x] == LodeNaVode.Controllers.TypPolicka.Voda)
                     {
                         <a href="/Tah/Policko/@cislo"><div class="pole-voda">V</div></a>
                     }
-                    else if (Model[y, x] == LodeNaVode.Controllers.TypPolicka.Mlha)
+                    else if (bojiste[y, x] == LodeNaVode.Controllers.TypPolicka.Mlha)
                     {
                         <a href="/Tah/Policko/@cislo"><div class="pole-mlha">#</div></a>
                     }
@@ -48,18 +51,18 @@
 {
     <table>
         <tr>
-            <td>
+            <td class="policko">
                 <a href="/Tah/Policko/-2"><div class="vlevo">L</div></a>
             </td>
-            <td>
+            <td class="policko">
                 <a href="/Tah/Policko/-3"><div class="vpravo">P</div></a>
             </td>
         </tr>
         <tr>
-            <td>
+            <td class="policko">
                 <a href="/Tah/Policko/-4"><div class="nahoru">H</div></a>
             </td>
-            <td>
+            <td class="policko">
                 <a href="/Tah/Policko/-5"><div class="dolu">D</div></a>
             </td>
         </tr>

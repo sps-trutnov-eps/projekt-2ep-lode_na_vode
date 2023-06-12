@@ -2,6 +2,9 @@
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using main_api;
+using Microsoft.AspNetCore.Mvc.Formatters;
+using Microsoft.AspNetCore.Routing.Constraints;
+using log_lib;
 
 namespace LodeNaVode.Controllers
 {
@@ -21,6 +24,15 @@ namespace LodeNaVode.Controllers
         Mlha,
     }
 
+
+
+    ////////////////////////
+    // !!!!!NEKOUKAT!!!!! //
+    ////////////////////////
+    // Please I beg you ! //
+    ////////////////////////
+
+
     public class Engin{
 
         public static Engine engine = GetIT();
@@ -32,7 +44,10 @@ namespace LodeNaVode.Controllers
             };
             Engine engine = new Engine(mojeStringy, 10, 15, "../../Data/textury/tvary-lodi.TEXT", "LodeNaVode/Lode/hlasky.txt", "LodeNaVode/Lode/nalepky.txt");
 
-            engine.UmistitLod(2, 5, "L", "a", "d");
+            engine.UmistitLod(2, 5, "L", "a", "c");
+            //engine.UmistitLod(10, 5, "P", "a", "c");
+            //engine.UmistitLod(5, 5, "L", "a", "c");
+            //engine.UmistitLod(0, 1, "L", "c", "c");
 
             Debug.WriteLine("hi");
 
@@ -43,19 +58,30 @@ namespace LodeNaVode.Controllers
 
     public static class Pamet
     {
+        public static int velikostX = 10;
+        public static int velikostY = 15;
         public static int lodId = -1;
         public static bool oznacenaLod = false;
     }
 
     public class TahController : Controller
     {
-        public void Redraw(ref TypPolicka[,] bojiste, ref Engine engine)
+        public void Redraw(ref Tuple<TypPolicka[,], string[,]> bojisteTuple, ref Engine engine)
         {
+            if (bojisteTuple.Item1 == null) throw new Exception();
+
+            TypPolicka[,] bojiste = bojisteTuple.Item1;
+            string[,] config = bojisteTuple.Item2;
+
             for (int y = 0; y < bojiste.GetLength(0); y++)
             {
                 for (int x = 0; x < bojiste.GetLength(1); x++)
                 {
-                    bojiste[y, x] = TypPolicka.Mlha;
+                    if (bojiste[y, x] == TypPolicka.Voda)
+                        continue;
+                    else
+                        bojiste[y, x] = TypPolicka.Mlha;
+                    //Debug.WriteLine("test");
                 }
             }
 
@@ -63,24 +89,66 @@ namespace LodeNaVode.Controllers
             {
                 var lod = engine.Lode[i];
 
+                if (lod.Hrac != "a")
+                    continue;
+
                 bojiste[lod.CentralneBod[1], lod.CentralneBod[0]] = TypPolicka.Lod;
+                if (lod.Smer == "sever")
+                    config[lod.CentralneBod[1], lod.CentralneBod[0]] = "rot0";
+                else if (lod.Smer == "zapad")
+                    config[lod.CentralneBod[1], lod.CentralneBod[0]] = "rot90";
+                else if (lod.Smer == "jih")
+                    config[lod.CentralneBod[1], lod.CentralneBod[0]] = "rot180";
+                else if (lod.Smer == "vychod")
+                    config[lod.CentralneBod[1], lod.CentralneBod[0]] = "rot270";
+
+                for (int x = 0; x < lod.ZbytekBodu.Length; x++)
+                {
+                    int bx = 0;
+                    int by = 0;
+                    int bz = 0;
+                    
+                    for (int y = 0; y < lod.ZbytekBodu[x].Length; y++)
+                    {
+                        Debug.WriteLine($"{x};{y}     {lod.ZbytekBodu[x][y]}");
+
+                        if (y == 0)
+                            bx = lod.ZbytekBodu[x][y];
+                        if (y == 1)
+                            by = lod.ZbytekBodu[x][y];
+
+                        //Debug.WriteLine($"{lod.ZbytekBodu[x][y]}    {lod.CentralneBod[1] + y};{lod.CentralneBod[0] + x}") ;
+                    }
+
+                    Debug.WriteLine("-------------");
+                    //Debug.WriteLine($"{lod.CentralneBod[0]};{lod.CentralneBod[1]}   {lod.CentralneBod[0] + bx}({bx});{lod.CentralneBod[1] + by}({by})");
+                    bojiste[lod.CentralneBod[1] + by, lod.CentralneBod[0] + bx] = TypPolicka.Lod;
+                    if (lod.Smer == "sever")
+                        config[lod.CentralneBod[1] + by, lod.CentralneBod[0] + bx] = "rot0";
+                    else if (lod.Smer == "zapad")
+                        config[lod.CentralneBod[1] + by, lod.CentralneBod[0] + bx] = "rot90";
+                    else if (lod.Smer == "jih")
+                        config[lod.CentralneBod[1] + by, lod.CentralneBod[0] + bx] = "rot180";
+                    else if (lod.Smer == "vychod")
+                        config[lod.CentralneBod[1] + by, lod.CentralneBod[0] + bx] = "rot270";
+                }
             }
+            Debug.WriteLine($"RedrawCompleted");
         }
-
-        public IActionResult Policko(int id)
+        public IActionResult Policko(int id = -1)
         {
-
             Debug.WriteLine(id);
 
             Engine engine = Engin.engine;
             ref int lodId = ref Pamet.lodId;
             ref bool oznacenaLod = ref Pamet.oznacenaLod;
 
-            TypPolicka[,] bojiste = new TypPolicka[15, 10];
+            Tuple<TypPolicka[,], string[,]> bojisteTuple = new Tuple<TypPolicka[,], string[,]>(new TypPolicka[Pamet.velikostX, Pamet.velikostY], new string[Pamet.velikostX, Pamet.velikostY]);
 
-            Redraw(ref bojiste, ref engine);
+            Redraw(ref bojisteTuple, ref engine);
 
-            bojiste[2, 6] = TypPolicka.NepratelskaLod;
+            TypPolicka[,] bojiste = bojisteTuple.Item1;
+            string[,] config = bojisteTuple.Item2;
 
             int cislo = 0;
             
@@ -123,9 +191,28 @@ namespace LodeNaVode.Controllers
                     {
                         ref TypPolicka policko = ref bojiste[y, x];
 
-                        if (policko == TypPolicka.NepratelskaLod)
+                        if (policko == TypPolicka.Mlha)
                         {
-                            policko = TypPolicka.ZasahLod;
+                            if (engine.StrelbaNaLod(x, y))
+                            {
+                                for (int i = 0; i < engine.Lode.Count; i++)
+                                {
+                                    var lod = engine.Lode[i];
+
+                                    if (lod.CentralneBod[0] == x && lod.CentralneBod[1] == y)
+                                    {
+                                        policko = TypPolicka.ZasahLod;
+                                        break;
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                policko = TypPolicka.Voda;                            
+                            }
+                            //Debug.WriteLine("Výstřel do prázdna");
+                            //Debug.WriteLine($"{policko}");
+                            //Debug.WriteLine($"{policko}");
                         }
 
                         if (policko == TypPolicka.Lod)
@@ -140,7 +227,6 @@ namespace LodeNaVode.Controllers
                                     oznacenaLod = true;
                                 }
                             }
-                            Debug.WriteLine("LodID: " + lodId);
                             //engine.PohybLode(0, "jih");
                         }
                         else
@@ -159,9 +245,9 @@ namespace LodeNaVode.Controllers
                 }
             }
 
-            Redraw(ref bojiste, ref engine);
+            Redraw(ref bojisteTuple, ref engine);
 
-            return View(bojiste);
+            return View(bojisteTuple);
         }
     }
 }

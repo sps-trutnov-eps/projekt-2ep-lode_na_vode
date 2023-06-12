@@ -48,7 +48,7 @@ namespace LodeNaVode.Controllers
         [HttpGet]
         public IActionResult Rozmisteni()
         {
-            List<int[]> L = RozmisteniClass.Rozmisti(pocetLodiMetodej,pocetLodiBorivoj,pocetLodiCyril);
+            List<int[]> L = RozmisteniClass.Rozmisti(pocetLodiMetodej, pocetLodiBorivoj, pocetLodiCyril, pocetLodiKrtecek, pocetLodiIlias, pocetLodiCapek, pocetLodiVaclavII, pocetLodiMacha, pocetLodiLibuse, pocetLodiPalach, pocetLodiMasaryk, pocetLodiSvatopluk, pocetLodiGott);
 
             return RedirectToAction("Zvolit");
         }

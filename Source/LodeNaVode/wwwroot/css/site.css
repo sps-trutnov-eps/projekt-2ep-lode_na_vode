@@ -68,6 +68,8 @@ h1{
 }
 
 
+/*MALÉ LODÌ*/
+
 .lodicky {
     align-items: center;
     display: flex;
@@ -130,6 +132,78 @@ h1{
 }
 
 .lodicky .cena{
+    text-align: center;
+    font-size: 18px;
+    color: red;
+    font-weight: 700;
+}
+
+
+/*STØEDNÍ LODÌ*/
+
+.lodicky-stredni {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    gap: 70px;
+    padding-top: 200px;
+}
+
+.lodicky-stredni .card{
+    width: 305px;
+    height: 350px;
+   /* background-color: #CEBEA2;*/
+    border: 2px solid #CEBEA2;
+    
+}
+
+.lodicky-stredni .tlacitka{
+    text-align: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(90px,20px));
+    grid-auto-rows: 50px;
+    padding-top: 30px;
+
+}
+
+.lodicky-stredni .tlacitka .plus, .minus{
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 1.2em;
+    border-radius: 25px;
+    width: 40px;
+}
+
+.lodicky-stredni .tlacitka .plus{
+    background-color: #5ffa05;
+
+}
+
+.lodicky-stredni .tlacitka .minus{
+    background-color: red;
+}
+
+.lodicky-stredni .tlacitka p{
+    font-size: 25px;
+    
+}
+
+.lodicky-stredni .nazev{
+    text-align: center;
+}
+
+.lodicky-stredni .nazev p{
+    font-size: 20px;
+    font-weight: 900;
+    
+}
+
+.lodicky-stredni .cena{
     text-align: center;
     font-size: 18px;
     color: red;

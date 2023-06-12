@@ -2,12 +2,12 @@
 
 @{
     string tokeny = LodeNaVode.Controllers.PripravaController.tokeny.ToString("N").Split(",")[0].Split(".")[0];
-    string cenaLodiKrtecek = LodeNaVode.Controllers.PripravaController.cenaLodiKrtecek.ToString("N").Split(",")[0].Split(".")[0];
-    string cenaLodiMysicka = LodeNaVode.Controllers.PripravaController.cenaLodiMysicka.ToString("N").Split(",")[0].Split(".")[0];
-    string cenaLodiVB = LodeNaVode.Controllers.PripravaController.cenaLodiVB.ToString("N").Split(",")[0].Split(".")[0];
-    string pocetLodiKrtecek = LodeNaVode.Controllers.PripravaController.pocetLodiKrtecek.ToString("N").Split(",")[0].Split(".")[0];
-    string pocetLodiMysicka = LodeNaVode.Controllers.PripravaController.pocetLodiMysicka.ToString("N").Split(",")[0].Split(".")[0];
-    string pocetLodiVB = LodeNaVode.Controllers.PripravaController.pocetLodiVB.ToString("N").Split(",")[0].Split(".")[0];
+    string cenaLodiMetodej = LodeNaVode.Controllers.PripravaController.cenaLodiMetodej.ToString("N").Split(",")[0].Split(".")[0];
+    string cenaLodiBorivoj = LodeNaVode.Controllers.PripravaController.cenaLodiBorivoj.ToString("N").Split(",")[0].Split(".")[0];
+    string cenaLodiCyril = LodeNaVode.Controllers.PripravaController.cenaLodiCyril.ToString("N").Split(",")[0].Split(".")[0];
+    string pocetLodiMetodej = LodeNaVode.Controllers.PripravaController.pocetLodiMetodej.ToString("N").Split(",")[0].Split(".")[0];
+    string pocetLodiBorivoj = LodeNaVode.Controllers.PripravaController.pocetLodiBorivoj.ToString("N").Split(",")[0].Split(".")[0];
+    string pocetLodiCyril = LodeNaVode.Controllers.PripravaController.pocetLodiCyril.ToString("N").Split(",")[0].Split(".")[0];
 }
 
 <h1>Výběr lodí⚓</h1>
@@ -27,15 +27,15 @@
             <img src="/img/M_lod.png" alt="lod s očima" />
         </div>
         <div class="tlacitka">
-            <form action="/Priprava/KliknutiPlusKrtecek"><input class="plus" type="submit" value="+" /></form>
-            <form action="/Priprava/KliknutiMinusKrtecek"><input class="minus" type="submit" value="-" /></form>
-            <p>@pocetLodiKrtecek</p>
+            <form action="/Priprava/KliknutiPlusMetodej"><input class="plus" type="submit" value="+" /></form>
+            <form action="/Priprava/KliknutiMinusMetodej"><input class="minus" type="submit" value="-" /></form>
+            <p>@pocetLodiMetodej</p>
         </div>
         <div class="nazev">
-            <p>Krteček</p>
+            <p>Metoděj</p>
         </div>
         <div class="cena">
-            <p>@cenaLodiKrtecek¤</p>
+            <p>@cenaLodiMetodej¤</p>
         </div>
     </div>
 
@@ -44,15 +44,15 @@
             <img src="/img/K_lod.png" alt="lod s očima" />
         </div>
         <div class="tlacitka">
-            <form action="/Priprava/KliknutiPlusMysicka"><input class="plus" type="submit" value="+" /></form>
-            <form action="/Priprava/KliknutiMinusMysicka"><input class="minus" type="submit" value="-" /></form>
-            <p>@pocetLodiMysicka</p>
+            <form action="/Priprava/KliknutiPlusBorivoj"><input class="plus" type="submit" value="+" /></form>
+            <form action="/Priprava/KliknutiMinusBorivoj"><input class="minus" type="submit" value="-" /></form>
+            <p>@pocetLodiBorivoj</p>
         </div>
         <div class="nazev">
-            <p>Myšička</p>
+            <p>Bořivoj</p>
         </div>
         <div class="cena">
-            <p>@cenaLodiMysicka¤</p>
+            <p>@cenaLodiBorivoj¤</p>
         </div>
     </div>
 
@@ -61,15 +61,15 @@
             <img src="/img/L_lod.png" alt="lod s očima" />
         </div>
         <div class="tlacitka">
-            <form action="/Priprava/KliknutiPlusVB"><input class="plus" type="submit" value="+" /></form>
-            <form action="/Priprava/KliknutiMinusVB"><input class="minus" type="submit" value="-" /></form>
-            <p>@pocetLodiVB</p>
+            <form action="/Priprava/KliknutiPlusCyril"><input class="plus" type="submit" value="+" /></form>
+            <form action="/Priprava/KliknutiMinusCyril"><input class="minus" type="submit" value="-" /></form>
+            <p>@pocetLodiCyril</p>
         </div>
         <div class="nazev">
-            <p>VB</p>
+            <p>Cyril</p>
         </div>
         <div class="cena">
-            <p>@cenaLodiVB¤</p>
+            <p>@cenaLodiCyril¤</p>
         </div>
     </div>
 </div>

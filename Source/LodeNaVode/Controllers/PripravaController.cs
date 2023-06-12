@@ -9,87 +9,87 @@ namespace LodeNaVode.Controllers
     public class PripravaController : Controller
     {
         public static int tokeny = 37_500_000;
-        public static int cenaLodiKrtecek = 7_000_000;
-        public static int pocetLodiKrtecek = 0;
-        public static int cenaLodiMysicka = 10_000_000;
-        public static int pocetLodiMysicka = 0;
-        public static int cenaLodiVB = 4_000_000;
-        public static int pocetLodiVB = 0;
+        public static int cenaLodiMetodej = 7_000_000;
+        public static int pocetLodiMetodej = 0;
+        public static int cenaLodiBorivoj = 10_000_000;
+        public static int pocetLodiBorivoj = 0;
+        public static int cenaLodiCyril = 4_000_000;
+        public static int pocetLodiCyril = 0;
 
         [HttpGet]
         public IActionResult Zvolit()
         {
-            return View(pocetLodiKrtecek);
+            return View(pocetLodiMetodej);
         }
 
         [HttpGet]
         public IActionResult Rozmisteni()
         {
-            List<int[]> L = RozmisteniClass.Rozmisti(pocetLodiKrtecek,pocetLodiMysicka,pocetLodiVB);
+            List<int[]> L = RozmisteniClass.Rozmisti(pocetLodiMetodej,pocetLodiBorivoj,pocetLodiCyril);
 
             return RedirectToAction("Zvolit");
         }
 
         [HttpGet]
-        public IActionResult KliknutiPlusKrtecek()
+        public IActionResult KliknutiPlusMetodej()
         {
-            if (tokeny >= cenaLodiKrtecek)
+            if (tokeny >= cenaLodiMetodej)
             {
-                pocetLodiKrtecek++;
-                tokeny -= cenaLodiKrtecek;
+                pocetLodiMetodej++;
+                tokeny -= cenaLodiMetodej;
             }
             return RedirectToAction("Zvolit");
         }
 
         [HttpGet]
-        public IActionResult KliknutiMinusKrtecek()
+        public IActionResult KliknutiMinusMetodej()
         {
-            if (pocetLodiKrtecek > 0)
+            if (pocetLodiMetodej > 0)
             {
-                pocetLodiKrtecek--;
-                tokeny += cenaLodiKrtecek;
+                pocetLodiMetodej--;
+                tokeny += cenaLodiMetodej;
             }
             return RedirectToAction("Zvolit");
         }
         [HttpGet]
-        public IActionResult KliknutiPlusMysicka()
+        public IActionResult KliknutiPlusBorivoj()
         {
-            if (tokeny >= cenaLodiMysicka)
+            if (tokeny >= cenaLodiBorivoj)
             {
-                pocetLodiMysicka++;
-                tokeny -= cenaLodiMysicka;
-            }
-            return RedirectToAction("Zvolit");
-        }
-
-        [HttpGet]
-        public IActionResult KliknutiMinusMysicka()
-        {
-            if (pocetLodiMysicka > 0)
-            {
-                pocetLodiMysicka--; 
-                tokeny += cenaLodiMysicka;
-            }
-            return RedirectToAction("Zvolit");
-        }
-        [HttpGet]
-        public IActionResult KliknutiPlusVB()
-        {
-            if (tokeny >= cenaLodiVB)
-            {
-                pocetLodiVB++;
-                tokeny -= cenaLodiVB;
+                pocetLodiBorivoj++;
+                tokeny -= cenaLodiBorivoj;
             }
             return RedirectToAction("Zvolit");
         }
 
         [HttpGet]
-        public IActionResult KliknutiMinusVB()
+        public IActionResult KliknutiMinusBorivoj()
         {
-            if (pocetLodiVB > 0)
+            if (pocetLodiBorivoj > 0)
             {
-                pocetLodiVB--;
-                tokeny += cenaLodiVB;
+                pocetLodiBorivoj--; 
+                tokeny += cenaLodiBorivoj;
+            }
+            return RedirectToAction("Zvolit");
+        }
+        [HttpGet]
+        public IActionResult KliknutiPlusCyril()
+        {
+            if (tokeny >= cenaLodiCyril)
+            {
+                pocetLodiCyril++;
+                tokeny -= cenaLodiCyril;
+            }
+            return RedirectToAction("Zvolit");
+        }
+
+        [HttpGet]
+        public IActionResult KliknutiMinusCyril()
+        {
+            if (pocetLodiCyril > 0)
+            {
+                pocetLodiCyril--;
+                tokeny += cenaLodiCyril;
             }
             return RedirectToAction("Zvolit");
         }

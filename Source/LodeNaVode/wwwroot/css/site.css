@@ -63,3 +63,10 @@ table {
     content: url('textury/sipka-otaceni.png');
     transform: scale(-1, 1);
 }
+.nahoru {
+    content: url('textury/s1.png');
+}
+.dolu {
+    content: url('textury/s2.png');
+}
+

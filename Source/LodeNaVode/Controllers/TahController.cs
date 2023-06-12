@@ -206,17 +206,16 @@ namespace LodeNaVode.Controllers
                                 for (int i = 0; i < engine.Lode.Count; i++)
                                 {
                                     var lod = engine.Lode[i];
-
+                                    policko = TypPolicka.ZasahLodZbytekBod;
                                     if (lod.CentralneBod[0] == x && lod.CentralneBod[1] == y)
                                     {
-                                        policko = TypPolicka.ZasahLodCentalniBod;
-                                        break;
+                                        policko = TypPolicka.ZasahLodCentalniBod;                                        
                                     }
-                                    else
-                                    {
-                                        policko = TypPolicka.ZasahLodZbytekBod;
-                                        break;
-                                    }
+                                    
+                                    
+                                        
+                                        
+                                    
                                 }
                             }
                             else

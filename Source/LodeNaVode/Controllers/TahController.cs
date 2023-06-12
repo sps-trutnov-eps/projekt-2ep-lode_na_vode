@@ -43,7 +43,7 @@ namespace LodeNaVode.Controllers
                 new string[] { "a", "b" },
                 new string[] { "c", "d" }
             };
-            Engine engine = new Engine(mojeStringy, 10, 15, "../../Data/textury/tvary-lodi.TEXT", "LodeNaVode/Lode/hlasky.txt", "LodeNaVode/Lode/nalepky.txt");
+            Engine engine = new Engine(mojeStringy, 14, 9, "../../Data/textury/tvary-lodi.TEXT", "LodeNaVode/Lode/hlasky.txt", "LodeNaVode/Lode/nalepky.txt");
 
             engine.UmistitLod(2, 5, "L", "a", "c");
             engine.UmistitLod(10, 5, "P", "a", "c");
@@ -109,9 +109,10 @@ namespace LodeNaVode.Controllers
 
                 for (int x = 0; x < lod.ZbytekBodu.Length; x++)
                 {
+                    // proč b? nemyslels d, jakožto delta?
                     int bx = 0;
                     int by = 0;
-                    int bz = 0;
+                    int bz = 0; // lodě jsou pouze dvojrozměrné
                     
                     for (int y = 0; y < lod.ZbytekBodu[x].Length; y++)
                     {
@@ -148,7 +149,9 @@ namespace LodeNaVode.Controllers
             ref int lodId = ref Pamet.lodId;
             ref bool oznacenaLod = ref Pamet.oznacenaLod;
 
-            Tuple<TypPolicka[,], string[,]> bojisteTuple = new Tuple<TypPolicka[,], string[,]>(new TypPolicka[Pamet.velikostX, Pamet.velikostY], new string[Pamet.velikostX, Pamet.velikostY]);
+            Tuple<TypPolicka[,], string[,]> bojisteTuple = new Tuple<TypPolicka[,], string[,]>
+                (new TypPolicka[Pamet.velikostX, Pamet.velikostY],
+                new string[Pamet.velikostX, Pamet.velikostY]);
 
             Redraw(ref bojisteTuple, ref engine);
 
@@ -225,17 +228,38 @@ namespace LodeNaVode.Controllers
                             //Debug.WriteLine($"{policko}");
                         }
 
-                        if (policko == TypPolicka.Lod)
-                        {
-                            for (int i = 0; i < engine.Lode.Count; i++)
-                            {
+                        if (policko == TypPolicka.Lod) {
+                            for (int i = 0; i < engine.Lode.Count; i++) {
                                 var lod = engine.Lode[i];
 
-                                if (lod.CentralneBod[0] == x && lod.CentralneBod[1] == y)
-                                {
+                                if (lod.CentralneBod[0] == x && lod.CentralneBod[1] == y) {
                                     lodId = i;
                                     oznacenaLod = true;
+                                    break;
                                 }
+                                for (int X = 0; X < lod.ZbytekBodu.Length; X++)
+                                // ano, jen jsem to zkopíroval
+                                // pokud se ti to nelíbí, tak si to přepiš
+                                {
+                                    int bx = 0;
+                                    int by = 0;
+
+                                    for (int Y = 0; Y < lod.ZbytekBodu[X].Length; Y++) {
+
+                                        if (Y == 0)
+                                            bx = lod.ZbytekBodu[X][Y];
+                                        if (Y == 1)
+                                            by = lod.ZbytekBodu[X][Y];
+
+                                    }
+                                    if (lod.CentralneBod[1] + by == y && lod.CentralneBod[0] + bx == x) {
+                                        lodId = i;
+                                        oznacenaLod = true;
+                                        break;
+                                    }
+                                }
+                                if (oznacenaLod)
+                                    break;
                             }
                             //engine.PohybLode(0, "jih");
                         }

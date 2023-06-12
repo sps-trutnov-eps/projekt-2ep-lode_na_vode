@@ -10,6 +10,7 @@ namespace log_lib {
         public DataHolder Data;
         private string message;
 
+        //Cesta k souborům je z lokace, kde je aplikace spuštěna
         public Log(string cestaKLodim, string cestaKNalepkam) {
             entireLog = new List<string>();
             Data = new DataHolder(cestaKLodim,cestaKNalepkam);            

@@ -6,16 +6,19 @@ namespace log_test {
             Console.WriteLine("Hello, World!");
             Log log = new Log("../../../data/hlasky.txt", "../../../data/nalepky.txt");
             
-            string hitMessage = log.GetHitMessage("hrac1", "lod1");
+            string hitMessage = log.GetHitMessage("hrac1", "curdova");
             Console.WriteLine(hitMessage);
 
-            string moveMessage = log.GetLodMovement("hrac1", "lod1");
+            string moveMessage = log.GetLodMovement("hrac1", "curdova");
             Console.WriteLine(moveMessage);
 
             string missStreakMessage = log.MissStreak("hrac1", 50);
             Console.WriteLine(missStreakMessage);
 
-            string nalepka = log.ActivateNalepka("hrac1", 0);
+            string destroyMessage = log.GetDestructionMessage("hrac1", "curdova");
+            Console.WriteLine(destroyMessage);
+
+            string nalepka = log.ActivateNalepka("hrac1", 4);
             Console.WriteLine(nalepka);
 
             List<string> entireLog = log.GetEntireLog();

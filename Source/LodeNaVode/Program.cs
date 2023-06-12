@@ -24,7 +24,7 @@ namespace LodeNaVode
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Tah}/{action=Policko}/{id?}");
+                pattern: "{controller=Priprava}/{action=Zvolit}/{id?}");
 
             app.Run();
         }

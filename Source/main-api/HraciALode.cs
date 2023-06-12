@@ -134,6 +134,13 @@ namespace main_api
                 ZbytekBodu = LodneHolrery[shipIndex].ZbytekBodu.ToArray(),
                 Smer = "sever"
             };
+            // zkoppíruju věci. protože array je očividně pointer a předává se pointerem, či co
+            for (int i = 0;i < LodneHolrery[shipIndex].ZbytekBodu.Count; i++) {
+               titanic.ZbytekBodu[i] = new int[] {
+                   LodneHolrery[shipIndex].ZbytekBodu[i][0],
+                   LodneHolrery[shipIndex].ZbytekBodu[i][1],
+                   LodneHolrery[shipIndex].ZbytekBodu[i][2]};
+            }
 
             // otestovat, jestli je v limitach
             if (!JeLodVMape(titanic))

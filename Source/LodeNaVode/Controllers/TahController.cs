@@ -44,10 +44,8 @@ namespace LodeNaVode.Controllers
             };
             Engine engine = new Engine(mojeStringy, 14, 9, "../../Data/textury/tvary-lodi.TEXT", "LodeNaVode/Lode/hlasky.txt", "LodeNaVode/Lode/nalepky.txt");
 
-            engine.UmistitLod(2, 5, "L", "a", "c");
-            //engine.UmistitLod(10, 5, "P", "a", "c");
-            //engine.UmistitLod(5, 5, "L", "a", "c");
-            //engine.UmistitLod(0, 1, "L", "c", "c");
+            engine.UmistitLod(2, 5, "L", "a", "Ucitel");
+            engine.UmistitLod(10, 5, "L", "a", "U");
 
             Debug.WriteLine("hi");
 

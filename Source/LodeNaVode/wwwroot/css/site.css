@@ -57,4 +57,9 @@ table {
 .rot90 {rotate: 90deg;}
 .rot180 {rotate: 180deg;}
 .rot270 {rotate: 270deg;}
-.zasazeno {content: url('./textury/dira.png')}
+.zasazeno {content: url('./textury/dira.png');}
+.vlevo {content:url('textury/sipka-otaceni.png');}
+.vpravo {
+    content: url('textury/sipka-otaceni.png');
+    transform: scale(-1, 1);
+}

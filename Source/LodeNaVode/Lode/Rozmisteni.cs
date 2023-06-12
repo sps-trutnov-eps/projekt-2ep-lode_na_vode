@@ -17,12 +17,13 @@ namespace LodeNaVode.Lode
     {
         static List<int[]> poleLodi = new List<int[]>(); // x,y
         static Random random = new Random();
-        public static List<int[]> /* x,y */ Rozmisti(int pocetLodiMetodej, int pocetLodiBorivoj, int pocetLodiCyril, int pocetLodiKrtecek, int pocetLodiIlias, int pocetLodiCapek, int pocetLodiVaclavII, int pocetLodiMacha, int pocetLodiLibuse, int pocetLodiPalach, int pocetLodiMasaryk, int pocetLodiSvatopluk, int pocetLodiGott)
+        public static List<int[]> /* x,y */ Rozmisti(int pocetLodiMetodej, int pocetLodiBorivoj, int pocetLodiCyril, int pocetLodiKrtecek, int pocetLodiIlias, int pocetLodiCapek, int pocetLodiVaclavII, int pocetLodiMacha, int pocetLodiLibuse, int pocetLodiPalach, int pocetLodiMasaryk, int pocetLodiSvatopluk, int pocetLodiGott, int pocetLodiZatopek, int pocetLodiOdysea, int pocetLodiKarelIV, int pocetLodiZizka, int pocetLodiNemcova)
         {
 
             // sepíšu tvary lodí
             List<Lod> lodnica= new List<Lod>();
 
+            //Malé
             for (int i = 0; i <pocetLodiMetodej; i++)
             {
                 lodnica.Add(new Lod(new int[][] {} ));
@@ -30,13 +31,31 @@ namespace LodeNaVode.Lode
 
             for (int i = 0; i <pocetLodiBorivoj; i++)
             {
-                lodnica.Add(new Lod(new int[][] { new int[]{-1,0},new int[]{0,1} } ));
+                lodnica.Add(new Lod(new int[][] { new int[]{ 1, 0 },new int[]{ 0, 1 } } ));
             }
 
             for (int i = 0; i <pocetLodiCyril; i++)
             {
-                lodnica.Add(new Lod(new int[][] { new int[]{0,-1},new int[]{0,1} } ));
+                lodnica.Add(new Lod(new int[][] { new int[]{ 0, -1 },new int[]{ 0, 1 } } ));
             }
+
+            //Střední
+            for (int i = 0; i < pocetLodiKrtecek; i++)
+            {
+                lodnica.Add(new Lod(new int[][] { new int[] { -1, 0 }, new int[] { 1, 0 }, new int[] { 0, 1 } }));
+            }
+
+            for (int i = 0; i < pocetLodiIlias; i++)
+            {
+                lodnica.Add(new Lod(new int[][] { new int[] { -1, 1 }, new int[] { 0, 1 }, new int[] { 1, 1 }, new int[] { -1, -1 }, new int[] { 0, -1 }, new int[] {1, -1} }));
+            }
+
+            for (int i = 0; i < pocetLodiCapek; i++)
+            {
+                lodnica.Add(new Lod(new int[][] { new int[] { 0, 2 }, new int[] { 0, 1 }, new int[] { 1, 1 }, new int[] { 0, -1 }, new int[] { 1, -1 }, new int[] { 0, -2 } }));
+            }
+
+
 
 
             // opakuju, dokud nenajdu kombinaci

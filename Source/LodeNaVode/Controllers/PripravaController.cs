@@ -37,6 +37,17 @@ namespace LodeNaVode.Controllers
         public static int pocetLodiSvatopluk = 0;
         public static int cenaLodiGott = 0;
         public static int pocetLodiGott = 0;
+        //Velké
+        public static int cenaLodiZatopek = 0;
+        public static int pocetLodiZatopek = 0;
+        public static int cenaLodiOdysea = 0;
+        public static int pocetLodiOdysea = 0;
+        public static int cenaLodiKarelIV = 0;
+        public static int pocetLodiKarelIV = 0;
+        public static int cenaLodiZizka = 0;
+        public static int pocetLodiZizka = 0;
+        public static int cenaLodiNemcova = 0;
+        public static int pocetLodiNemcova = 0;
 
 
         [HttpGet]
@@ -48,7 +59,7 @@ namespace LodeNaVode.Controllers
         [HttpGet]
         public IActionResult Rozmisteni()
         {
-            List<int[]> L = RozmisteniClass.Rozmisti(pocetLodiMetodej,pocetLodiBorivoj,pocetLodiCyril);
+            List<int[]> L = RozmisteniClass.Rozmisti(pocetLodiMetodej, pocetLodiBorivoj, pocetLodiCyril, pocetLodiKrtecek, pocetLodiIlias, pocetLodiCapek, pocetLodiVaclavII, pocetLodiMacha, pocetLodiLibuse, pocetLodiPalach, pocetLodiMasaryk, pocetLodiSvatopluk, pocetLodiGott);
 
             return RedirectToAction("Zvolit");
         }
@@ -335,6 +346,106 @@ namespace LodeNaVode.Controllers
             {
                 pocetLodiGott--;
                 tokeny += cenaLodiGott;
+            }
+            return RedirectToAction("Zvolit");
+        }
+
+        //Velké
+        [HttpGet]
+        public IActionResult KliknutiPlusZatopek()
+        {
+            if (tokeny >= cenaLodiZatopek)
+            {
+                pocetLodiZatopek++;
+                tokeny -= cenaLodiZatopek;
+            }
+            return RedirectToAction("Zvolit");
+        }
+
+        [HttpGet]
+        public IActionResult KliknutiMinusZatopek()
+        {
+            if (pocetLodiZatopek > 0)
+            {
+                pocetLodiZatopek--;
+                tokeny += cenaLodiZatopek;
+            }
+            return RedirectToAction("Zvolit");
+        }
+
+        [HttpGet]
+        public IActionResult KliknutiPlusOdysea()
+        {
+            if (tokeny >= cenaLodiOdysea)
+            {
+                pocetLodiOdysea++;
+                tokeny -= cenaLodiOdysea;
+            }
+            return RedirectToAction("Zvolit");
+        }
+
+        [HttpGet]
+        public IActionResult KliknutiMinusOdysea()
+        {
+            if (pocetLodiOdysea > 0)
+            {
+                pocetLodiOdysea--;
+                tokeny += cenaLodiOdysea;
+            }
+            return RedirectToAction("Zvolit");
+        }
+
+        [HttpGet]
+        public IActionResult KliknutiPlusKarelIV()
+        {
+            if (tokeny >= cenaLodiKarelIV)
+            {
+                pocetLodiKarelIV++;
+                tokeny -= cenaLodiKarelIV;
+            }
+            return RedirectToAction("Zvolit");
+        }
+
+        [HttpGet]
+        public IActionResult KliknutiMinusKarelIV()
+        {
+            if (pocetLodiKarelIV > 0)
+            {
+                pocetLodiKarelIV--;
+                tokeny += cenaLodiKarelIV;
+            }
+            return RedirectToAction("Zvolit");
+        }
+
+        [HttpGet]
+        public IActionResult KliknutiPlusZizka()
+        {
+            if (tokeny >= cenaLodiZizka)
+            {
+                pocetLodiZizka++;
+                tokeny -= cenaLodiZizka;
+            }
+            return RedirectToAction("Zvolit");
+        }
+
+        [HttpGet]
+        public IActionResult KliknutiMinusZizka()
+        {
+            if (pocetLodiZizka > 0)
+            {
+                pocetLodiZizka--;
+                tokeny += cenaLodiZizka;
+            }
+            return RedirectToAction("Zvolit");
+        }
+
+        [HttpGet]
+        public IActionResult KliknutiPlusNemcova()
+        {
+            if (tokeny >= cenaLodiNemcova)
+            {
+                pocetLodiNemcova++;
+                tokeny -= cenaLodiNemcova;
             }
             return RedirectToAction("Zvolit");
         }

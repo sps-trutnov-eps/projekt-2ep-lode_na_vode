@@ -18,6 +18,12 @@
     string cenaLodiMasaryk = LodeNaVode.Controllers.PripravaController.cenaLodiMasaryk.ToString("N").Split(",")[0].Split(".")[0];
     string cenaLodiSvatopluk = LodeNaVode.Controllers.PripravaController.cenaLodiSvatopluk.ToString("N").Split(",")[0].Split(".")[0];
     string cenaLodiGott = LodeNaVode.Controllers.PripravaController.cenaLodiGott.ToString("N").Split(",")[0].Split(".")[0];
+    //Velké
+    string cenaLodiZatopek = LodeNaVode.Controllers.PripravaController.cenaLodiZatopek.ToString("N").Split(",")[0].Split(".")[0];
+    string cenaLodiOdysea = LodeNaVode.Controllers.PripravaController.cenaLodiOdysea.ToString("N").Split(",")[0].Split(".")[0];
+    string cenaLodiKarelIV = LodeNaVode.Controllers.PripravaController.cenaLodiKarelIV.ToString("N").Split(",")[0].Split(".")[0];
+    string cenaLodiZizka = LodeNaVode.Controllers.PripravaController.cenaLodiZizka.ToString("N").Split(",")[0].Split(".")[0];
+    string cenaLodiNemcova = LodeNaVode.Controllers.PripravaController.cenaLodiNemcova.ToString("N").Split(",")[0].Split(".")[0];
     //Počet
     //Malé
     string pocetLodiMetodej = LodeNaVode.Controllers.PripravaController.pocetLodiMetodej.ToString("N").Split(",")[0].Split(".")[0];
@@ -34,15 +40,18 @@
     string pocetLodiMasaryk = LodeNaVode.Controllers.PripravaController.pocetLodiMasaryk.ToString("N").Split(",")[0].Split(".")[0];
     string pocetLodiSvatopluk = LodeNaVode.Controllers.PripravaController.pocetLodiSvatopluk.ToString("N").Split(",")[0].Split(".")[0];
     string pocetLodiGott = LodeNaVode.Controllers.PripravaController.pocetLodiGott.ToString("N").Split(",")[0].Split(".")[0];
+    //Velké
+    string pocetLodiZatopek = LodeNaVode.Controllers.PripravaController.pocetLodiZatopek.ToString("N").Split(",")[0].Split(".")[0];
+    string pocetLodiOdysea = LodeNaVode.Controllers.PripravaController.pocetLodiOdysea.ToString("N").Split(",")[0].Split(".")[0];
+    string pocetLodiKarelIV = LodeNaVode.Controllers.PripravaController.pocetLodiKarelIV.ToString("N").Split(",")[0].Split(".")[0];
+    string pocetLodiZizka = LodeNaVode.Controllers.PripravaController.pocetLodiZizka.ToString("N").Split(",")[0].Split(".")[0];
+    string pocetLodiNemcova = LodeNaVode.Controllers.PripravaController.pocetLodiNemcova.ToString("N").Split(",")[0].Split(".")[0];
 }
 
 <h1>Výběr lodí⚓</h1>
 <div class="mena">Vaše tokeny:  <span class="curr">@tokeny¤</span></div>
 <br />
 
-<div class="btn-go">
-    <a href="/Priprava/Rozmisteni">HRA!</a>
-</div>
 <div class="skupina-nazev">
     <h2>Malé</h2>
 </div>
@@ -103,7 +112,7 @@
 
 
 
-<div class="skupina-nazev">
+<div class="skupina-nazev-stredni">
     <h2>Střední</h2>
 </div>
 <div class="lodicky-stredni">
@@ -127,7 +136,7 @@
 
     <div class="card">
         <div class="contentik">
-            <img src="/img/K_lod.png" alt="lod s očima" />
+            <img src="/img/Masaryk.png" alt="lod s očima" />
         </div>
         <div class="tlacitka">
             <form action="/Priprava/KliknutiPlusIlias"><input class="plus" type="submit" value="+" /></form>
@@ -144,7 +153,7 @@
 
     <div class="card">
         <div class="contentik">
-            <img src="/img/L_lod.png" alt="lod s očima" />
+            <img src="/img/Vaclav II..png" alt="lod s očima" />
         </div>
         <div class="tlacitka">
             <form action="/Priprava/KliknutiPlusCapek"><input class="plus" type="submit" value="+" /></form>
@@ -161,7 +170,7 @@
 
     <div class="card">
         <div class="contentik">
-            <img src="/img/L_lod.png" alt="lod s očima" />
+            <img src="/img/Karel_Gott.png" alt="lod s očima" />
         </div>
         <div class="tlacitka">
             <form action="/Priprava/KliknutiPlusVaclavII"><input class="plus" type="submit" value="+" /></form>
@@ -278,6 +287,103 @@
         </div>
     </div>
 
+</div>
+
+
+<div class="lodicky-velke">
+
+    <div class="card">
+        <div class="contentik">
+            <img src="/img/M_lod.png" alt="lod s očima" />
+        </div>
+        <div class="tlacitka">
+            <form action="/Priprava/KliknutiPlusZatopek"><input class="plus" type="submit" value="+" /></form>
+            <form action="/Priprava/KliknutiMinusZatopek"><input class="minus" type="submit" value="-" /></form>
+            <p>@pocetLodiZatopek</p>
+        </div>
+        <div class="nazev">
+            <p>Zátopek</p>
+        </div>
+        <div class="cena">
+            <p>@cenaLodiZatopek¤</p>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="contentik">
+            <img src="/img/K_lod.png" alt="lod s očima" />
+        </div>
+        <div class="tlacitka">
+            <form action="/Priprava/KliknutiPlusOdysea"><input class="plus" type="submit" value="+" /></form>
+            <form action="/Priprava/KliknutiMinusOdysea"><input class="minus" type="submit" value="-" /></form>
+            <p>@pocetLodiOdysea</p>
+        </div>
+        <div class="nazev">
+            <p>Odysea</p>
+        </div>
+        <div class="cena">
+            <p>@cenaLodiOdysea¤</p>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="contentik">
+            <img src="/img/L_lod.png" alt="lod s očima" />
+        </div>
+        <div class="tlacitka">
+            <form action="/Priprava/KliknutiPlusKarelIV"><input class="plus" type="submit" value="+" /></form>
+            <form action="/Priprava/KliknutiMinusKarelIV"><input class="minus" type="submit" value="-" /></form>
+            <p>@pocetLodiKarelIV</p>
+        </div>
+        <div class="nazev">
+            <p>Karel IV.</p>
+        </div>
+        <div class="cena">
+            <p>@cenaLodiKarelIV¤</p>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="contentik">
+            <img src="/img/L_lod.png" alt="lod s očima" />
+        </div>
+        <div class="tlacitka">
+            <form action="/Priprava/KliknutiPlusZizka"><input class="plus" type="submit" value="+" /></form>
+            <form action="/Priprava/KliknutiMinusZizka"><input class="minus" type="submit" value="-" /></form>
+            <p>@pocetLodiZizka</p>
+        </div>
+        <div class="nazev">
+            <p>Žižka</p>
+        </div>
+        <div class="cena">
+            <p>@cenaLodiZizka¤</p>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="contentik">
+            <img src="/img/L_lod.png" alt="lod s očima" />
+        </div>
+        <div class="tlacitka">
+            <form action="/Priprava/KliknutiPlusNemcova"><input class="plus" type="submit" value="+" /></form>
+            <form action="/Priprava/KliknutiMinusNemcova"><input class="minus" type="submit" value="-" /></form>
+            <p>@pocetLodiKarelIV</p>
+        </div>
+        <div class="nazev">
+            <p>Božena Němcová</p>
+        </div>
+        <div class="cena">
+            <p>@cenaLodiNemcova¤</p>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<div class="btn-go">
+    <a href="/Priprava/Rozmisteni">HRA!</a>
 </div>
 
 

@@ -17,26 +17,27 @@ namespace LodeNaVode.Lode
     {
         static List<int[]> poleLodi = new List<int[]>(); // x,y
         static Random random = new Random();
-        public static List<int[]> /* x,y */ Rozmisti(int pocetLodiKrtecek, int pocetLodiMysicka, int pocetLodiVB)
+        public static List<int[]> /* x,y */ Rozmisti(int pocetLodiMetodej, int pocetLodiBorivoj, int pocetLodiCyril, int pocetLodiKrtecek, int pocetLodiIlias, int pocetLodiCapek, int pocetLodiVaclavII, int pocetLodiMacha, int pocetLodiLibuse, int pocetLodiPalach, int pocetLodiMasaryk, int pocetLodiSvatopluk, int pocetLodiGott)
         {
 
             // sepíšu tvary lodí
             List<Lod> lodnica= new List<Lod>();
 
-            for (int i = 0; i <pocetLodiKrtecek; i++)
+            for (int i = 0; i <pocetLodiMetodej; i++)
             {
                 lodnica.Add(new Lod(new int[][] {} ));
             }
 
-            for (int i = 0; i <pocetLodiMysicka; i++)
+            for (int i = 0; i <pocetLodiBorivoj; i++)
             {
                 lodnica.Add(new Lod(new int[][] { new int[]{-1,0},new int[]{0,1} } ));
             }
 
-            for (int i = 0; i <pocetLodiVB; i++)
+            for (int i = 0; i <pocetLodiCyril; i++)
             {
                 lodnica.Add(new Lod(new int[][] { new int[]{0,-1},new int[]{0,1} } ));
             }
+
 
             // opakuju, dokud nenajdu kombinaci
             while (true)

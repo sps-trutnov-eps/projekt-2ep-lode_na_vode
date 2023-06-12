@@ -20,7 +20,7 @@ namespace LodeNaVode.Controllers
             return View();
         }
 
-        public IActionResult JoinLobby() 
+        public IActionResult JoinLobby(string playerName) 
         {
             if (HttpContext.Session.GetString("playerid") == null)
             {
@@ -28,16 +28,9 @@ namespace LodeNaVode.Controllers
                 int diceresult = dice.Next(1000000000, 2000000000);
                 string newplayeridhashed = BCrypt.Net.BCrypt.HashPassword(diceresult.ToString());
                 HttpContext.Session.SetString("playerid", newplayeridhashed);
-                HttpContext.Session.CommitAsync();
-
-                if (HttpContext.Session.IsAvailable)
-                {
-                    if (HttpContext.Session.Keys.Contains("playerid"))
-                    {
-                        Debug.WriteLine("ok");
-                    }
-                }
             }
+            HttpContext.Session.SetString("playername", playerName);
+            HttpContext.Session.CommitAsync();
             return RedirectToAction("Index","Lobby");
         }
     }

@@ -19,7 +19,8 @@ namespace LodeNaVode.Controllers
         VedlejsiLod,
         NepratelskaLod,
         Voda,
-        ZasahLod,
+        ZasahLodCentalniBod,
+        ZasahLodZbytekBod,
         LodPotopena,
         Mlha,
     }
@@ -45,9 +46,9 @@ namespace LodeNaVode.Controllers
             Engine engine = new Engine(mojeStringy, 14, 9, "../../Data/textury/tvary-lodi.TEXT", "LodeNaVode/Lode/hlasky.txt", "LodeNaVode/Lode/nalepky.txt");
 
             engine.UmistitLod(2, 5, "L", "a", "c");
-            //engine.UmistitLod(10, 5, "P", "a", "c");
+            engine.UmistitLod(10, 5, "P", "a", "c");
             //engine.UmistitLod(5, 5, "L", "a", "c");
-            //engine.UmistitLod(0, 1, "L", "c", "c");
+            engine.UmistitLod(0, 1, "L", "c", "c");
 
             Debug.WriteLine("hi");
 
@@ -78,6 +79,10 @@ namespace LodeNaVode.Controllers
                 for (int x = 0; x < bojiste.GetLength(1); x++)
                 {
                     if (bojiste[y, x] == TypPolicka.Voda)
+                        continue;
+                    if (bojiste[y, x] == TypPolicka.ZasahLodCentalniBod)
+                        continue;
+                    if (bojiste[y, x] == TypPolicka.ZasahLodZbytekBod)
                         continue;
                     else
                         bojiste[y, x] = TypPolicka.Mlha;
@@ -201,12 +206,16 @@ namespace LodeNaVode.Controllers
                                 for (int i = 0; i < engine.Lode.Count; i++)
                                 {
                                     var lod = engine.Lode[i];
-
+                                    policko = TypPolicka.ZasahLodZbytekBod;
                                     if (lod.CentralneBod[0] == x && lod.CentralneBod[1] == y)
                                     {
-                                        policko = TypPolicka.ZasahLod;
-                                        break;
+                                        policko = TypPolicka.ZasahLodCentalniBod;                                        
                                     }
+                                    
+                                    
+                                        
+                                        
+                                    
                                 }
                             }
                             else

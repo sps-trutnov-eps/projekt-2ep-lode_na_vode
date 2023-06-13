@@ -1,18 +1,44 @@
-﻿<h1>LOBBY</h1>
-<p>Vítejte v LOBBY!</p>
+﻿@if (ViewData["lobbyOwner"] == ViewData["currentUser"])
+{
+    <h1>LOBBY OWNER</h1>
+    <p>Vítejte ve vašem LOBBY!</p>
+    <h2>Správa hráčů:</h2>
+    <div id="add&remove">
+        <button type="button" id="addplayerButton" class="add-button">Přidat hráče</button>
+        <button type="button" id="removeplayerButton" class="remove-button">Odebrat hráče</button>
+    </div>
 
-<h2>Zde vyberte herní mód:</h2>
-<div id="lobby">
-    <button type="button" id="mode1Button" class="game-mode-button">Herní mód 1</button>
-    <button type="button" id="mode2Button" class="game-mode-button">Herní mód 2</button>
-    <button type="button" id="mode3Button" class="game-mode-button">Herní mód 3</button>
-    <button type="button" id="mode4Button" class="game-mode-button">Herní mód 4</button>
-</div>
+    <h2>Zde vyberte herní mód:</h2>
+    <div id="lobby">
+        <button type="button" id="mode1Button" class="game-mode-button">Herní mód 1</button>
+        <button type="button" id="mode2Button" class="game-mode-button">Herní mód 2</button>
+        <button type="button" id="mode3Button" class="game-mode-button">Herní mód 3</button>
+        <button type="button" id="mode4Button" class="game-mode-button">Herní mód 4</button>
+    </div>
 
-<h2>Pokud už nechcete hrát, můžete:</h2>
-<div id="exit">
-    <a href="/Lobby/Leave?from=Lobby" id="exitButton" class="exit-button" >Opustit LOBBY</a>
-</div>
+    <h2>Pokud už nechcete hrát, můžete:</h2>
+    <div id="exit">
+        <a href="/Lobby/Leave?from=Lobby" id="exitButton" class="exit-button">Opustit LOBBY</a>
+    </div>
+
+} else
+{
+    <h1>LOBBY</h1>
+    <p>Vítejte v LOBBY!</p>
+
+    <h2>Zde vyberte herní mód:</h2>
+    <div id="lobby">
+        <button type="button" id="mode1Button" class="game-mode-button">Herní mód 1</button>
+        <button type="button" id="mode2Button" class="game-mode-button">Herní mód 2</button>
+        <button type="button" id="mode3Button" class="game-mode-button">Herní mód 3</button>
+        <button type="button" id="mode4Button" class="game-mode-button">Herní mód 4</button>
+    </div>
+
+    <h2>Pokud už nechcete hrát, můžete:</h2>
+    <div id="exit">
+        <a href="/Lobby/Leave?from=Lobby" id="exitButton" class="exit-button" >Opustit LOBBY</a>
+    </div>
+}
 <style>
     .game-mode-button {
         background-color: #007bff;

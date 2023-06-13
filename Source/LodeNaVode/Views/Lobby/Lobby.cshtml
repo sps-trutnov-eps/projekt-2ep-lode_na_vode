@@ -1,4 +1,4 @@
-﻿@if (ViewData["lobbyOwner"] == ViewData["currentUser"])
+﻿@if ((string)ViewData["lobbyOwner"] == (string)ViewData["currentUser"])
 {
     <h1>LOBBY OWNER</h1>
     <p>Vítejte ve vašem LOBBY!</p>
@@ -21,7 +21,8 @@
         <a href="/Lobby/Leave?from=Lobby" id="exitButton" class="exit-button">Opustit LOBBY</a>
     </div>
 
-} else
+} 
+else
 {
     <h1>LOBBY</h1>
     <p>Vítejte v LOBBY!</p>

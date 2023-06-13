@@ -62,11 +62,7 @@ namespace LodeNaVode.Controllers
         public IActionResult Lobby()
         {
             Player? playercheck = _lobbyDatabase.Players.Where(p => p.PlayerCookie == HttpContext.Session.GetString("playerid")).FirstOrDefault();
-            Debug.WriteLine("Toto jste vy");
-            Debug.WriteLine(playercheck);
             Lobby currentLobby = _lobbyDatabase.Lobbies.Where(l => l.Players.Contains(playercheck)).First();
-            Debug.WriteLine("Toto je vlastník lobby");
-            Debug.WriteLine(currentLobby.Owner);
             ViewData["lobbyOwner"] = currentLobby.Owner;
             ViewData["currentUser"] = playercheck.PlayerCookie;
             return View();

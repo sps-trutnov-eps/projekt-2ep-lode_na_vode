@@ -1,8 +1,9 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Lodě na vodě";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<h1>@ViewData["Title"]</h1>
+<form action="/Home/JoinLobby" method="get">
+    <input type="text" name="playerName" placeholder="Insert player name..."><br>
+    <input type="submit" value="PLAY!">
+</form>

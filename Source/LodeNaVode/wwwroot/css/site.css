@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Faster+One&display=swap');
+
+
+
 html {
   font-size: 14px;
 }
@@ -15,4 +19,391 @@ html {
 
 body {
   margin-bottom: 60px;
+  background-image: url('textury/mlha-na-mori.png');
+  background-repeat: repeat;
 }
+footer {
+    background-color: white;
+}
+
+table {
+    margin: auto auto;
+}
+.policko {
+    border-collapse:collapse;
+    width: 24px;
+    height: 24px;
+}
+.policko a {
+    text-align:center;
+    vertical-align:middle;
+    color: rgba(0,0,0,0);
+}
+.policko a div {
+    width: 24px;
+    height: 24px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 3px;
+}
+.container {
+    background-color: whitesmoke;
+    padding: 0;
+}
+header h1 {
+    font-family: 'Faster One', cursive;
+    font-size: 4em;
+}
+header {
+    background-color:darkcyan;
+    color:yellow;
+    padding: 1em;
+    margin-bottom: 1em;
+}
+
+
+.pole-mlha {background-image: url('./textury/mlha.png');}
+.pole-lod {background-image: url('./textury/1-vor.png');}
+.pole-voda {background-image: url('./textury/more.png');}
+.id1 { background-image: url('./textury/id1.png');}
+.id2 {background-image: url('./textury/id2.png');}
+.id3 {background-image: url('./textury/id3.png');}
+.id4 {background-image: url('./textury/id4.png');}
+.id5 {background-image: url('./textury/id5.png');}
+.id6 {background-image: url('./textury/id6.png');}
+.rot90 {rotate: 90deg;}
+.rot180 {rotate: 180deg;}
+.rot270 {rotate: 270deg;}
+.zasazeno {content: url('./textury/dira.png');}
+.vlevo {content:url('textury/sipka-otaceni.png');}
+.vpravo {
+    content: url('textury/sipka-otaceni.png');
+    transform: scale(-1, 1);
+}
+.nahoru {
+    content: url('textury/s1.png');
+}
+.dolu {
+    content: url('textury/s2.png');
+}
+
+
+
+.curr {
+    color: #5ffa05;
+    padding:.2em;
+}
+.mena {
+    font-size: 1.3em;
+    text-align: center;
+    padding-top: 40px;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+h1{
+    text-align: center;
+}
+.btn-go {
+    width: 240px;
+    font-size: 24px;
+    position: fixed;
+    bottom: 40px;
+    left: calc(50vw - 120px);
+    padding: 8px;
+    color: white;
+    border-radius: 25px;
+    text-decoration: none;
+    background-color: #5ffa05;
+    transition: .5s;
+    text-align: center;
+}
+
+.btn-go a{
+    color: white;
+    text-decoration: none;
+    margin: 0 auto;
+   
+}
+
+.btn-go:hover{
+   background-color: aquamarine;
+   
+   
+}
+
+.skupina-nazev h2 {
+    text-align: center;
+    font-size: 32px;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding-bottom: 60px
+}
+
+
+/*MAL� LOD�*/
+
+.lodicky {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    gap: 70px;
+}
+
+.lodicky .card{
+    width: 305px;
+    height: 350px;
+   /* background-color: #CEBEA2;*/
+    border: 2px solid #CEBEA2;
+    
+}
+
+.lodicky .tlacitka{
+    text-align: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(90px,20px));
+    grid-auto-rows: 50px;
+    padding-top: 30px;
+
+}
+
+.lodicky .tlacitka .plus, .minus{
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 1.2em;
+    border-radius: 25px;
+    width: 40px;
+}
+
+.lodicky .tlacitka .plus{
+    background-color: #5ffa05;
+
+}
+
+.lodicky .tlacitka .minus{
+    background-color: red;
+}
+
+.lodicky .tlacitka p{
+    font-size: 25px;
+    
+}
+
+.lodicky .nazev{
+    text-align: center;
+}
+
+.lodicky .nazev p{
+    font-size: 20px;
+    font-weight: 900;
+    
+}
+
+.lodicky .cena{
+    text-align: center;
+    font-size: 18px;
+    color: red;
+    font-weight: 700;
+}
+
+
+/*ST�EDN� LOD�*/
+
+
+.skupina-nazev-stredni h2 {
+    text-align: center;
+    font-size: 32px;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding-bottom: 60px;
+    padding-top: 60px;
+
+}
+
+.lodicky-stredni {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    gap: 70px;
+}
+
+.lodicky-stredni .card{
+    width: 305px;
+    height: 350px;
+   /* background-color: #CEBEA2;*/
+    border: 2px solid #CEBEA2;
+    
+}
+
+.lodicky-stredni .tlacitka{
+    text-align: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(90px,20px));
+    grid-auto-rows: 50px;
+    padding-top: 30px;
+
+}
+
+.lodicky-stredni .tlacitka .plus, .minus{
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 1.2em;
+    border-radius: 25px;
+    width: 40px;
+}
+
+.lodicky-stredni .tlacitka .plus{
+    background-color: #5ffa05;
+
+}
+
+.lodicky-stredni .tlacitka .minus{
+    background-color: red;
+}
+
+.lodicky-stredni .tlacitka p{
+    font-size: 25px;
+    
+}
+
+.lodicky-stredni .nazev{
+    text-align: center;
+}
+
+.lodicky-stredni .nazev p{
+    font-size: 20px;
+    font-weight: 900;
+    
+}
+
+.lodicky-stredni .cena{
+    text-align: center;
+    font-size: 18px;
+    color: red;
+    font-weight: 700;
+}
+
+
+/*VELK�*/
+
+
+.skupina-nazev-velke h2 {
+    text-align: center;
+    font-size: 32px;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding-bottom: 60px;
+    padding-top: 60px;
+
+}
+
+.lodicky-velke {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    gap: 70px;
+}
+
+.lodicky-velke .card{
+    width: 305px;
+    height: 350px;
+   /* background-color: #CEBEA2;*/
+    border: 2px solid #CEBEA2;
+    
+}
+
+.lodicky-velke .tlacitka{
+    text-align: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(90px,20px));
+    grid-auto-rows: 50px;
+    padding-top: 30px;
+
+}
+
+.lodicky-velke .tlacitka .plus, .minus{
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 1.2em;
+    border-radius: 25px;
+    width: 40px;
+}
+
+.lodicky-velke .tlacitka .plus{
+    background-color: #5ffa05;
+
+}
+
+.lodicky-velke .tlacitka .minus{
+    background-color: red;
+}
+
+.lodicky-velke .tlacitka p{
+    font-size: 25px;
+    
+}
+
+.lodicky-velke .nazev{
+    text-align: center;
+}
+
+.lodicky-velke .nazev p{
+    font-size: 20px;
+    font-weight: 900;
+    
+}
+
+.lodicky-velke .cena{
+    text-align: center;
+    font-size: 18px;
+    color: red;
+    font-weight: 700;
+}
+footer {
+    background-color: white;
+}
+
+@media (max-width: 560px){
+    .btn-go {
+        width: 100%;
+        position: fixed;
+        bottom: 0px;
+        left: 0;
+        padding: 4px;
+        color: white;
+        border-radius: 0;
+        text-decoration: none;
+        background-color: #5ffa05;
+        transition: .5s;
+        text-align: center;
+    }
+
+
+.pole-mlha {background-image: url('./textury/mlha.png');}
+.pole-lod {background-image: url('./textury/1-vor.png');}
+.pole-voda {background-image: url('./textury/more.png');}
+.id1 { background-image: url('./textury/id1.png');}
+.id2 {background-image: url('./textury/id2.png');}
+.id3 {background-image: url('./textury/id3.png');}
+.id4 {background-image: url('./textury/id4.png');}
+.id5 {background-image: url('./textury/id5.png');}
+.id6 {background-image: url('./textury/id6.png');}
+.rot90 {rotate: 90deg;}
+.rot180 {rotate: 180deg;}
+.rot270 {rotate: 270deg;}
+.zasazeno {content: url('./textury/dira.png')}

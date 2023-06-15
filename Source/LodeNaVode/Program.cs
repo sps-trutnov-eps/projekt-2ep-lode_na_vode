@@ -1,3 +1,6 @@
+using LodeNaVode.Data;
+using Microsoft.EntityFrameworkCore;
+
 namespace LodeNaVode
 {
     public class Program
@@ -6,22 +9,22 @@ namespace LodeNaVode
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
             builder.Services.AddControllersWithViews();
-
+            builder.Services.AddDbContext<LobbyDbContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("LobbyConnection")));
+            builder.Services.AddSession(options =>
+            {
+                options.Cookie.IsEssential = true;
+                options.IdleTimeout = TimeSpan.FromMinutes(60);
+            });
+            builder.Services.Configure<CookiePolicyOptions>(options =>
+                options.CheckConsentNeeded = context => false);
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
-            if (!app.Environment.IsDevelopment())
-            {
-                app.UseExceptionHandler("/Home/Error");
-            }
+            app.UseSession();
             app.UseStaticFiles();
-
             app.UseRouting();
-
             app.UseAuthorization();
-
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");

@@ -51,5 +51,9 @@ namespace log_lib {
             return message;
         }
 
+        public string ActivateNalepka(string jmenoHrace, string Nalepka) {
+
+        }
+
     }
 }

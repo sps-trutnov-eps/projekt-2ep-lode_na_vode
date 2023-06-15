@@ -16,3 +16,288 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.curr {
+    color: #5ffa05;
+    padding:.2em;
+}
+.mena {
+    font-size: 1.3em;
+    text-align: center;
+    padding-top: 40px;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+h1{
+    text-align: center;
+}
+.btn-go {
+    width: 240px;
+    font-size: 64px;
+    position: fixed;
+    bottom: 80px;
+    left: 815px;
+    padding: 16px;
+    color: white;
+    border-radius: 25px;
+    text-decoration: none;
+    background-color: #5ffa05;
+    transition: .5s;
+    text-align: center;
+}
+
+.btn-go a{
+    color: white;
+    text-decoration: none;
+    margin: 0 auto;
+   
+}
+
+.btn-go:hover{
+   background-color: aquamarine;
+   
+   
+}
+
+.skupina-nazev h2 {
+    text-align: center;
+    font-size: 32px;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding-bottom: 60px
+}
+
+
+/*MALÉ LODÌ*/
+
+.lodicky {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    gap: 70px;
+}
+
+.lodicky .card{
+    width: 305px;
+    height: 350px;
+   /* background-color: #CEBEA2;*/
+    border: 2px solid #CEBEA2;
+    
+}
+
+.lodicky .tlacitka{
+    text-align: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(90px,20px));
+    grid-auto-rows: 50px;
+    padding-top: 30px;
+
+}
+
+.lodicky .tlacitka .plus, .minus{
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 1.2em;
+    border-radius: 25px;
+    width: 40px;
+}
+
+.lodicky .tlacitka .plus{
+    background-color: #5ffa05;
+
+}
+
+.lodicky .tlacitka .minus{
+    background-color: red;
+}
+
+.lodicky .tlacitka p{
+    font-size: 25px;
+    
+}
+
+.lodicky .nazev{
+    text-align: center;
+}
+
+.lodicky .nazev p{
+    font-size: 20px;
+    font-weight: 900;
+    
+}
+
+.lodicky .cena{
+    text-align: center;
+    font-size: 18px;
+    color: red;
+    font-weight: 700;
+}
+
+
+/*STØEDNÍ LODÌ*/
+
+
+.skupina-nazev-stredni h2 {
+    text-align: center;
+    font-size: 32px;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding-bottom: 60px;
+    padding-top: 60px;
+
+}
+
+.lodicky-stredni {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    gap: 70px;
+}
+
+.lodicky-stredni .card{
+    width: 305px;
+    height: 350px;
+   /* background-color: #CEBEA2;*/
+    border: 2px solid #CEBEA2;
+    
+}
+
+.lodicky-stredni .tlacitka{
+    text-align: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(90px,20px));
+    grid-auto-rows: 50px;
+    padding-top: 30px;
+
+}
+
+.lodicky-stredni .tlacitka .plus, .minus{
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 1.2em;
+    border-radius: 25px;
+    width: 40px;
+}
+
+.lodicky-stredni .tlacitka .plus{
+    background-color: #5ffa05;
+
+}
+
+.lodicky-stredni .tlacitka .minus{
+    background-color: red;
+}
+
+.lodicky-stredni .tlacitka p{
+    font-size: 25px;
+    
+}
+
+.lodicky-stredni .nazev{
+    text-align: center;
+}
+
+.lodicky-stredni .nazev p{
+    font-size: 20px;
+    font-weight: 900;
+    
+}
+
+.lodicky-stredni .cena{
+    text-align: center;
+    font-size: 18px;
+    color: red;
+    font-weight: 700;
+}
+
+
+/*VELKÉ*/
+
+
+.skupina-nazev-velke h2 {
+    text-align: center;
+    font-size: 32px;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding-bottom: 60px;
+    padding-top: 60px;
+
+}
+
+.lodicky-velke {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    gap: 70px;
+}
+
+.lodicky-velke .card{
+    width: 305px;
+    height: 350px;
+   /* background-color: #CEBEA2;*/
+    border: 2px solid #CEBEA2;
+    
+}
+
+.lodicky-velke .tlacitka{
+    text-align: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(90px,20px));
+    grid-auto-rows: 50px;
+    padding-top: 30px;
+
+}
+
+.lodicky-velke .tlacitka .plus, .minus{
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 1.2em;
+    border-radius: 25px;
+    width: 40px;
+}
+
+.lodicky-velke .tlacitka .plus{
+    background-color: #5ffa05;
+
+}
+
+.lodicky-velke .tlacitka .minus{
+    background-color: red;
+}
+
+.lodicky-velke .tlacitka p{
+    font-size: 25px;
+    
+}
+
+.lodicky-velke .nazev{
+    text-align: center;
+}
+
+.lodicky-velke .nazev p{
+    font-size: 20px;
+    font-weight: 900;
+    
+}
+
+.lodicky-velke .cena{
+    text-align: center;
+    font-size: 18px;
+    color: red;
+    font-weight: 700;
+}

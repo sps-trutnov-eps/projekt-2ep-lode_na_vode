@@ -16,6 +16,10 @@ html {
   position: relative;
   min-height: 100%;
 }
+main {
+    padding:1em;
+    text-align:center;
+}
 
 body {
   margin-bottom: 60px;
@@ -50,6 +54,7 @@ table {
 .container {
     background-color: whitesmoke;
     padding: 0;
+    height: 100%;
 }
 header h1 {
     font-family: 'Faster One', cursive;
@@ -61,6 +66,53 @@ header {
     padding: 1em;
     margin-bottom: 1em;
 }
+
+input[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type=submit], #lobbycreate {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+#lobbycreate {
+    display: inline-block;
+    background-color: dodgerblue;
+    text-align: center;
+    text-decoration: none;
+}
+
+    input[type=submit]:hover {
+        background-color: #45a049;
+    }
+
+
+
+.game-mode-button {
+    margin-bottom: 1em;
+}
+#exitButton {
+    text-decoration:none;
+}
+    #exitButton:hover{
+        color:white;
+    }
+    #removeplayerButton {
+        background-color: #dc3545;
+    }
+
 
 
 .pole-mlha {background-image: url('./textury/mlha.png');}

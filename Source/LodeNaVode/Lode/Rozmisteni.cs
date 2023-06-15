@@ -55,6 +55,68 @@ namespace LodeNaVode.Lode
                 lodnica.Add(new Lod(new int[][] { new int[] { 0, 2 }, new int[] { 0, 1 }, new int[] { 1, 1 }, new int[] { 0, -1 }, new int[] { 1, -1 }, new int[] { 0, -2 } }));
             }
 
+            for (int i = 0; i < pocetLodiVaclavII; i++)
+            {
+                lodnica.Add(new Lod(new int[][] { new int[] { 0, 2 }, new int[] { 0, 1 }, new int[] { 0, -1 }, new int[] { 0, -2 } }));
+            }
+
+            for (int i = 0; i < pocetLodiMacha; i++)
+            {
+                lodnica.Add(new Lod(new int[][] { new int[] { 0, 1 }, new int[] { 1, 0 }, new int[] { 1, 0 }, new int[] { 0, -1 }, new int[] { -1, 0 } }));
+            }
+
+            for (int i = 0; i < pocetLodiLibuse; i++)
+            {
+                lodnica.Add(new Lod(new int[][] { new int[] { 0, 2 }, new int[] { 0, 1 }, new int[] { 1, 0 }, new int[] { 2, 0 } }));
+            }
+
+            for (int i = 0; i < pocetLodiPalach; i++)
+            {
+                lodnica.Add(new Lod(new int[][] { new int[] { 1, 2 }, new int[] { 0, 2 }, new int[] { 1, 1 }, new int[] { 0, 1 }, new int[] { 0, -1 }, new int[] { 0, -2 } }));
+            }
+
+            for (int i = 0; i < pocetLodiMasaryk; i++)
+            {
+                lodnica.Add(new Lod(new int[][] { new int[] { 0, 1 }, new int[] { -1, -1 }, new int[] { 0, -1 }, new int[] { 1, -1 } }));
+            }
+
+            for (int i = 0; i < pocetLodiSvatopluk; i++)
+            {
+                lodnica.Add(new Lod(new int[][] { new int[] { 1, 2 }, new int[] { 0, 2 }, new int[] { 0, 1 }, new int[] { 1, 0 }, new int[] { 1, -1 }, new int[] { 1, -2 }, new int[] { 0, -2 } }));
+            }
+
+            for (int i = 0; i < pocetLodiGott; i++)
+            {
+                lodnica.Add(new Lod(new int[][] { new int[] { -1, 1 }, new int[] { -1, 0 }, new int[] { 1, 0 }, new int[] { 1, -1 } }));
+            }
+
+            //Velké
+            for (int i = 0; i < pocetLodiZatopek; i++)
+            {
+                lodnica.Add(new Lod(new int[][] { new int[] { 0, 1 }, new int[] { 0, -1 }, new int[] { -1, 0 }, new int[] { -1, -1 }, new int[] { -1, 1 }, new int[] { 1, 1 }, new int[] { 1, 0 }, new int[] { 1, -1 }, new int[] { -1, -2 }, new int[] { 1, -2 }, new int[] { -1, 2 }, new int[] { 1, 2 } }));
+            }
+
+            for (int i = 0; i < pocetLodiOdysea; i++)
+            {
+                lodnica.Add(new Lod(new int[][] { new int[] { -1, 2 }, new int[] { -1, 1 }, new int[] { 0, 1 }, new int[] { 1, 1 }, new int[] { 1, 2 }, new int[] { -1, -2 }, new int[] { -1, -1 }, new int[] { 0, -1 }, new int[] { 1, -1 }, new int[] { 1, -2 } }));
+            }
+
+            for (int i = 0; i < pocetLodiKarelIV; i++)
+            {
+                lodnica.Add(new Lod(new int[][] { new int[] { 1, 1 }, new int[] { 0, 1 }, new int[] { 2, 1 }, new int[] { -1, 1 }, new int[] { -2, 1 }, new int[] { 0, -1 }, new int[] { 1 - 1 }, new int[] { 2, -1 }, new int[] { -1, -1 }, new int[] { -2, -1 } }));
+            }
+
+            for (int i = 0; i < pocetLodiZizka; i++)
+            {
+                lodnica.Add(new Lod(new int[][] { new int[] { 1, -1 }, new int[] { 0, -1 }, new int[] { -1, -1 }, new int[] { 0, -1 }, new int[] { -1, 1 }, new int[] { 0, 1 }, new int[] { 1, 1 }, new int[] { 0, 2 }, new int[] { 1, 2 }, new int[] { 0, -2 }, new int[] { 1, -2 } }));
+            }
+
+            for (int i = 0; i < pocetLodiNemcova; i++)
+            {
+                lodnica.Add(new Lod(new int[][] { new int[] { 0, -1 }, new int[] { 0, 1 }, new int[] { -1, 1 }, new int[] { 1, 1 }, new int[] { -1, -1 }, new int[] { 1, -1 }, new int[] { -1, 2 }, new int[] { 1, 2 }, new int[] { 1, -2 }, new int[] { -1, -2 } }));
+            }
+
+
 
 
 

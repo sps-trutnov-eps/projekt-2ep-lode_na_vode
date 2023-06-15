@@ -1,0 +1,78 @@
+﻿@model Tuple<LodeNaVode.Controllers.TypPolicka[,], string[,]>;
+
+@{
+    int sirka = LodeNaVode.Controllers.Pamet.velikostX;
+    int vyska = LodeNaVode.Controllers.Pamet.velikostY;
+    int cislo = 0;
+
+    LodeNaVode.Controllers.TypPolicka[,] bojiste = Model.Item1;
+    string[,] config = Model.Item2;
+
+    bool zobrazOvladani = LodeNaVode.Controllers.Pamet.oznacenaLod;
+}
+
+<table>
+    @for (int y = 0; y < bojiste.GetLength(0); y++)
+    {
+        <tr>
+            @for (int x = 0; x < bojiste.GetLength(1); x++, cislo++)
+            {
+                <td class="policko">
+
+                    @if (bojiste[y, x] == LodeNaVode.Controllers.TypPolicka.Lod)
+                    {
+                        <a href="/Tah/Policko/@cislo"><div class="pole-lod @config[y, x]">L</div></a>
+                    }
+                    @if (bojiste[y, x] == LodeNaVode.Controllers.TypPolicka.ZasahLodCentalniBod)
+                    {
+                        <a href="/Tah/Policko/@cislo"><div class="pole-zasah @config[y, x]">Zc</div></a>
+                    }
+                    @if (bojiste[y, x] == LodeNaVode.Controllers.TypPolicka.ZasahLodZbytekBod)
+                    {
+                    <a href="/Tah/Policko/@cislo"><div class="pole-zasah @config[y, x]">Zz</div></a>
+                    }
+                    else if (bojiste[y, x] == LodeNaVode.Controllers.TypPolicka.Voda)
+                    {
+                        <a href="/Tah/Policko/@cislo"><div class="pole-voda">V</div></a>
+                    }
+                    else if (bojiste[y, x] == LodeNaVode.Controllers.TypPolicka.Mlha)
+                    {
+                        <a href="/Tah/Policko/@cislo"><div class="pole-mlha">#</div></a>
+                    }
+
+                </td>
+            }
+        </tr>
+    }
+</table>
+
+<!--
+ Pohyb lodě
+ Negativní id se používá jako ovládání
+ -1 == null
+ -2 otočit levá
+ -3 otočit pravá
+ -4 hore
+ -5 dolů
+-->
+@if (zobrazOvladani)
+{
+    <table>
+        <tr>
+            <td>
+                <a href="/Tah/Policko/-2"><div class="vlevo">L</div></a>
+            </td>
+            <td>
+                <a href="/Tah/Policko/-3"><div class="vpravo">P</div></a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a href="/Tah/Policko/-4"><div class="nahoru">H</div></a>
+            </td>
+            <td>
+                <a href="/Tah/Policko/-5"><div class="dolu">D</div></a>
+            </td>
+        </tr>
+    </table>
+}

@@ -43,14 +43,27 @@ namespace LodeNaVode.Controllers
         }
 
         [HttpGet]
-        public IActionResult Join(int lobbyId)
+        public IActionResult Join(string lobbyId)
         {
+            if (lobbyId == null || lobbyId.Trim().Length == 0)
+                return Redirect("/Lobby/Index");
+
+            int id = 0;
+            try
+            {
+                id = Convert.ToInt32(lobbyId);
+            }
+            catch
+            {
+                return Redirect("/Lobby/Index");
+            }
+
             string playerCookie = HttpContext.Session.GetString("playerid");
-            if (_lobbyDatabase.Lobbies.Any(l => l.LobbyId == lobbyId))
+            if (_lobbyDatabase.Lobbies.Any(l => l.LobbyId == id))
             {
                 Player player = _lobbyDatabase.Players.Where(p => p.PlayerCookie == playerCookie).First();
                 var lobbies = _lobbyDatabase.Lobbies;
-                var correctLobbies = lobbies.Where(l => l.LobbyId == lobbyId);
+                var correctLobbies = lobbies.Where(l => l.LobbyId == id);
                 var playersOfLobby = correctLobbies.First().Players;
                 playersOfLobby.Add(player);
                 _lobbyDatabase.SaveChanges();

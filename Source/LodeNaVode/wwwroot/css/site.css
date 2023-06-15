@@ -18,6 +18,59 @@ body {
   background-image: url('textury/mlha-na-mori.png');
   background-repeat: repeat;
 }
+footer {
+    background-color: white;
+}
+
+table {
+    margin: auto auto;
+}
+.policko {
+    border-collapse:collapse;
+    width: 24px;
+    height: 24px;
+}
+.policko a {
+    text-align:center;
+    vertical-align:middle;
+    color: rgba(0,0,0,0);
+}
+.policko a div {
+    width: 24px;
+    height: 24px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 3px;
+}
+
+
+.pole-mlha {background-image: url('./textury/mlha.png');}
+.pole-lod {background-image: url('./textury/1-vor.png');}
+.pole-voda {background-image: url('./textury/more.png');}
+.id1 { background-image: url('./textury/id1.png');}
+.id2 {background-image: url('./textury/id2.png');}
+.id3 {background-image: url('./textury/id3.png');}
+.id4 {background-image: url('./textury/id4.png');}
+.id5 {background-image: url('./textury/id5.png');}
+.id6 {background-image: url('./textury/id6.png');}
+.rot90 {rotate: 90deg;}
+.rot180 {rotate: 180deg;}
+.rot270 {rotate: 270deg;}
+.zasazeno {content: url('./textury/dira.png');}
+.vlevo {content:url('textury/sipka-otaceni.png');}
+.vpravo {
+    content: url('textury/sipka-otaceni.png');
+    transform: scale(-1, 1);
+}
+.nahoru {
+    content: url('textury/s1.png');
+}
+.dolu {
+    content: url('textury/s2.png');
+}
+
+
 
 .curr {
     color: #5ffa05;

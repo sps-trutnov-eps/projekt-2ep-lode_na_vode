@@ -113,16 +113,20 @@ namespace LodeNaVode.Controllers
 
                 if (playercheck.PlayerCookie == currentLobby.Owner) 
                 {
-                    currentLobby.Owner = currentLobby.Players.First().PlayerCookie;
+                    if (currentLobby.Players.IsNullOrEmpty()) 
+                    {
+                        currentLobby.Active = false;
+                        currentLobby.Owner = null;
+                        _lobbyDatabase.SaveChanges();
+                    }
+                    else 
+                    {
+                        currentLobby.Owner = currentLobby.Players.First().PlayerCookie;
+                        _lobbyDatabase.SaveChanges();
+                    }
+                } 
+                else
                     _lobbyDatabase.SaveChanges();
-                } else
-                    _lobbyDatabase.SaveChanges();
-
-                if (currentLobby.Players.IsNullOrEmpty()) 
-                {
-                    currentLobby.Active = false;
-                    _lobbyDatabase.SaveChanges();
-                }
 
                 return RedirectToAction("Index", "Lobby");
             }

@@ -13,8 +13,7 @@ namespace LodeNaVode.Models
         [Required]
         public string Gamemode { get; set; }
 
-        [Required]
-        public string Owner { get; set; }
+        public string? Owner { get; set; }
 
         [Required]
         public bool Active { get; set; }

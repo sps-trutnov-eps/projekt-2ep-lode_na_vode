@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Faster+One&display=swap');
+
+
+
 html {
   font-size: 14px;
 }
@@ -42,6 +46,20 @@ table {
     background-repeat: no-repeat;
     background-size: cover;
     border-radius: 3px;
+}
+.container {
+    background-color: whitesmoke;
+    padding: 0;
+}
+header h1 {
+    font-family: 'Faster One', cursive;
+    font-size: 4em;
+}
+header {
+    background-color:darkcyan;
+    color:yellow;
+    padding: 1em;
+    margin-bottom: 1em;
 }
 
 
@@ -88,11 +106,11 @@ h1{
 }
 .btn-go {
     width: 240px;
-    font-size: 64px;
+    font-size: 24px;
     position: fixed;
-    bottom: 80px;
-    left: 815px;
-    padding: 16px;
+    bottom: 40px;
+    left: calc(50vw - 120px);
+    padding: 8px;
     color: white;
     border-radius: 25px;
     text-decoration: none;
@@ -355,4 +373,21 @@ h1{
     font-size: 18px;
     color: red;
     font-weight: 700;
+}
+
+@media (max-width: 560px){
+    .btn-go {
+        width: 100%;
+        position: fixed;
+        bottom: 0px;
+        left: 0;
+        padding: 4px;
+        color: white;
+        border-radius: 0;
+        text-decoration: none;
+        background-color: #5ffa05;
+        transition: .5s;
+        text-align: center;
+    }
+
 }

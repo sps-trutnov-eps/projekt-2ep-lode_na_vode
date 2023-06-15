@@ -107,11 +107,11 @@ namespace main_api
             {
 						// zkusím centrálné bod
 						if (Lode[i].CentralneBod[0] == x && Lode[i].CentralneBod[1] == y){
-					// sepíšu spis
-					NaposledyTrefenaLod = Lode[i].Ucitel;
+							// sepíšu spis
+							NaposledyTrefenaLod = Lode[i].Ucitel;
 							// když již zničen
 							if (Lode[i].CentralneBod[2] == 0)
-								return false;
+								return true;
 							// jinak zničit
 							else{
 								Lode[i].CentralneBod[2] = 0;
@@ -128,7 +128,7 @@ namespace main_api
                     {
                         // když zničeno
                         if (Lode[i].ZbytekBodu[j][2] == 0)
-                            return false;
+                            return true;
                         // když nezničeno
                         else
                         {

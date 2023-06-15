@@ -1,6 +1,7 @@
 ﻿using LodeNaVode.Data;
 using LodeNaVode.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using System.Diagnostics;
 using System.Linq;
 
@@ -31,14 +32,14 @@ namespace LodeNaVode.Controllers
             else
             {
                 List<Player> players = new List<Player> { lobbyOwner };
-                Lobby newLobby = new Lobby() { Gamemode = "normal", Owner = lobbyOwnerId, Players = players };
+                Lobby newLobby = new Lobby() { Gamemode = "normal", Owner = lobbyOwnerId, Players = players , Active = true };
 
                 _lobbyDatabase.Lobbies.Add(newLobby);
                 _lobbyDatabase.SaveChanges();
             }
 
 
-            return RedirectToAction("LobbyOwner");
+            return RedirectToAction("Lobby");
         }
 
         [HttpGet]
@@ -58,13 +59,12 @@ namespace LodeNaVode.Controllers
             return RedirectToAction("JoinLobby", "Home");
         }
 
-        public IActionResult LobbyOwner()
-        {
-            return View();
-        }
-
         public IActionResult Lobby()
         {
+            Player? playercheck = _lobbyDatabase.Players.Where(p => p.PlayerCookie == HttpContext.Session.GetString("playerid")).FirstOrDefault();
+            Lobby currentLobby = _lobbyDatabase.Lobbies.Where(l => l.Players.Contains(playercheck)).First();
+            ViewData["lobbyOwner"] = currentLobby.Owner;
+            ViewData["currentUser"] = playercheck.PlayerCookie;
             return View();
         }
 
@@ -104,12 +104,26 @@ namespace LodeNaVode.Controllers
         public IActionResult Leave(string from)
         {
             HttpContext.Session.SetString("from", from);
-            Player playercheck = _lobbyDatabase.Players.Where(p => p.PlayerCookie == HttpContext.Session.GetString("playerid")).FirstOrDefault();
+            Player? playercheck = _lobbyDatabase.Players.Where(p => p.PlayerCookie == HttpContext.Session.GetString("playerid")).FirstOrDefault();
+            Lobby currentLobby = _lobbyDatabase.Lobbies.Where(l => l.Players.Contains(playercheck)).First();
             if (playercheck != null)
             {
                 Lobby lobbyWithPlayer = _lobbyDatabase.Lobbies.Where(l => l.Players.Contains(playercheck)).First();
                 lobbyWithPlayer.Players.Remove(playercheck);
-                _lobbyDatabase.SaveChanges();
+
+                if (playercheck.PlayerCookie == currentLobby.Owner) 
+                {
+                    currentLobby.Owner = currentLobby.Players.First().PlayerCookie;
+                    _lobbyDatabase.SaveChanges();
+                } else
+                    _lobbyDatabase.SaveChanges();
+
+                if (currentLobby.Players.IsNullOrEmpty()) 
+                {
+                    currentLobby.Active = false;
+                    _lobbyDatabase.SaveChanges();
+                }
+
                 return RedirectToAction("Index", "Lobby");
             }
             else

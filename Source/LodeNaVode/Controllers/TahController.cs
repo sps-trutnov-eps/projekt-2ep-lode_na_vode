@@ -141,11 +141,15 @@ namespace LodeNaVode.Controllers
             }
             Debug.WriteLine($"RedrawCompleted");
         }
-        public IActionResult Policko(int id = -1)
-        {
+
+        public IActionResult NalepkySiVyberTyMagor() {
+            return View();
+        }
+        public IActionResult Policko(int id = -1) {
+            Engine engine = Engin.engine;
+
             Debug.WriteLine(id);
 
-            Engine engine = Engin.engine;
             ref int lodId = ref Pamet.lodId;
             ref bool oznacenaLod = ref Pamet.oznacenaLod;
 
@@ -168,6 +172,8 @@ namespace LodeNaVode.Controllers
             // -3 otočit pravá
             // -4 hore
             // -5 dolů
+
+            // -100 a nižší nalepky
             if(oznacenaLod) {
                 Lod l = engine.Lode[lodId];
                 oznacenaLod = false;
@@ -193,6 +199,11 @@ namespace LodeNaVode.Controllers
                 }
             }
 
+            if (id < -100) {
+                Lod l = engine.Lode[lodId];
+                engine.GetLog.ActivateNalepka(l,id+100);
+            }
+
             // Procházení bojištěm
             for (int y = 0; y < bojiste.GetLength(0); y++)
             {
@@ -213,10 +224,10 @@ namespace LodeNaVode.Controllers
                                     if (lod.CentralneBod[0] == x && lod.CentralneBod[1] == y)
                                     {
                                         policko = TypPolicka.ZasahLodCentalniBod;                                        
+                                        Lod l = engine.Lode[i];
+                                        engine.GetLog.GetHitMessage(l.Hrac,l.Ucitel);
                                     }
                                 }
-                                Lod l = engine.Lode[lodId];
-                                engine.GetLog.GetHitMessage(l.Hrac,l.Ucitel);
                             }
                             else
                             {

@@ -22,11 +22,14 @@ main {
     overflow: scroll;
 }
 
+html{
+    height:100%;
+}
 body {
   margin-bottom: none;
   background-image: url('textury/mlha-na-mori.png');
   background-repeat: repeat;
-  height: 100vh;
+  height: 100%;
 }
 footer {
     background-color: white;
@@ -432,7 +435,7 @@ footer {
     background-color: white;
 }
 
-@media (max-width: 560px){
+@media (max-width: 560px) {
     .btn-go {
         width: 100%;
         position: fixed;
@@ -446,7 +449,10 @@ footer {
         transition: .5s;
         text-align: center;
     }
-
+    h1 {
+        font-size:1em;
+    }
+}
 
 .pole-mlha {background-image: url('./textury/mlha.png');}
 .pole-lod {background-image: url('./textury/1-vor.png');}

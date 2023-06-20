@@ -53,7 +53,7 @@ namespace LodeNaVode.Controllers
         [HttpGet]
         public IActionResult Zvolit()
         {
-            return View(pocetLodiMetodej);
+            return View();
         }
 
         [HttpGet]

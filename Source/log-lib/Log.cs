@@ -6,9 +6,9 @@ using System.Text.Json.Serialization;
 namespace log_lib {
     public class Log {
 
-        private List<string> entireLog;
+        public List<string> entireLog;
         public DataHolder Data;
-        private string message;
+        public string message;
 
         //Cesta k souborům je z lokace, kde je aplikace spuštěna
         public Log(string cestaKLodim, string cestaKNalepkam) {
@@ -50,10 +50,5 @@ namespace log_lib {
             entireLog.Add(message);
             return message;
         }
-
-        public string ActivateNalepka(string jmenoHrace, string Nalepka) {
-
-        }
-
     }
 }

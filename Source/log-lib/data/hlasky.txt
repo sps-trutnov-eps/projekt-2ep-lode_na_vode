@@ -1,15 +1,15 @@
 reznicek
-	trefa placeholder
-	pohyb placeholder
+	Trefili nás kvůli tomu, že máme systém v dark modu.
+	Naši ikonku si posuneme na spravné místo, aby jsem ji neztratili.
 kosatko
-	trefa placeholder
-	pohyb placeholder
+	Neoprávněné reklamace střel se hodnotí stupněm dolů, děkuji za pochopení.
+	Moje mořeplavectví být špatné, jak se říka.
 cichovsky
-	trefa placeholder
-	pohyb placeholder
+	Za trest si zaběháme kilometr.
+	Čas si potrénovat veslování.
 matejec
-	trefa placeholder
-	pohyb placeholder		
+	Jak rádi říkají Britové:"FUCK!".
+	Čas emigrovat do anglických moří.
 vanek
 	Střela se pokusila narazit na mou numerickou stabilitu.
 	Posádko, připravte se na geometrický posun.
@@ -18,7 +18,7 @@ kadrle
 	Tady máte lodní miny, hrajte si.
 jindova
 	Nezasalutovala jsem a šla jsem na kobereček před ředitele.
-	
+	Jdeme se vrátit do časů komunismu
 curdova
 	Nemám čas na to být naštvaná.;Tos sem poslal teda fakt chcípáka
 	Co se dá dělat, dětma nezatopíš, ale můžou kormidlovat.;Jaké zvíře má službu? VÁCLAVE KMITEJ!

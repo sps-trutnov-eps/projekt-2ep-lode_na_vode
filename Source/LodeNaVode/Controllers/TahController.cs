@@ -232,9 +232,10 @@ namespace LodeNaVode.Controllers
                                         policko = TypPolicka.ZasahLodCentalniBod;
                                         odhalenePolicka.Add(new Tuple<int, int, TypPolicka>(x, y, TypPolicka.ZasahLodCentalniBod));
                                     }
+
+                                    Lod l = engine.Lode[lodId];
+                                    engine.GetLog.GetHitMessage(l.Hrac, l.Ucitel);
                                 }
-                                Lod l = engine.Lode[lodId];
-                                engine.GetLog.GetHitMessage(l.Hrac,l.Ucitel);
                             }
                             else
                             {

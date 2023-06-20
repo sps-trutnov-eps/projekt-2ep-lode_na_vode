@@ -34,29 +34,6 @@ namespace LodeNaVode.Controllers
     ////////////////////////
 
 
-    public class Engin{
-
-        public static Engine engine = GetIT();
-        private static Engine GetIT()
-        {
-            string[][] mojeStringy = new string[][] {
-                new string[] { "a", "b" },
-                new string[] { "c", "d" }
-            };
-            Engine engine = new Engine(mojeStringy, 14, 9, "../../Data/textury/tvary-lodi.TEXT", "LodeNaVode/Lode/hlasky.txt", "LodeNaVode/Lode/nalepky.txt");
-
-            engine.UmistitLod(2, 5, "L", "a", "c");
-            engine.UmistitLod(10, 5, "P", "a", "c");
-            //engine.UmistitLod(5, 5, "L", "a", "c");
-            engine.UmistitLod(0, 1, "L", "c", "c");
-
-            Debug.WriteLine("hi");
-
-            return engine;
-
-        }
-    }
-
     public static class Pamet
     {
         public static int velikostX = 10;
@@ -76,7 +53,7 @@ namespace LodeNaVode.Controllers
 
             // pripravime si promennou, abychom meli pristup k enginu
             engine = Program.KolekceEnginu["${lobbyId}"];
-            // ze by ID neexistvalo, neresime
+            // ze by ID neexistovalo, neresime
         }
 
         public void Redraw(ref Tuple<TypPolicka[,], string[,]> bojisteTuple, ref Engine engine)
@@ -157,7 +134,11 @@ namespace LodeNaVode.Controllers
         {
             Debug.WriteLine(id);
 
-            Engine engine = Engin.engine;
+            // ze session zjistime ID naseho lobby
+            int lobbyId = Convert.ToInt32(HttpContext.Session.GetString("lobbyid"));
+            // nacteme si prislusny engine
+            Engine engine = Program.KolekceEnginu[lobbyId.ToString()];
+
             ref int lodId = ref Pamet.lodId;
             ref bool oznacenaLod = ref Pamet.oznacenaLod;
 

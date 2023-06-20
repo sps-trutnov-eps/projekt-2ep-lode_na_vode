@@ -51,6 +51,15 @@ namespace LodeNaVode.Controllers
                 // vytvoreni instance enginu pro nove lobby
                 Program.KolekceEnginu.Add(newLobby.LobbyId.ToString(), new Engine(hraci, Pamet.velikostX, Pamet.velikostY));
 
+                // ze session ziskame skutecne jmeno hrace
+                string jmeno = HttpContext.Session.GetString("playername");
+
+                // cvicne lode dane hry
+                Program.KolekceEnginu[newLobby.LobbyId.ToString()].UmistitLod(2, 5, "L", jmeno, jmeno);
+                Program.KolekceEnginu[newLobby.LobbyId.ToString()].UmistitLod(9, 5, "P", jmeno, jmeno);
+                Program.KolekceEnginu[newLobby.LobbyId.ToString()].UmistitLod(5, 5, "L", jmeno, jmeno);
+                Program.KolekceEnginu[newLobby.LobbyId.ToString()].UmistitLod(0, 1, "L", jmeno, jmeno);
+
                 // ulozeni aktualniho lobby do session
                 HttpContext.Session.SetString("lobbyid", newLobby.LobbyId.ToString());
 

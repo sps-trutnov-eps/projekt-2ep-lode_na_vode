@@ -1,5 +1,6 @@
 ﻿using LodeNaVode.Data;
 using LodeNaVode.Models;
+using main_api;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.Diagnostics;
@@ -31,13 +32,32 @@ namespace LodeNaVode.Controllers
             }
             else
             {
+                // seznam hracu v novem lobby
                 List<Player> players = new List<Player> { lobbyOwner };
-                Lobby newLobby = new Lobby() { Gamemode = "normal", Owner = lobbyOwnerId, Players = players , Active = true };
+                // nove lobby
+                Lobby newLobby = new Lobby() { Gamemode = "normal", Owner = lobbyOwnerId, Players = players, Active = true };
 
+                // kopie hracu pro engine
+                string[][] hraci = new string[players.Count][];
+
+                for (int i = 0; i < hraci.GetLength(0); i++)
+                {
+                    hraci[i] = new string[2];
+
+                    // polozky [0] a [1] odpovidaji jmenu hrace a jmenu tymu - zjednodusujeme oboji na jmeno hrace (Debian style)
+                    hraci[i][0] = hraci[i][1] = players[i].PlayerName;
+                }
+
+                // vytvoreni instance enginu pro nove lobby
+                Program.KolekceEnginu.Add(newLobby.LobbyId.ToString(), new Engine(hraci, Pamet.velikostX, Pamet.velikostY));
+
+                // ulozeni aktualniho lobby do session
+                HttpContext.Session.SetString("lobbyid", newLobby.LobbyId.ToString());
+
+                // ulozeni noveho lobby do databaze
                 _lobbyDatabase.Lobbies.Add(newLobby);
                 _lobbyDatabase.SaveChanges();
             }
-
 
             return RedirectToAction("Lobby");
         }
@@ -70,7 +90,7 @@ namespace LodeNaVode.Controllers
                     HttpContext.Session.SetString("from", "Lobby");
                     return RedirectToAction("/Lobby/Index");
                 }
-                else 
+                else
                 {
                     Player player = _lobbyDatabase.Players.Where(p => p.PlayerCookie == playerCookie).First();
                     var lobbies = _lobbyDatabase.Lobbies;
@@ -108,7 +128,7 @@ namespace LodeNaVode.Controllers
                     _lobbyDatabase.SaveChanges();
                     return View();
                 }
-                else 
+                else
                 {
                     if (from == "Lobby")
                     {
@@ -137,20 +157,20 @@ namespace LodeNaVode.Controllers
                 Lobby lobbyWithPlayer = _lobbyDatabase.Lobbies.Where(l => l.Players.Contains(playercheck)).First();
                 lobbyWithPlayer.Players.Remove(playercheck);
 
-                if (playercheck.PlayerCookie == currentLobby.Owner) 
+                if (playercheck.PlayerCookie == currentLobby.Owner)
                 {
-                    if (currentLobby.Players.IsNullOrEmpty()) 
+                    if (currentLobby.Players.IsNullOrEmpty())
                     {
                         currentLobby.Active = false;
                         currentLobby.Owner = null;
                         _lobbyDatabase.SaveChanges();
                     }
-                    else 
+                    else
                     {
                         currentLobby.Owner = currentLobby.Players.First().PlayerCookie;
                         _lobbyDatabase.SaveChanges();
                     }
-                } 
+                }
                 else
                     _lobbyDatabase.SaveChanges();
 

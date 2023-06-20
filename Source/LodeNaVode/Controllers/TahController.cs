@@ -67,6 +67,18 @@ namespace LodeNaVode.Controllers
 
     public class TahController : Controller
     {
+        private Engine engine;
+
+        public TahController()
+        {
+            // pri kazdem pozadavku na controller vyzvedneme ID prislusneho lobby
+            string? lobbyId = HttpContext.Session.GetString("lobbyid");
+
+            // pripravime si promennou, abychom meli pristup k enginu
+            engine = Program.KolekceEnginu["${lobbyId}"];
+            // ze by ID neexistvalo, neresime
+        }
+
         public void Redraw(ref Tuple<TypPolicka[,], string[,]> bojisteTuple, ref Engine engine)
         {
             if (bojisteTuple.Item1 == null) throw new Exception();

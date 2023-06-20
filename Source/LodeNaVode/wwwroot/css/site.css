@@ -19,12 +19,14 @@ html {
 main {
     padding:1em;
     text-align:center;
+    overflow: scroll;
 }
 
 body {
-  margin-bottom: 60px;
+  margin-bottom: none;
   background-image: url('textury/mlha-na-mori.png');
   background-repeat: repeat;
+  height: 100vh;
 }
 footer {
     background-color: white;

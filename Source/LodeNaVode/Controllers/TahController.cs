@@ -59,6 +59,7 @@ namespace LodeNaVode.Controllers
 
     public static class Pamet
     {
+        public static List<Tuple<int, int, TypPolicka>> odhalenePolicka = new List<Tuple<int, int, TypPolicka>>();
         public static int velikostX = 10;
         public static int velikostY = 15;
         public static int lodId = -1;
@@ -67,7 +68,7 @@ namespace LodeNaVode.Controllers
 
     public class TahController : Controller
     {
-        public void Redraw(ref Tuple<TypPolicka[,], string[,]> bojisteTuple, ref Engine engine)
+        public void Redraw(ref Tuple<TypPolicka[,], string[,]> bojisteTuple, ref Engine engine, ref List<Tuple<int, int, TypPolicka>> odhalenaPolicka)
         {
             if (bojisteTuple.Item1 == null) throw new Exception();
 
@@ -86,10 +87,23 @@ namespace LodeNaVode.Controllers
                         continue;
                     else
                         bojiste[y, x] = TypPolicka.Mlha;
+
+
                     //Debug.WriteLine("test");
                 }
             }
 
+            // Jen nakresli políčka kam jsi klikal
+            if (odhalenaPolicka != null)
+            {
+                for (int i = 0; i < odhalenaPolicka.Count; i++)
+                {
+                    Tuple<int, int, TypPolicka> odhalenePolicko = odhalenaPolicka[i];
+
+                    bojiste[odhalenePolicko.Item2, odhalenePolicko.Item1] = odhalenePolicko.Item3;
+                }   
+            }
+            // Nakresli lodě (přátelské)
             for (int i = 0; i < engine.Lode.Count; i++)
             {
                 var lod = engine.Lode[i];
@@ -139,6 +153,7 @@ namespace LodeNaVode.Controllers
                         config[lod.CentralneBod[1] + by, lod.CentralneBod[0] + bx] = "rot270";
                 }
             }
+
             Debug.WriteLine($"RedrawCompleted");
         }
         public IActionResult Policko(int id = -1)
@@ -148,12 +163,13 @@ namespace LodeNaVode.Controllers
             Engine engine = Engin.engine;
             ref int lodId = ref Pamet.lodId;
             ref bool oznacenaLod = ref Pamet.oznacenaLod;
+            ref List<Tuple<int, int, TypPolicka>> odhalenePolicka = ref Pamet.odhalenePolicka;
 
             Tuple<TypPolicka[,], string[,]> bojisteTuple = new Tuple<TypPolicka[,], string[,]>
                 (new TypPolicka[Pamet.velikostX, Pamet.velikostY],
                 new string[Pamet.velikostX, Pamet.velikostY]);
 
-            Redraw(ref bojisteTuple, ref engine);
+            Redraw(ref bojisteTuple, ref engine, ref odhalenePolicka);
 
             TypPolicka[,] bojiste = bojisteTuple.Item1;
             string[,] config = bojisteTuple.Item2;
@@ -210,9 +226,11 @@ namespace LodeNaVode.Controllers
                                 {
                                     var lod = engine.Lode[i];
                                     policko = TypPolicka.ZasahLodZbytekBod;
+                                    odhalenePolicka.Add(new Tuple<int, int, TypPolicka>(x, y, TypPolicka.ZasahLodZbytekBod));
                                     if (lod.CentralneBod[0] == x && lod.CentralneBod[1] == y)
                                     {
-                                        policko = TypPolicka.ZasahLodCentalniBod;                                        
+                                        policko = TypPolicka.ZasahLodCentalniBod;
+                                        odhalenePolicka.Add(new Tuple<int, int, TypPolicka>(x, y, TypPolicka.ZasahLodCentalniBod));
                                     }
                                 }
                                 Lod l = engine.Lode[lodId];
@@ -220,7 +238,8 @@ namespace LodeNaVode.Controllers
                             }
                             else
                             {
-                                policko = TypPolicka.Voda;                            
+                                policko = TypPolicka.Voda;
+                                odhalenePolicka.Add(new Tuple<int, int, TypPolicka>(x, y, TypPolicka.Voda));
                             }
                             //Debug.WriteLine("Výstřel do prázdna");
                             //Debug.WriteLine($"{policko}");
@@ -278,7 +297,7 @@ namespace LodeNaVode.Controllers
                 }
             }
 
-            Redraw(ref bojisteTuple, ref engine);
+            Redraw(ref bojisteTuple, ref engine, ref odhalenePolicka);
 
             return View(bojisteTuple);
         }

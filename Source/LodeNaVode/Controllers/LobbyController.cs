@@ -45,8 +45,11 @@ namespace LodeNaVode.Controllers
         [HttpGet]
         public IActionResult Join(string lobbyId)
         {
-            if (lobbyId == null || lobbyId.Trim().Length == 0)
+            if (lobbyId == null || lobbyId.Trim() == null)
+            {
+                HttpContext.Session.SetString("from", "Lobby");
                 return Redirect("/Lobby/Index");
+            }
 
             int id = 0;
             try
@@ -55,21 +58,31 @@ namespace LodeNaVode.Controllers
             }
             catch
             {
+                HttpContext.Session.SetString("from", "Lobby");
                 return Redirect("/Lobby/Index");
             }
 
             string playerCookie = HttpContext.Session.GetString("playerid");
             if (_lobbyDatabase.Lobbies.Any(l => l.LobbyId == id))
             {
-                Player player = _lobbyDatabase.Players.Where(p => p.PlayerCookie == playerCookie).First();
-                var lobbies = _lobbyDatabase.Lobbies;
-                var correctLobbies = lobbies.Where(l => l.LobbyId == id);
-                var playersOfLobby = correctLobbies.First().Players;
-                playersOfLobby.Add(player);
-                _lobbyDatabase.SaveChanges();
-                return RedirectToAction("Lobby");
+                if (!_lobbyDatabase.Lobbies.Where(l => l.LobbyId == id).First().Active)
+                {
+                    HttpContext.Session.SetString("from", "Lobby");
+                    return RedirectToAction("/Lobby/Index");
+                }
+                else 
+                {
+                    Player player = _lobbyDatabase.Players.Where(p => p.PlayerCookie == playerCookie).First();
+                    var lobbies = _lobbyDatabase.Lobbies;
+                    var correctLobbies = lobbies.Where(l => l.LobbyId == id);
+                    var playersOfLobby = correctLobbies.First().Players;
+                    playersOfLobby.Add(player);
+                    _lobbyDatabase.SaveChanges();
+                    return RedirectToAction("Lobby");
+                }
             }
-            return RedirectToAction("JoinLobby", "Home");
+            HttpContext.Session.SetString("from", "Lobby");
+            return Redirect("/Lobby/Index");
         }
 
         public IActionResult Lobby()

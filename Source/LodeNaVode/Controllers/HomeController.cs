@@ -22,9 +22,6 @@ namespace LodeNaVode.Controllers
 
         public IActionResult JoinLobby(string playerName) 
         {
-            if (playerName == null || playerName.Trim().Length == 0)
-                return Redirect("/Home/Index");
-
             if (HttpContext.Session.GetString("playerid") == null)
             {
                 var dice = new Random();

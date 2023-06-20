@@ -3,8 +3,9 @@
 }
 
 <h1>@ViewData["Title"]</h1>
-<a href="/Lobby/Create">Vytvořit lobby</a>
+    <a id="lobbycreate" href="/Lobby/Create">Vytvořit lobby</a>
 <form action="/Lobby/Join" method="get">
     <input type="text" name="lobbyId" placeholder="Lobby ID"><br>
     <input type="submit" value="Připojit k lobby">
 </form>
+<p>@ViewData["debugmsg"]</p>

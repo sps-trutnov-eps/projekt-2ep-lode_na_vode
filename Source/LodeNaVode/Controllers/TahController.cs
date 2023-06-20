@@ -68,6 +68,11 @@ namespace LodeNaVode.Controllers
 
     public class TahController : Controller
     {
+        public TahController()
+        {
+            HttpContext.Session.GetString("playerid");
+        }
+
         public void Redraw(ref Tuple<TypPolicka[,], string[,]> bojisteTuple, ref Engine engine, ref List<Tuple<int, int, TypPolicka>> odhalenaPolicka)
         {
             if (bojisteTuple.Item1 == null) throw new Exception();

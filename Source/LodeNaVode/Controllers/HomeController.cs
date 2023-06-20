@@ -1,4 +1,5 @@
 ﻿using LodeNaVode.Data;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -22,7 +23,7 @@ namespace LodeNaVode.Controllers
 
         public IActionResult JoinLobby(string playerName) 
         {
-            if (HttpContext.Session.GetString("playerid") == null)
+            if ((HttpContext.Session.GetString("playerid") == null) && !_lobbyDatabase.Players.Where(p => p.PlayerName == playerName).First().Active)
             {
                 var dice = new Random();
                 int diceresult = dice.Next(1000000000, 2000000000);
@@ -31,7 +32,7 @@ namespace LodeNaVode.Controllers
             }
             HttpContext.Session.SetString("playername", playerName);
             HttpContext.Session.CommitAsync();
-            return RedirectToAction("Index","Lobby");
+            return RedirectToAction("Index", "Lobby");
         }
     }
 }

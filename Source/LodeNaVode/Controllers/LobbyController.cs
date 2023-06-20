@@ -14,6 +14,7 @@ namespace LodeNaVode.Controllers
         public LobbyController(LobbyDbContext dbContext)
         {
             _lobbyDatabase = dbContext;
+            HttpContext.Session.GetString("playerid");
         }
 
         [HttpGet]
@@ -108,7 +109,7 @@ namespace LodeNaVode.Controllers
                 if (!_lobbyDatabase.Players.Any(p => p.PlayerName == playerName))
                 {
                     string? playerCookie = HttpContext.Session.GetString("playerid");
-                    Player player = new Player() { PlayerCookie = playerCookie, PlayerName = playerName };
+                    Player player = new Player() { PlayerCookie = playerCookie, PlayerName = playerName, Active = true};
                     _lobbyDatabase.Players.Add(player);
                     _lobbyDatabase.SaveChanges();
                     return View();

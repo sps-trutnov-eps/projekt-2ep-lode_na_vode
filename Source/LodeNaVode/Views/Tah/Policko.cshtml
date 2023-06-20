@@ -25,11 +25,11 @@
                     }
                     @if (bojiste[y, x] == LodeNaVode.Controllers.TypPolicka.ZasahLodCentalniBod)
                     {
-                        <a href="/Tah/Policko/@cislo"><div class="pole-zasah @config[y, x]">Zc</div></a>
+                        <a href="/Tah/Policko/@cislo"><div class="zasazeno @config[y, x]">Zc</div></a>
                     }
                     @if (bojiste[y, x] == LodeNaVode.Controllers.TypPolicka.ZasahLodZbytekBod)
                     {
-                    <a href="/Tah/Policko/@cislo"><div class="pole-zasah @config[y, x]">Zz</div></a>
+                        <a href="/Tah/Policko/@cislo"><div class="zasazeno @config[y, x]">Zz</div></a>
                     }
                     else if (bojiste[y, x] == LodeNaVode.Controllers.TypPolicka.Voda)
                     {

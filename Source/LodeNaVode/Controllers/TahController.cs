@@ -226,6 +226,10 @@ namespace LodeNaVode.Controllers
                                 {
                                     var lod = engine.Lode[i];
                                     policko = TypPolicka.ZasahLodZbytekBod;
+
+                                    Lod l = engine.Lode[i];
+                                    engine.GetLog.GetHitMessage(l.Hrac, l.Ucitel);
+
                                     odhalenePolicka.Add(new Tuple<int, int, TypPolicka>(x, y, TypPolicka.ZasahLodZbytekBod));
                                     if (lod.CentralneBod[0] == x && lod.CentralneBod[1] == y)
                                     {
@@ -233,8 +237,6 @@ namespace LodeNaVode.Controllers
                                         odhalenePolicka.Add(new Tuple<int, int, TypPolicka>(x, y, TypPolicka.ZasahLodCentalniBod));
                                     }
 
-                                    Lod l = engine.Lode[lodId];
-                                    engine.GetLog.GetHitMessage(l.Hrac, l.Ucitel);
                                 }
                             }
                             else

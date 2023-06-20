@@ -1,4 +1,8 @@
-﻿@if ((string)ViewData["lobbyOwner"] == (string)ViewData["currentUser"])
+﻿<head>
+    <meta http-equiv="refresh" content="1">
+</head>
+
+@if ((string)ViewData["lobbyOwner"] == (string)ViewData["currentUser"])
 {
     <h1>LOBBY OWNER</h1>
     <p>Vítejte ve vašem LOBBY!</p>

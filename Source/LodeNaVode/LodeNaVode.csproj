@@ -30,4 +30,16 @@
     <ProjectReference Include="..\main-api\main-api.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Lode\hlasky.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Lode\Lode.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Lode\nalepky.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

@@ -43,12 +43,12 @@ namespace LodeNaVode.Controllers
                 new string[] { "a", "b" },
                 new string[] { "c", "d" }
             };
-            Engine engine = new Engine(mojeStringy, 14, 9, "../../Data/textury/tvary-lodi.TEXT", "LodeNaVode/Lode/hlasky.txt", "LodeNaVode/Lode/nalepky.txt");
+            Engine engine = new Engine(mojeStringy, 14, 9, "../../Data/textury/tvary-lodi.TEXT", "Lode/hlasky.txt", "Lode/nalepky.txt");
 
-            engine.UmistitLod(2, 5, "L", "a", "c");
-            engine.UmistitLod(10, 5, "P", "a", "c");
+            engine.UmistitLod(2, 5, "L", "a", "kotek");
+            engine.UmistitLod(10, 5, "P", "a", "kotek");
             //engine.UmistitLod(5, 5, "L", "a", "c");
-            engine.UmistitLod(0, 1, "L", "c", "c");
+            engine.UmistitLod(0, 1, "L", "c", "kotek");
 
             Debug.WriteLine("hi");
 
@@ -169,6 +169,7 @@ namespace LodeNaVode.Controllers
             // -4 hore
             // -5 dolů
             if(oznacenaLod) {
+                Lod l = engine.Lode[lodId];
                 oznacenaLod = false;
                 switch(id)
                 {
@@ -182,10 +183,12 @@ namespace LodeNaVode.Controllers
 
                     case -4:
                         engine.Kupredu(lodId);
+                        engine.GetLog.GetLodMovement(l.Hrac,l.Ucitel);
                         break;
 
                     case -5:
                         engine.Kuzadu(lodId);
+                        engine.GetLog.GetLodMovement(l.Hrac,l.Ucitel);
                         break;
                 }
             }
@@ -211,12 +214,9 @@ namespace LodeNaVode.Controllers
                                     {
                                         policko = TypPolicka.ZasahLodCentalniBod;                                        
                                     }
-                                    
-                                    
-                                        
-                                        
-                                    
                                 }
+                                Lod l = engine.Lode[lodId];
+                                engine.GetLog.GetHitMessage(l.Hrac,l.Ucitel);
                             }
                             else
                             {

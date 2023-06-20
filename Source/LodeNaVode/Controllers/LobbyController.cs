@@ -66,6 +66,10 @@ namespace LodeNaVode.Controllers
             ViewData["lobbyOwner"] = currentLobby.Owner;
             ViewData["currentUser"] = playercheck.PlayerCookie;
             ViewData["lobbyId"] = currentLobby.LobbyId;
+            ViewData["currentUserName"] = playercheck.PlayerName;
+            ViewData["vsichniHraciVLobby"] = currentLobby.Players.ToList();
+            Lobby lobbyVeKteremJsme = _lobbyDatabase.Lobbies.Where(l => l.Players.Contains(playercheck)).First();
+            ICollection<Player> hraciNasehoLobby = lobbyVeKteremJsme.Players;
             return View();
         }
 

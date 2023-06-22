@@ -108,6 +108,11 @@ input[type=submit], #lobbycreate {
         background-color: #dc3545;
     }
 
+.nastenka{
+    background-color:black;
+    color:gray;
+    padding:1em;
+}
 
 
 .pole-mlha {background-image: url('./textury/mlha.png');}

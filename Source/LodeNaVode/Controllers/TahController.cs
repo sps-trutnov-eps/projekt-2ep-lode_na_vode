@@ -41,16 +41,19 @@ namespace LodeNaVode.Controllers
         public static Engine engine = GetIT();
         private static Engine GetIT()
         {
+            string hrac = "ahoj5";
+            string hrac2 = "1ahoj";
+
             string[][] mojeStringy = new string[][] {
-                new string[] { "a", "b" },
+                new string[] { hrac, "b" },
                 new string[] { "c", "d" }
             };
             Engine engine = new Engine(mojeStringy, 14, 9, "../../Data/textury/tvary-lodi.TEXT", "Lode/hlasky.txt", "Lode/nalepky.txt");
 
-            engine.UmistitLod(2, 5, "L", "a", "kotek");
-            engine.UmistitLod(10, 5, "P", "a", "kotek");
+            engine.UmistitLod(2, 5, "L", hrac, "kotek");
+            engine.UmistitLod(10, 5, "P", hrac, "kotek");
             //engine.UmistitLod(5, 5, "L", "a", "c");
-            engine.UmistitLod(0, 1, "L", "c", "kotek");
+            engine.UmistitLod(0, 1, "L", hrac2, "kotek");
 
             Debug.WriteLine("hi");
 
@@ -73,10 +76,14 @@ namespace LodeNaVode.Controllers
         private LobbyDbContext _lobbyDatabase;
         public TahController(LobbyDbContext dbContext)
         {
+            _lobbyDatabase = dbContext;
         }
 
         public void Redraw(ref Tuple<TypPolicka[,], string[,]> bojisteTuple, ref Engine engine, ref List<Tuple<int, int, TypPolicka>> odhalenaPolicka)
         {
+            Player nasHrac = _lobbyDatabase.Players.Where(p => p.PlayerCookie == HttpContext.Session.GetString("playerid")).First();
+            Lobby naseLobby = _lobbyDatabase.Lobbies.Where(l => l.Players.Contains(nasHrac)).First();
+
             if (bojisteTuple.Item1 == null) throw new Exception();
 
             TypPolicka[,] bojiste = bojisteTuple.Item1;
@@ -115,7 +122,8 @@ namespace LodeNaVode.Controllers
             {
                 var lod = engine.Lode[i];
 
-                if (lod.Hrac != "a")
+
+                if (lod.Hrac != nasHrac.PlayerName)
                     continue;
 
                 bojiste[lod.CentralneBod[1], lod.CentralneBod[0]] = TypPolicka.Lod;

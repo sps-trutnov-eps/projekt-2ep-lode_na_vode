@@ -165,151 +165,156 @@ namespace LodeNaVode.Controllers
         }
         public IActionResult Policko(int id = -1)
         {
-            Debug.WriteLine(id);
+            if (_lobbyDatabase.Players.Where(p => p.PlayerCookie == HttpContext.Session.GetString("playerid")).First().Active)
+            {
+                Debug.WriteLine(id);
 
-            Engine engine = Engin.engine;
-            ref int lodId = ref Pamet.lodId;
-            ref bool oznacenaLod = ref Pamet.oznacenaLod;
-            ref List<Tuple<int, int, TypPolicka>> odhalenePolicka = ref Pamet.odhalenePolicka;
+                Engine engine = Engin.engine;
+                ref int lodId = ref Pamet.lodId;
+                ref bool oznacenaLod = ref Pamet.oznacenaLod;
+                ref List<Tuple<int, int, TypPolicka>> odhalenePolicka = ref Pamet.odhalenePolicka;
 
-            Tuple<TypPolicka[,], string[,]> bojisteTuple = new Tuple<TypPolicka[,], string[,]>
-                (new TypPolicka[Pamet.velikostX, Pamet.velikostY],
-                new string[Pamet.velikostX, Pamet.velikostY]);
+                Tuple<TypPolicka[,], string[,]> bojisteTuple = new Tuple<TypPolicka[,], string[,]>
+                    (new TypPolicka[Pamet.velikostX, Pamet.velikostY],
+                    new string[Pamet.velikostX, Pamet.velikostY]);
 
-            Redraw(ref bojisteTuple, ref engine, ref odhalenePolicka);
+                Redraw(ref bojisteTuple, ref engine, ref odhalenePolicka);
 
-            TypPolicka[,] bojiste = bojisteTuple.Item1;
-            string[,] config = bojisteTuple.Item2;
+                TypPolicka[,] bojiste = bojisteTuple.Item1;
+                string[,] config = bojisteTuple.Item2;
 
-            int cislo = 0;
+                int cislo = 0;
             
 
-            // Pohyb lodě
-            // Negativní id se používá jako ovládání
-            // -1 == null
-            // -2 otočit levá
-            // -3 otočit pravá
-            // -4 hore
-            // -5 dolů
-            if(oznacenaLod) {
-                Lod l = engine.Lode[lodId];
-                oznacenaLod = false;
-                switch(id)
-                {
-                    case -2:
-                        engine.OtoceniVlevo(lodId);
-                        break;
-
-                    case -3:
-                        engine.OtoceniVpravo(lodId);
-                        break;
-
-                    case -4:
-                        engine.Kupredu(lodId);
-                        engine.GetLog.GetLodMovement(l.Hrac,l.Ucitel);
-                        break;
-
-                    case -5:
-                        engine.Kuzadu(lodId);
-                        engine.GetLog.GetLodMovement(l.Hrac,l.Ucitel);
-                        break;
-                }
-            }
-
-            // Procházení bojištěm
-            for (int y = 0; y < bojiste.GetLength(0); y++)
-            {
-                for (int x = 0; x < bojiste.GetLength(1); x++, cislo++)
-                {
-                    if (id == cislo && bojiste[y, x] != null)
+                // Pohyb lodě
+                // Negativní id se používá jako ovládání
+                // -1 == null
+                // -2 otočit levá
+                // -3 otočit pravá
+                // -4 hore
+                // -5 dolů
+                if(oznacenaLod) {
+                    Lod l = engine.Lode[lodId];
+                    oznacenaLod = false;
+                    switch(id)
                     {
-                        ref TypPolicka policko = ref bojiste[y, x];
+                        case -2:
+                            engine.OtoceniVlevo(lodId);
+                            break;
 
-                        if (policko == TypPolicka.Mlha)
+                        case -3:
+                            engine.OtoceniVpravo(lodId);
+                            break;
+
+                        case -4:
+                            engine.Kupredu(lodId);
+                            engine.GetLog.GetLodMovement(l.Hrac,l.Ucitel);
+                            break;
+
+                        case -5:
+                            engine.Kuzadu(lodId);
+                            engine.GetLog.GetLodMovement(l.Hrac,l.Ucitel);
+                            break;
+                    }
+                }
+
+                // Procházení bojištěm
+                for (int y = 0; y < bojiste.GetLength(0); y++)
+                {
+                    for (int x = 0; x < bojiste.GetLength(1); x++, cislo++)
+                    {
+                        if (id == cislo && bojiste[y, x] != null)
                         {
-                            if (engine.StrelbaNaLod(x, y))
+                            ref TypPolicka policko = ref bojiste[y, x];
+
+                            if (policko == TypPolicka.Mlha)
                             {
-                                for (int i = 0; i < engine.Lode.Count; i++)
+                                if (engine.StrelbaNaLod(x, y))
                                 {
-                                    var lod = engine.Lode[i];
-                                    policko = TypPolicka.ZasahLodZbytekBod;
-
-                                    Lod l = engine.Lode[i];
-                                    engine.GetLog.GetHitMessage(l.Hrac, l.Ucitel);
-
-                                    odhalenePolicka.Add(new Tuple<int, int, TypPolicka>(x, y, TypPolicka.ZasahLodZbytekBod));
-                                    if (lod.CentralneBod[0] == x && lod.CentralneBod[1] == y)
+                                    for (int i = 0; i < engine.Lode.Count; i++)
                                     {
-                                        policko = TypPolicka.ZasahLodCentalniBod;
-                                        odhalenePolicka.Add(new Tuple<int, int, TypPolicka>(x, y, TypPolicka.ZasahLodCentalniBod));
+                                        var lod = engine.Lode[i];
+                                        policko = TypPolicka.ZasahLodZbytekBod;
+
+                                        Lod l = engine.Lode[i];
+                                        engine.GetLog.GetHitMessage(l.Hrac, l.Ucitel);
+
+                                        odhalenePolicka.Add(new Tuple<int, int, TypPolicka>(x, y, TypPolicka.ZasahLodZbytekBod));
+                                        if (lod.CentralneBod[0] == x && lod.CentralneBod[1] == y)
+                                        {
+                                            policko = TypPolicka.ZasahLodCentalniBod;
+                                            odhalenePolicka.Add(new Tuple<int, int, TypPolicka>(x, y, TypPolicka.ZasahLodCentalniBod));
+                                        }
+
                                     }
-
                                 }
-                            }
-                            else
-                            {
-                                policko = TypPolicka.Voda;
-                                odhalenePolicka.Add(new Tuple<int, int, TypPolicka>(x, y, TypPolicka.Voda));
-                            }
-                            //Debug.WriteLine("Výstřel do prázdna");
-                            //Debug.WriteLine($"{policko}");
-                            //Debug.WriteLine($"{policko}");
-                        }
-
-                        if (policko == TypPolicka.Lod) {
-                            for (int i = 0; i < engine.Lode.Count; i++) {
-                                var lod = engine.Lode[i];
-
-                                if (lod.CentralneBod[0] == x && lod.CentralneBod[1] == y) {
-                                    lodId = i;
-                                    oznacenaLod = true;
-                                    break;
-                                }
-                                for (int X = 0; X < lod.ZbytekBodu.Length; X++)
-                                // ano, jen jsem to zkopíroval
-                                // pokud se ti to nelíbí, tak si to přepiš
+                                else
                                 {
-                                    int bx = 0;
-                                    int by = 0;
+                                    policko = TypPolicka.Voda;
+                                    odhalenePolicka.Add(new Tuple<int, int, TypPolicka>(x, y, TypPolicka.Voda));
+                                }
+                                //Debug.WriteLine("Výstřel do prázdna");
+                                //Debug.WriteLine($"{policko}");
+                                //Debug.WriteLine($"{policko}");
+                            }
 
-                                    for (int Y = 0; Y < lod.ZbytekBodu[X].Length; Y++) {
+                            if (policko == TypPolicka.Lod) {
+                                for (int i = 0; i < engine.Lode.Count; i++) {
+                                    var lod = engine.Lode[i];
 
-                                        if (Y == 0)
-                                            bx = lod.ZbytekBodu[X][Y];
-                                        if (Y == 1)
-                                            by = lod.ZbytekBodu[X][Y];
-
-                                    }
-                                    if (lod.CentralneBod[1] + by == y && lod.CentralneBod[0] + bx == x) {
+                                    if (lod.CentralneBod[0] == x && lod.CentralneBod[1] == y) {
                                         lodId = i;
                                         oznacenaLod = true;
                                         break;
                                     }
+                                    for (int X = 0; X < lod.ZbytekBodu.Length; X++)
+                                    // ano, jen jsem to zkopíroval
+                                    // pokud se ti to nelíbí, tak si to přepiš
+                                    {
+                                        int bx = 0;
+                                        int by = 0;
+
+                                        for (int Y = 0; Y < lod.ZbytekBodu[X].Length; Y++) {
+
+                                            if (Y == 0)
+                                                bx = lod.ZbytekBodu[X][Y];
+                                            if (Y == 1)
+                                                by = lod.ZbytekBodu[X][Y];
+
+                                        }
+                                        if (lod.CentralneBod[1] + by == y && lod.CentralneBod[0] + bx == x) {
+                                            lodId = i;
+                                            oznacenaLod = true;
+                                            break;
+                                        }
+                                    }
+                                    if (oznacenaLod)
+                                        break;
                                 }
-                                if (oznacenaLod)
-                                    break;
+                                //engine.PohybLode(0, "jih");
                             }
-                            //engine.PohybLode(0, "jih");
+                            else
+                            {
+                                oznacenaLod = false;
+                            }
+
+                            /*if (policko == TypPolicka.Mlha)
+                            {
+                                policko = TypPolicka.Voda;
+                            }*/
+
+
+                            //bojiste[y, x] ==
                         }
-                        else
-                        {
-                            oznacenaLod = false;
-                        }
-
-                        /*if (policko == TypPolicka.Mlha)
-                        {
-                            policko = TypPolicka.Voda;
-                        }*/
-
-
-                        //bojiste[y, x] ==
                     }
                 }
+
+                Redraw(ref bojisteTuple, ref engine, ref odhalenePolicka);
+
+                return View(bojisteTuple);
             }
-
-            Redraw(ref bojisteTuple, ref engine, ref odhalenePolicka);
-
-            return View(bojisteTuple);
+            else
+                return RedirectToAction("Home", "Index");
         }
     }
 }

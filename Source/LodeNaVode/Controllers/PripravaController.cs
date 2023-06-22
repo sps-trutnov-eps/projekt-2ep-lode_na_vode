@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using LodeNaVode.Lode;
+using LodeNaVode.Data;
 
 namespace LodeNaVode.Controllers
 {
@@ -49,17 +50,131 @@ namespace LodeNaVode.Controllers
         public static int cenaLodiNemcova = 25_000_000;
         public static int pocetLodiNemcova = 0;
 
+        private LobbyDbContext _lobbyDatabase;
+
+        public PripravaController(LobbyDbContext dbContext)
+        {
+            _lobbyDatabase = dbContext;
+        }
 
         [HttpGet]
         public IActionResult Zvolit()
         {
+            _lobbyDatabase.Lobbies.Where(l => l.Owner == HttpContext.Session.GetString("playerid")).First().Ingame = true;
             return View();
+        }
+
+        void pridatLodDoDatabaze(string lodJmeno)
+        {
+            Player user = _lobbyDatabase.Players.Where(p => p.PlayerCookie == HttpContext.Session.GetString("playerid")).First();
+            
+
+            string[] vec = new string[] {
+                 _lobbyDatabase.Players.Where(p => p.PlayerCookie == HttpContext.Session.GetString("playerid"))
+                .First().PlayerName
+                ,lodJmeno };
         }
 
         [HttpGet]
         public IActionResult Rozmisteni()
         {
-            List<int[]> L = RozmisteniClass.Rozmisti(pocetLodiMetodej, pocetLodiBorivoj, pocetLodiCyril, pocetLodiKrtecek, pocetLodiIlias, pocetLodiCapek, pocetLodiVaclavII, pocetLodiMacha, pocetLodiLibuse, pocetLodiPalach, pocetLodiMasaryk, pocetLodiSvatopluk, pocetLodiGott, pocetLodiZatopek, pocetLodiOdysea, pocetLodiKarelIV, pocetLodiZizka, pocetLodiNemcova);
+            if (!(_lobbyDatabase.Players.Where(p => p.PlayerCookie == HttpContext.Session.GetString("playerid")).First().Active))
+                return RedirectToAction("Home", "Index");
+            //List<int[]> L = RozmisteniClass.Rozmisti(pocetLodiMetodej, pocetLodiBorivoj, pocetLodiCyril, pocetLodiKrtecek, pocetLodiIlias, pocetLodiCapek, pocetLodiVaclavII, pocetLodiMacha, pocetLodiLibuse, pocetLodiPalach, pocetLodiMasaryk, pocetLodiSvatopluk, pocetLodiGott, pocetLodiZatopek, pocetLodiOdysea, pocetLodiKarelIV, pocetLodiZizka, pocetLodiNemcova);
+
+            //Malé
+            for (int i = 0; i < pocetLodiMetodej; i++)
+            {
+                pridatLodDoDatabaze("metodej");
+            }
+
+            for (int i = 0; i < pocetLodiBorivoj; i++)
+            {
+                pridatLodDoDatabaze("borivoj");
+            }
+
+            for (int i = 0; i < pocetLodiCyril; i++)
+            {
+                pridatLodDoDatabaze("cyril");
+            }
+
+            //Střední
+            for (int i = 0; i < pocetLodiKrtecek; i++)
+            {
+                pridatLodDoDatabaze("krtecek");
+            }
+
+            for (int i = 0; i < pocetLodiIlias; i++)
+            {
+                pridatLodDoDatabaze("ilias");
+            }
+
+            for (int i = 0; i < pocetLodiCapek; i++)
+            {
+                pridatLodDoDatabaze("capek");
+
+            }
+
+            for (int i = 0; i < pocetLodiVaclavII; i++)
+            {
+                pridatLodDoDatabaze("vaclaviv");
+            }
+
+            for (int i = 0; i < pocetLodiMacha; i++)
+            {
+                pridatLodDoDatabaze("macha");
+            }
+
+            for (int i = 0; i < pocetLodiLibuse; i++)
+            {
+                pridatLodDoDatabaze("libuse");
+            }
+
+            for (int i = 0; i < pocetLodiPalach; i++)
+            {
+                pridatLodDoDatabaze("palach");
+            }
+
+            for (int i = 0; i < pocetLodiMasaryk; i++)
+            {
+                pridatLodDoDatabaze("masaryk");
+            }
+
+            for (int i = 0; i < pocetLodiSvatopluk; i++)
+            {
+                pridatLodDoDatabaze("svatopluk");
+            }
+
+            for (int i = 0; i < pocetLodiGott; i++)
+            {
+                pridatLodDoDatabaze("gott");
+            }
+
+            //Velké
+            for (int i = 0; i < pocetLodiZatopek; i++)
+            {
+                pridatLodDoDatabaze("zatopek");
+            }
+
+            for (int i = 0; i < pocetLodiOdysea; i++)
+            {
+                pridatLodDoDatabaze("odysea");
+            }
+
+            for (int i = 0; i < pocetLodiKarelIV; i++)
+            {
+                pridatLodDoDatabaze("karaliv");
+            }
+
+            for (int i = 0; i < pocetLodiZizka; i++)
+            {
+                pridatLodDoDatabaze("zizka");
+            }
+
+            for (int i = 0; i < pocetLodiNemcova; i++)
+            {
+                pridatLodDoDatabaze("nemcova");
+            }
 
             return RedirectToAction("Zvolit");
         }
@@ -68,6 +183,9 @@ namespace LodeNaVode.Controllers
         [HttpGet]
         public IActionResult KliknutiPlusMetodej()
         {
+            if (!(_lobbyDatabase.Players.Where(p => p.PlayerCookie == HttpContext.Session.GetString("playerid")).First().Active))
+                return RedirectToAction("Home", "Index");
+                
             if (tokeny >= cenaLodiMetodej)
             {
                 pocetLodiMetodej++;

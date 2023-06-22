@@ -19,150 +19,174 @@ namespace LodeNaVode.Controllers
         [HttpGet]
         public IActionResult Create(Lobby model)
         {
-            string? lobbyOwnerId = HttpContext.Session.GetString("playerid");
-
-            var lobbyOwner = _lobbyDatabase.Players
-                .Where(p => p.PlayerCookie == lobbyOwnerId)
-                .FirstOrDefault();
-
-            if (lobbyOwner == null)
+            if (_lobbyDatabase.Players.Where(p => p.PlayerCookie == HttpContext.Session.GetString("playerid")).First().Active)
             {
-                RedirectToAction("Index");
+                string? lobbyOwnerId = HttpContext.Session.GetString("playerid");
+
+                var lobbyOwner = _lobbyDatabase.Players
+                    .Where(p => p.PlayerCookie == lobbyOwnerId)
+                    .FirstOrDefault();
+
+                if (lobbyOwner == null)
+                {
+                    RedirectToAction("Index");
+                }
+                else
+                {
+                    List<Player> players = new List<Player> { lobbyOwner };
+                    Lobby newLobby = new Lobby() { Owner = lobbyOwnerId, Players = players , Active = true , LodeHracu = new string[][] { } };
+
+                    _lobbyDatabase.Lobbies.Add(newLobby);
+                    _lobbyDatabase.SaveChanges();
+                }
+
+                return RedirectToAction("Lobby");
             }
             else
-            {
-                List<Player> players = new List<Player> { lobbyOwner };
-                Lobby newLobby = new Lobby() { Gamemode = "normal", Owner = lobbyOwnerId, Players = players , Active = true };
-
-                _lobbyDatabase.Lobbies.Add(newLobby);
-                _lobbyDatabase.SaveChanges();
-            }
-
-
-            return RedirectToAction("Lobby");
+                return RedirectToAction("Home", "Index");
         }
 
         [HttpGet]
         public IActionResult Join(string lobbyId)
         {
-            if (lobbyId == null || lobbyId.Trim() == null)
+            if (_lobbyDatabase.Players.Where(p => p.PlayerCookie == HttpContext.Session.GetString("playerid")).First().Active)
             {
-                HttpContext.Session.SetString("from", "Lobby");
-                return Redirect("/Lobby/Index");
-            }
-
-            int id = 0;
-            try
-            {
-                id = Convert.ToInt32(lobbyId);
-            }
-            catch
-            {
-                HttpContext.Session.SetString("from", "Lobby");
-                return Redirect("/Lobby/Index");
-            }
-
-            string playerCookie = HttpContext.Session.GetString("playerid");
-            if (_lobbyDatabase.Lobbies.Any(l => l.LobbyId == id))
-            {
-                if (!_lobbyDatabase.Lobbies.Where(l => l.LobbyId == id).First().Active)
+                if (lobbyId == null || lobbyId.Trim() == null)
                 {
                     HttpContext.Session.SetString("from", "Lobby");
-                    return RedirectToAction("/Lobby/Index");
+                    return Redirect("/Lobby/Index");
                 }
-                else 
+
+                int id = 0;
+                try
                 {
-                    Player player = _lobbyDatabase.Players.Where(p => p.PlayerCookie == playerCookie).First();
-                    var lobbies = _lobbyDatabase.Lobbies;
-                    var correctLobbies = lobbies.Where(l => l.LobbyId == id);
-                    var playersOfLobby = correctLobbies.First().Players;
-                    playersOfLobby.Add(player);
-                    _lobbyDatabase.SaveChanges();
-                    return RedirectToAction("Lobby");
+                    id = Convert.ToInt32(lobbyId);
                 }
+                catch
+                {
+                    HttpContext.Session.SetString("from", "Lobby");
+                    return Redirect("/Lobby/Index");
+                }
+
+                string playerCookie = HttpContext.Session.GetString("playerid");
+                if (_lobbyDatabase.Lobbies.Any(l => l.LobbyId == id))
+                {
+                    if (!_lobbyDatabase.Lobbies.Where(l => l.LobbyId == id).First().Active)
+                    {
+                        HttpContext.Session.SetString("from", "Lobby");
+                        return RedirectToAction("/Lobby/Index");
+                    }
+                    else
+                    {
+                        Player player = _lobbyDatabase.Players.Where(p => p.PlayerCookie == playerCookie).First();
+                        var lobbies = _lobbyDatabase.Lobbies;
+                        var correctLobbies = lobbies.Where(l => l.LobbyId == id);
+                        var playersOfLobby = correctLobbies.First().Players;
+                        playersOfLobby.Add(player);
+                        _lobbyDatabase.SaveChanges();
+                        return RedirectToAction("Lobby");
+                    }
+                }
+                HttpContext.Session.SetString("from", "Lobby");
+                return Redirect("/Lobby/Index");
             }
-            HttpContext.Session.SetString("from", "Lobby");
-            return Redirect("/Lobby/Index");
+            else
+                return RedirectToAction("Home", "Index");
         }
 
         public IActionResult Lobby()
         {
-            Player? playercheck = _lobbyDatabase.Players.Where(p => p.PlayerCookie == HttpContext.Session.GetString("playerid")).FirstOrDefault();
-            Lobby currentLobby = _lobbyDatabase.Lobbies.Where(l => l.Players.Contains(playercheck)).First();
-            ViewData["lobbyOwner"] = currentLobby.Owner;
-            ViewData["currentUser"] = playercheck.PlayerCookie;
-            ViewData["lobbyId"] = currentLobby.LobbyId;
-            ViewData["currentUserName"] = playercheck.PlayerName;
-            ViewData["vsichniHraciVLobby"] = currentLobby.Players.ToList();
-            Lobby lobbyVeKteremJsme = _lobbyDatabase.Lobbies.Where(l => l.Players.Contains(playercheck)).First();
-            ICollection<Player> hraciNasehoLobby = lobbyVeKteremJsme.Players;
-            return View();
+            if (_lobbyDatabase.Players.Where(p => p.PlayerCookie == HttpContext.Session.GetString("playerid")).First().Active)
+            {
+                Player? playercheck = _lobbyDatabase.Players.Where(p => p.PlayerCookie == HttpContext.Session.GetString("playerid")).FirstOrDefault();
+                Lobby currentLobby = _lobbyDatabase.Lobbies.Where(l => l.Players.Contains(playercheck)).First();
+                ViewData["lobbyOwner"] = currentLobby.Owner;
+                ViewData["currentUser"] = playercheck.PlayerCookie;
+                ViewData["lobbyId"] = currentLobby.LobbyId;
+                ViewData["currentUserName"] = playercheck.PlayerName;
+                ViewData["vsichniHraciVLobby"] = currentLobby.Players.ToList();
+                Lobby lobbyVeKteremJsme = _lobbyDatabase.Lobbies.Where(l => l.Players.Contains(playercheck)).First();
+                ICollection<Player> hraciNasehoLobby = lobbyVeKteremJsme.Players;
+                return View();
+            }
+            else
+                return RedirectToAction("Home", "Index");
         }
 
         public IActionResult Index()
         {
-            string? from = HttpContext.Session.GetString("from");
-            string? playerName = HttpContext.Session.GetString("playername");
-            if (playerName != null && playerName.Trim() != "")
+            if (_lobbyDatabase.Players.Where(p => p.PlayerCookie == HttpContext.Session.GetString("playerid")).First().Active)
             {
-                if (!_lobbyDatabase.Players.Any(p => p.PlayerName == playerName))
+                string? from = HttpContext.Session.GetString("from");
+                string? playerName = HttpContext.Session.GetString("playername");
+                if (playerName != null && playerName.Trim() != "")
                 {
-                    string? playerCookie = HttpContext.Session.GetString("playerid");
-                    Player player = new Player() { PlayerCookie = playerCookie, PlayerName = playerName, Active = true, ExpirationDate = DateTime.Now.AddMinutes(15)};
-                    _lobbyDatabase.Players.Add(player);
-                    _lobbyDatabase.SaveChanges();
-                    return View();
-                }
-                else 
-                {
-                    if (from == "Lobby")
+                    if (!_lobbyDatabase.Players.Any(p => p.PlayerName == playerName))
                     {
-                        HttpContext.Session.Remove("from");
+                        string? playerCookie = HttpContext.Session.GetString("playerid");
+                        Player player = new Player() { PlayerCookie = playerCookie, PlayerName = playerName, Active = true, ExpirationDate = DateTime.Now.AddMinutes(15)};
+                        _lobbyDatabase.Players.Add(player);
+                        _lobbyDatabase.SaveChanges();
                         return View();
                     }
-
-                    else
+                    else 
                     {
-                        return RedirectToAction("Index", "Home");
+                        if (from == "Lobby")
+                        {
+                            HttpContext.Session.Remove("from");
+                            return View();
+                        }
+
+                        else
+                        {
+                            return RedirectToAction("Index", "Home");
+                        }
                     }
                 }
+                else
+                    return RedirectToAction("Index", "Home");
             }
             else
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Home", "Index");
 
         }
 
         public IActionResult Leave(string from)
         {
-            HttpContext.Session.SetString("from", from);
-            Player? playercheck = _lobbyDatabase.Players.Where(p => p.PlayerCookie == HttpContext.Session.GetString("playerid")).FirstOrDefault();
-            Lobby currentLobby = _lobbyDatabase.Lobbies.Where(l => l.Players.Contains(playercheck)).First();
-            if (playercheck != null)
+            if (_lobbyDatabase.Players.Where(p => p.PlayerCookie == HttpContext.Session.GetString("playerid")).First().Active)
             {
-                Lobby lobbyWithPlayer = _lobbyDatabase.Lobbies.Where(l => l.Players.Contains(playercheck)).First();
-                lobbyWithPlayer.Players.Remove(playercheck);
-
-                if (playercheck.PlayerCookie == currentLobby.Owner) 
+                HttpContext.Session.SetString("from", from);
+                Player? playercheck = _lobbyDatabase.Players.Where(p => p.PlayerCookie == HttpContext.Session.GetString("playerid")).FirstOrDefault();
+                Lobby currentLobby = _lobbyDatabase.Lobbies.Where(l => l.Players.Contains(playercheck)).First();
+                if (playercheck != null)
                 {
-                    if (currentLobby.Players.IsNullOrEmpty()) 
-                    {
-                        currentLobby.Active = false;
-                        currentLobby.Owner = null;
-                        _lobbyDatabase.SaveChanges();
-                    }
-                    else 
-                    {
-                        currentLobby.Owner = currentLobby.Players.First().PlayerCookie;
-                        _lobbyDatabase.SaveChanges();
-                    }
-                } 
-                else
-                    _lobbyDatabase.SaveChanges();
+                    Lobby lobbyWithPlayer = _lobbyDatabase.Lobbies.Where(l => l.Players.Contains(playercheck)).First();
+                    lobbyWithPlayer.Players.Remove(playercheck);
 
-                return RedirectToAction("Index", "Lobby");
+                    if (playercheck.PlayerCookie == currentLobby.Owner) 
+                    {
+                        if (currentLobby.Players.IsNullOrEmpty()) 
+                        {
+                            currentLobby.Active = false;
+                            currentLobby.Owner = null;
+                            _lobbyDatabase.SaveChanges();
+                        }
+                        else 
+                        {
+                            currentLobby.Owner = currentLobby.Players.First().PlayerCookie;
+                            _lobbyDatabase.SaveChanges();
+                        }
+                    } 
+                    else
+                        _lobbyDatabase.SaveChanges();
+
+                    return RedirectToAction("Index", "Lobby");
+                }
+                else
+                    throw new NotImplementedException();
             }
             else
-                throw new NotImplementedException();
+                return RedirectToAction("Home", "Index");
         }
     }
 }

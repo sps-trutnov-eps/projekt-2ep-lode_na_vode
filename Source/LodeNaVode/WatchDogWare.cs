@@ -1,5 +1,6 @@
 ﻿using LodeNaVode.Data;
 using LodeNaVode.Models;
+using Microsoft.AspNetCore.Identity;
 using System.Diagnostics;
 
 namespace LodeNaVode
@@ -19,24 +20,17 @@ namespace LodeNaVode
             {
                 LobbyDbContext dbContext = scope.ServiceProvider.GetRequiredService<LobbyDbContext>();
 
-                if (httpContext.Session.GetString("playerid") != null)
+                Player user = dbContext.Players.Where(p => p.PlayerCookie == httpContext.Session.GetString("playerid")).First();
+                if (user.ExpirationDate < DateTime.Now)
                 {
-                    DateTime now = DateTime.Now;
-
-                    Player? user = dbContext.Players
-                        .Where(p => p.PlayerCookie == httpContext.Session.GetString("playerid"))
-                        .FirstOrDefault();
-
-                    if (user != null)
-                    {
-                        user.ExpirationDate = now.AddMinutes(15);
-                        if (user.ExpirationDate < now)
-                        {
-                            user.Active = false;
-                        }
-                        dbContext.SaveChanges();
-                    }
+                    user.Active = false;
+                    dbContext.SaveChanges();
                 }
+                else 
+                {
+                    user.ExpirationDate = DateTime.Now.AddMinutes(15);
+                }
+
 
                 await _next(httpContext);
             }

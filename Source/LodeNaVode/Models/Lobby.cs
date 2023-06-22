@@ -10,13 +10,15 @@ namespace LodeNaVode.Models
         [Key]
         public int LobbyId { get; set; }
 
-        [Required]
-        public string Gamemode { get; set; }
-
         public string? Owner { get; set; }
 
         [Required]
         public bool Active { get; set; }
+
+        [Required]
+        public bool Ingame { get; set; }
+
+        virtual public string[][] LodeHracu { get; set; }
 
         [Required]
         virtual public ICollection<Player> Players { get; set; }

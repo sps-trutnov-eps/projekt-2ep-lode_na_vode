@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Routing.Constraints;
 using log_lib;
 using LodeNaVode.Data;
 using LodeNaVode.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace LodeNaVode.Controllers
 {
@@ -42,14 +43,14 @@ namespace LodeNaVode.Controllers
         public static int pocetLodi; // jen pro log
         private static Engine GetIT()
         {
-            string hrac = "ahoj5";
-            string hrac2 = "1ahoj";
+            string hrac = "ahoj9";
+            string hrac2 = "5ahoj";
 
             string[][] mojeStringy = new string[][] {
                 new string[] { hrac, "b" },
                 new string[] { hrac2, "d" }
             };
-            Engine engine = new Engine(mojeStringy, 14, 9, "../../Data/textury/tvary-lodi.TEXT", "LodeNaVode/Lode/hlasky.txt", "LodeNaVode/Lode/nalepky.txt");
+            Engine engine = new Engine(mojeStringy, 14, 9, "../../Data/textury/tvary-lodi.TEXT", "Lode/hlasky.txt", "/Lode/nalepky.txt");
 
             engine.UmistitLod(2, 5, "L", hrac, "kotek");
             engine.UmistitLod(10, 5, "P", hrac, "kotek");
@@ -77,19 +78,16 @@ namespace LodeNaVode.Controllers
     {
         private Engine engine;
 
-        public TahController()
+        private LobbyDbContext _lobbyDatabase;
+        public TahController(LobbyDbContext dbContext)
         {
+            _lobbyDatabase = dbContext;
             // pri kazdem pozadavku na controller vyzvedneme ID prislusneho lobby
             string? lobbyId = HttpContext.Session.GetString("lobbyid");
 
             // pripravime si promennou, abychom meli pristup k enginu
             engine = Program.KolekceEnginu["${lobbyId}"];
             // ze by ID neexistovalo, neresime
-        }
-
-        public void Redraw(ref Tuple<TypPolicka[,], string[,]> bojisteTuple, ref Engine engine)
-        {
-            _lobbyDatabase = dbContext;
         }
 
         public void Redraw(ref Tuple<TypPolicka[,], string[,]> bojisteTuple, ref Engine engine, ref List<Tuple<int, int, TypPolicka>> odhalenaPolicka)
@@ -188,12 +186,11 @@ namespace LodeNaVode.Controllers
             return View();
         }
         public IActionResult Policko(int id = -1) {
-            Engine engine = Engin.engine;
 
             // ze session zjistime ID naseho lobby
             int lobbyId = Convert.ToInt32(HttpContext.Session.GetString("lobbyid"));
             // nacteme si prislusny engine
-            Engine engine = Program.KolekceEnginu[lobbyId.ToString()];
+            engine = Program.KolekceEnginu[lobbyId.ToString()];
 
             ref int lodId = ref Pamet.lodId;
             ref bool oznacenaLod = ref Pamet.oznacenaLod;

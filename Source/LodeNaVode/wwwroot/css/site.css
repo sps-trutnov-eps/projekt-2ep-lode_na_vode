@@ -160,8 +160,8 @@ h1{
 
 .btn-go {
     font-size: 32px;
-    width:300px;
-    height:80px;
+    width: 300px;
+    height: 80px;
     position: fixed;
     bottom: 30px;
     left: calc(50vw - 150px);
@@ -173,6 +173,7 @@ h1{
     transition: .5s;
     text-align: center;
     text-decoration: none;
+    box-shadow: 5px 5px 5px rgba(0,0,0,30%);
 }
 
 .btn-go a{

@@ -12,18 +12,11 @@ html {
   }
 }
 
-html {
-  position: relative;
-  min-height: 100%;
-}
 main {
     padding:1em;
     text-align:center;
 }
 
-html{
-    height:100%;
-}
 body {
   margin-bottom: none;
   background-image: url('textury/mlha-na-mori.png');
@@ -97,6 +90,9 @@ input[type=submit], #lobbycreate {
     text-align: center;
     text-decoration: none;
 }
+.seznamhracu {
+    margin-bottom:1em;
+}
 
     input[type=submit]:hover {
         background-color: #45a049;
@@ -156,9 +152,6 @@ input[type=submit], #lobbycreate {
     top: 80px;
     text-transform: uppercase;
     font-weight: 700;
-    position: fixed;
-    z-index: 999;
-    left: 1600px;
 }
 h1{
     text-align: center;
@@ -166,13 +159,15 @@ h1{
 
 
 .btn-go {
-    font-size: 40px;
+    font-size: 32px;
+    width:300px;
+    height:80px;
     position: fixed;
-    bottom: 80px;
-    left: 1675px;
+    bottom: 40px;
+    left: calc(50vw - 150px);
     padding: 16px;
     color: white;
-    border-radius: 50%;
+    border-radius: .5em;
     text-decoration: none;
     background-color: #5ffa05;
     transition: .5s;

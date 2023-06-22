@@ -1,6 +1,9 @@
-﻿<head>
+﻿<!-- 
+    <head>
     <meta http-equiv="refresh" content="1">
 </head>
+
+-->
 
 @if ((string)ViewData["lobbyOwner"] == (string)ViewData["currentUser"])
 {
@@ -22,7 +25,7 @@
     }
     else
     {
-        <table>
+        <table class="seznamhracu">
             @foreach (Player p in (List<Player>)ViewData["vsichniHraciVLobby"])
             {
                 <tr>
@@ -50,7 +53,7 @@ else
     }
     else
     {
-        <table>
+        <table class="seznamhracu">
             @foreach (Player p in (List<Player>)ViewData["vsichniHraciVLobby"])
             {
                 <tr>

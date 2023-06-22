@@ -143,7 +143,7 @@ input[type=submit], #lobbycreate {
 
 
 .curr {
-    color: #5ffa05;
+    color: goldenrod;
     padding:.2em;
 }
 .mena {
@@ -257,10 +257,10 @@ h1{
     
 }
 
-.lodicky .cena{
+.cena {
     text-align: center;
     font-size: 18px;
-    color: red;
+    color: #dc3545;
     font-weight: 700;
 }
 
@@ -331,13 +331,6 @@ h1{
     
 }
 
-.lodicky-stredni .cena{
-    text-align: center;
-    font-size: 18px;
-    color: red;
-    font-weight: 700;
-}
-
 
 /*VELK�*/
 
@@ -405,12 +398,6 @@ h1{
     
 }
 
-.lodicky-velke .cena{
-    text-align: center;
-    font-size: 18px;
-    color: red;
-    font-weight: 700;
-}
 footer {
     background-color: white;
 }

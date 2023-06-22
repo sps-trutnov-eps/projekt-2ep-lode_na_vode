@@ -16,41 +16,44 @@
     else
         logInd = 0;
 }
+<div id="obal-tabulky">
 
-<table>
-    @for (int y = 0; y < bojiste.GetLength(0); y++)
-    {
-        <tr>
-            @for (int x = 0; x < bojiste.GetLength(1); x++, cislo++)
-            {
-                <td class="policko">
+    <table>
+        @for (int y = 0; y < bojiste.GetLength(0); y++)
+        {
+            <tr>
+                @for (int x = 0; x < bojiste.GetLength(1); x++, cislo++)
+                {
+                    <td class="policko">
 
-                    @if (bojiste[y, x] == LodeNaVode.Controllers.TypPolicka.Lod)
-                    {
-                        <a href="/Tah/Policko/@cislo"><div class="pole-lod @config[y, x]">L</div></a>
-                    }
-                    @if (bojiste[y, x] == LodeNaVode.Controllers.TypPolicka.ZasahLodCentalniBod)
-                    {
-                        <a href="/Tah/Policko/@cislo"><div class="zasazeno @config[y, x]">Zc</div></a>
-                    }
-                    @if (bojiste[y, x] == LodeNaVode.Controllers.TypPolicka.ZasahLodZbytekBod)
-                    {
-                        <a href="/Tah/Policko/@cislo"><div class="zasazeno @config[y, x]">Zz</div></a>
-                    }
-                    else if (bojiste[y, x] == LodeNaVode.Controllers.TypPolicka.Voda)
-                    {
-                        <a href="/Tah/Policko/@cislo"><div class="pole-voda">V</div></a>
-                    }
-                    else if (bojiste[y, x] == LodeNaVode.Controllers.TypPolicka.Mlha)
-                    {
-                        <a href="/Tah/Policko/@cislo"><div class="pole-mlha">#</div></a>
-                    }
+                        @if (bojiste[y, x] == LodeNaVode.Controllers.TypPolicka.Lod)
+                        {
+                            <a href="/Tah/Policko/@cislo"><div class="pole-lod @config[y, x]">L</div></a>
+                        }
+                        @if (bojiste[y, x] == LodeNaVode.Controllers.TypPolicka.ZasahLodCentalniBod)
+                        {
+                            <a href="/Tah/Policko/@cislo"><div class="zasazeno @config[y, x]">Zc</div></a>
+                        }
+                        @if (bojiste[y, x] == LodeNaVode.Controllers.TypPolicka.ZasahLodZbytekBod)
+                        {
+                            <a href="/Tah/Policko/@cislo"><div class="zasazeno @config[y, x]">Zz</div></a>
+                        }
+                        else if (bojiste[y, x] == LodeNaVode.Controllers.TypPolicka.Voda)
+                        {
+                            <a href="/Tah/Policko/@cislo"><div class="pole-voda">V</div></a>
+                        }
+                        else if (bojiste[y, x] == LodeNaVode.Controllers.TypPolicka.Mlha)
+                        {
+                            <a href="/Tah/Policko/@cislo"><div class="pole-mlha">#</div></a>
+                        }
 
-                </td>
-            }
-        </tr>
-    }
-</table>
+                    </td>
+                }
+            </tr>
+        }
+    </table>
+
+</div>
 
 <!--
  Pohyb lodě
@@ -83,8 +86,15 @@
     </table>
 }
 
-<div style="font-family:monospace;">
+<a href="/Tah/NalepkySiVyberTyMagor">nalepit něco</a>
+<div style="font-family:monospace;text-align:left;">
     @for (int i = logInd; i < log.Count(); i++) {
-        <p>@log[i]</p>
+        @for (int j = 0; j < log[i].Split("\n").Length; j++) {
+            @if(j > 0) {
+                <br />
+            }
+            @log[i].Split("\n")[j];
+        }
+        <br />
     }
 </div>

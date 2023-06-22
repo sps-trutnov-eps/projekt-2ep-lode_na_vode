@@ -94,11 +94,6 @@ input[type=submit], #lobbycreate {
     margin-bottom:1em;
 }
 
-    input[type=submit]:hover {
-        background-color: #45a049;
-    }
-
-
 
 .game-mode-button {
     margin-bottom: 1em;

@@ -257,6 +257,7 @@ h1{
 .lodicky .nazev p{
     font-size: 20px;
     font-weight: 900;
+    padding-top:20px;
     
 }
 
@@ -320,7 +321,6 @@ h1{
 
 .lodicky-stredni .tlacitka .plus{
     background-color: #5ffa05;
-
 }
 
 .lodicky-stredni .tlacitka .minus{
@@ -339,6 +339,7 @@ h1{
 .lodicky-stredni .nazev p{
     font-size: 20px;
     font-weight: 900;
+    padding-top:20px;
     
 }
 
@@ -402,7 +403,7 @@ h1{
 
 .lodicky-velke .tlacitka .plus{
     background-color: #5ffa05;
-
+  
 }
 
 .lodicky-velke .tlacitka .minus{
@@ -421,6 +422,7 @@ h1{
 .lodicky-velke .nazev p{
     font-size: 20px;
     font-weight: 900;
+    padding-top:20px;
     
 }
 

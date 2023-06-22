@@ -24,7 +24,15 @@ namespace LodeNaVode.Controllers
 
         public IActionResult JoinLobby(string playerName) 
         {
-            if ((HttpContext.Session.GetString("playerid") == null) && !_lobbyDatabase.Players.Where(p => p.PlayerName == playerName).First().Active)
+            bool vPocitaciNeexistujeHrac = HttpContext.Session.GetString("playerid") == null;
+            bool vDatabaziNejsouZadniHraci = _lobbyDatabase.Players.Count() == 0;
+
+            if (vPocitaciNeexistujeHrac && (vDatabaziNejsouZadniHraci ||
+                !_lobbyDatabase.Players
+                    .Where(p => p.PlayerName == playerName)
+                    .First()
+                    .Active
+            ))
             {
                 var dice = new Random();
                 int diceresult = dice.Next(1000000000, 2000000000);

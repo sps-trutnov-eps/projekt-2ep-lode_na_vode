@@ -12,19 +12,16 @@ html {
   }
 }
 
-html {
-  position: relative;
-  min-height: 100%;
-}
 main {
     padding:1em;
     text-align:center;
 }
 
 body {
-  margin-bottom: 60px;
+  margin-bottom: none;
   background-image: url('textury/mlha-na-mori.png');
   background-repeat: repeat;
+  height: 100%;
 }
 footer {
     background-color: white;
@@ -93,11 +90,9 @@ input[type=submit], #lobbycreate {
     text-align: center;
     text-decoration: none;
 }
-
-    input[type=submit]:hover {
-        background-color: #45a049;
-    }
-
+.seznamhracu {
+    margin-bottom:1em;
+}
 
 
 .game-mode-button {
@@ -143,7 +138,7 @@ input[type=submit], #lobbycreate {
 
 
 .curr {
-    color: #5ffa05;
+    color: goldenrod;
     padding:.2em;
 }
 .mena {
@@ -152,9 +147,6 @@ input[type=submit], #lobbycreate {
     top: 80px;
     text-transform: uppercase;
     font-weight: 700;
-    position: fixed;
-    z-index: 999;
-    left: 1600px;
 }
 h1{
     text-align: center;
@@ -162,18 +154,21 @@ h1{
 
 
 .btn-go {
-    font-size: 40px;
+    font-size: 32px;
+    width: 300px;
+    height: 80px;
     position: fixed;
-    bottom: 80px;
-    left: 1675px;
+    bottom: 30px;
+    left: calc(50vw - 150px);
     padding: 16px;
     color: white;
-    border-radius: 50%;
+    border-radius: .5em;
     text-decoration: none;
-    background-color: #5ffa05;
+    background-color: #4CAF50;
     transition: .5s;
     text-align: center;
     text-decoration: none;
+    box-shadow: 5px 5px 5px rgba(0,0,0,30%);
 }
 
 .btn-go a{
@@ -232,13 +227,13 @@ h1{
     width: 40px;
 }
 
-.lodicky .tlacitka .plus{
-    background-color: #5ffa05;
+.tlacitka .plus{
+    background-color: dodgerblue;
 
 }
 
-.lodicky .tlacitka .minus{
-    background-color: red;
+.tlacitka .minus {
+    background-color: #dc3545;
 }
 
 .lodicky .tlacitka p{
@@ -253,13 +248,14 @@ h1{
 .lodicky .nazev p{
     font-size: 20px;
     font-weight: 900;
+    padding-top:20px;
     
 }
 
-.lodicky .cena{
+.cena {
     text-align: center;
     font-size: 18px;
-    color: red;
+    color: #dc3545;
     font-weight: 700;
 }
 
@@ -314,15 +310,6 @@ h1{
     width: 40px;
 }
 
-.lodicky-stredni .tlacitka .plus{
-    background-color: #5ffa05;
-
-}
-
-.lodicky-stredni .tlacitka .minus{
-    background-color: red;
-}
-
 .lodicky-stredni .tlacitka p{
     font-size: 25px;
     
@@ -335,14 +322,8 @@ h1{
 .lodicky-stredni .nazev p{
     font-size: 20px;
     font-weight: 900;
+    padding-top:20px;
     
-}
-
-.lodicky-stredni .cena{
-    text-align: center;
-    font-size: 18px;
-    color: red;
-    font-weight: 700;
 }
 
 
@@ -396,15 +377,6 @@ h1{
     width: 40px;
 }
 
-.lodicky-velke .tlacitka .plus{
-    background-color: #5ffa05;
-
-}
-
-.lodicky-velke .tlacitka .minus{
-    background-color: red;
-}
-
 .lodicky-velke .tlacitka p{
     font-size: 25px;
     
@@ -417,20 +389,15 @@ h1{
 .lodicky-velke .nazev p{
     font-size: 20px;
     font-weight: 900;
+    padding-top:20px;
     
 }
 
-.lodicky-velke .cena{
-    text-align: center;
-    font-size: 18px;
-    color: red;
-    font-weight: 700;
-}
 footer {
     background-color: white;
 }
 
-@media (max-width: 560px){
+@media (max-width: 560px) {
     .btn-go {
         width: 100%;
         position: fixed;
@@ -444,7 +411,10 @@ footer {
         transition: .5s;
         text-align: center;
     }
-
+    h1 {
+        font-size:1em;
+    }
+}
 
 .pole-mlha {background-image: url('./textury/mlha.png');}
 .pole-lod {background-image: url('./textury/1-vor.png');}

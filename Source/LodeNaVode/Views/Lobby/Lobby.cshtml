@@ -43,7 +43,7 @@
 else
 {
     <h1>LOBBY</h1>
-    <p>Vítejte v LOBBY!</p>
+    <p>Vítejte v LOBBY hráče <b>@ViewData["ownerName"]</b>!</p>
     <p>ID tohoto LOBBY je: <b>@ViewData["lobbyId"]</b></p>
 
     <h2>Zde vyberte herní mód:</h2>
@@ -64,9 +64,20 @@ else
         <table>
             @foreach (Player p in (List<Player>)ViewData["vsichniHraciVLobby"])
             {
-                <tr>
-                    <td>@p.PlayerName</td>
-                </tr>
+                
+                if (p.PlayerName == ViewData["ownerName"])
+                {
+                    <tr>
+                        <td><b>@p.PlayerName</b></td>
+                    </tr>
+                }
+                else
+                {
+                    <tr>
+                        <td>@p.PlayerName</td>
+                    </tr>
+                }
+
             }
         </table>
     }

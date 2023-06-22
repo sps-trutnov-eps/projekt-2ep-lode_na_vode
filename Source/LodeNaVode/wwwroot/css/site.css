@@ -169,7 +169,7 @@ h1{
     color: white;
     border-radius: .5em;
     text-decoration: none;
-    background-color: #5ffa05;
+    background-color: #4CAF50;
     transition: .5s;
     text-align: center;
     text-decoration: none;
@@ -232,13 +232,13 @@ h1{
     width: 40px;
 }
 
-.lodicky .tlacitka .plus{
-    background-color: #5ffa05;
+.tlacitka .plus{
+    background-color: dodgerblue;
 
 }
 
-.lodicky .tlacitka .minus{
-    background-color: red;
+.tlacitka .minus {
+    background-color: #dc3545;
 }
 
 .lodicky .tlacitka p{
@@ -315,14 +315,6 @@ h1{
     width: 40px;
 }
 
-.lodicky-stredni .tlacitka .plus{
-    background-color: #5ffa05;
-}
-
-.lodicky-stredni .tlacitka .minus{
-    background-color: red;
-}
-
 .lodicky-stredni .tlacitka p{
     font-size: 25px;
     
@@ -395,15 +387,6 @@ h1{
     font-size: 1.2em;
     border-radius: 25px;
     width: 40px;
-}
-
-.lodicky-velke .tlacitka .plus{
-    background-color: #5ffa05;
-  
-}
-
-.lodicky-velke .tlacitka .minus{
-    background-color: red;
 }
 
 .lodicky-velke .tlacitka p{

@@ -1,11 +1,12 @@
-﻿@if ((string)ViewData["lobbyOwner"] == (string)ViewData["currentUser"])
+﻿<head>
+    <meta http-equiv="refresh" content="1">
+</head>
+
+@if ((string)ViewData["lobbyOwner"] == (string)ViewData["currentUser"])
 {
     <h1>LOBBY OWNER</h1>
     <p>Vítejte ve vašem LOBBY!</p>
-    <h2>Správa hráčů:</h2>
-    <div id="add&remove">
-        <button type="button" id="removeplayerButton" class="remove-button">Odebrat hráče</button>
-    </div>
+    <p>ID tohoto LOBBY je: <b>@ViewData["lobbyId"]</b></p>
 
     <h2>Zde vyberte herní mód:</h2>
     <div id="lobby">
@@ -14,7 +15,23 @@
         </form>
     </div>
 
-    <h2>Pokud už nechcete hrát, můžete:</h2>
+    <h2>Hráči v LOBBY:</h2>
+    if (ViewData["vsichniHraciVLobby"] == null)
+    {
+        <p><i>V lobby nejsou žádní hráči.</i></p>
+    }
+    else
+    {
+        <table>
+            @foreach (Player p in (List<Player>)ViewData["vsichniHraciVLobby"])
+            {
+                <tr>
+                    <td>@p.PlayerName</td>
+                </tr>
+            }
+        </table>
+    }
+
     <div id="exit">
         <a href="/Lobby/Leave?from=Lobby" id="exitButton" class="exit-button">Opustit LOBBY</a>
     </div>
@@ -24,16 +41,25 @@ else
 {
     <h1>LOBBY</h1>
     <p>Vítejte v LOBBY!</p>
+    <p>ID tohoto LOBBY je: <b>@ViewData["lobbyId"]</b></p>
 
-    <h2>Zde vyberte herní mód:</h2>
-    <div id="lobby">
-        <button type="button" id="mode1Button" class="game-mode-button">Herní mód 1</button>
-        <button type="button" id="mode2Button" class="game-mode-button">Herní mód 2</button>
-        <button type="button" id="mode3Button" class="game-mode-button">Herní mód 3</button>
-        <button type="button" id="mode4Button" class="game-mode-button">Herní mód 4</button>
-    </div>
+    <h2>Hráči v LOBBY:</h2>
+    if (ViewData["vsichniHraciVLobby"] == null)
+    {
+        <p><i>V lobby nejsou žádní hráči.</i></p>
+    }
+    else
+    {
+        <table>
+            @foreach (Player p in (List<Player>)ViewData["vsichniHraciVLobby"])
+            {
+                <tr>
+                    <td>@p.PlayerName</td>
+                </tr>
+            }
+        </table>
+    }
 
-    <h2>Pokud už nechcete hrát, můžete:</h2>
     <div id="exit">
         <a href="/Lobby/Leave?from=Lobby" id="exitButton" class="exit-button" >Opustit LOBBY</a>
     </div>
@@ -62,11 +88,21 @@ else
     }
 
     .exit-button {
+        display: inline-block;
         background-color: #dc3545;
         color: white;
         padding: 10px 20px;
         border: none;
         border-radius: 4px;
         cursor: pointer;
+    }
+
+    table {
+        border-collapse : collapse;
+    }
+
+    th, td {
+        border: 1px solid black;
+        padding: 8px;
     }
 </style>

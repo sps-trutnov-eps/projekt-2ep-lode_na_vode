@@ -9,6 +9,12 @@
     string[,] config = Model.Item2;
 
     bool zobrazOvladani = LodeNaVode.Controllers.Pamet.oznacenaLod;
+    List<string> log = LodeNaVode.Controllers.Engin.engine.GetLog.GetEntireLog();
+    int logInd;
+    if (log.Count() >= 5)
+        logInd = log.Count() - 5;
+    else
+        logInd = 0;
 }
 
 <table>
@@ -76,3 +82,9 @@
         </tr>
     </table>
 }
+
+<div style="font-family:monospace;">
+    @for (int i = logInd; i < log.Count(); i++) {
+        <p>@log[i]</p>
+    }
+</div>

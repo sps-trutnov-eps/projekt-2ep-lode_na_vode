@@ -16,6 +16,12 @@ namespace LodeNaVode.Models
         [Required]
         public string PlayerName { get; set; }
 
+        [Required]
+        public bool Active { get; set; }
+
+        [Required]
+        public DateTime ExpirationDate { get; set; }
+
         public int? LobbyId { get; set; }
         virtual public Lobby? Lobby { get; set; }
     }

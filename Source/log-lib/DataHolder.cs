@@ -1,38 +1,75 @@
-﻿using System;
+using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
+using System.Net.Http.Headers;
 
 namespace log_lib {
-    public struct Lod {
-        string jmeno;
-        string[] hlasky;
-    }
+    public class DataHolder {
+        public List<string> nalepky;
 
-    public struct Hrac {
-        public string jmeno;
-        public string barva;
-    }
-
-    internal class DataHolder {
-
-        List<Lod> Lode;
-        List<Hrac> Hraci;
-        List<string> Nalepky;
+        StreamReader hlaskySR;
+        StreamReader nalepkySR;
+        private Random Rnd;
 
         public DataHolder(string cestakLodim,string cestaKNalepkam){
-            Lode = new List<Lod>();
-            Hraci = new List<Hrac>();
-            Nalepky = new List<string>();
-        }
-        public string[] GetHlasky(string jmenoLodi) {
-            throw new NotImplementedException();
+            hlaskySR = new StreamReader(Path.GetFullPath(cestakLodim));
+            nalepkySR = new StreamReader(Path.GetFullPath(cestaKNalepkam));
+            Rnd = new Random();
+
+            nalepky = getNalepky();
         }
 
+        public string GetHlaska(string jmenoLodi, bool hitHlaska) {
+            bool read = true;
+            string[] hitHlasky = new string[10];
+            string[] moveHlasky = new string[10];
+            while (read) {
+                string line = hlaskySR.ReadLine();              
+                if (line == jmenoLodi)
+                {
+                    hitHlasky = hlaskySR.ReadLine().Split(";");
+                    moveHlasky = hlaskySR.ReadLine().Split(";");
+                    read = false;
+
+                    //pro resetování readlinu na začátek souboru
+                    hlaskySR.BaseStream.Seek(0, SeekOrigin.Begin); 
+                    hlaskySR.DiscardBufferedData();
+                }
+           }
+           if (hitHlaska)
+                return hitHlasky[Rnd.Next(0, hitHlasky.Length)];         
+           else
+                return moveHlasky[Rnd.Next(0, moveHlasky.Length)];
+        
+        }
         public string GetHracBarva(string jmenoHrace) {
-            throw new NotImplementedException();
+            return "a";
         }
 
+
+        //vrátí seznam všech nálepek
+        public List<string> getNalepky(){
+            List<string> nalepky = new List<string>();
+            string nalepka = "";
+            
+            while(true){
+                string line = nalepkySR.ReadLine();
+
+                if (line == null)
+                    break;
+                else if (line != ";")
+                    nalepka += line + "\n";
+                else
+                {
+                    nalepky.Add(nalepka);
+                    nalepka = "";
+                }                               
+            }
+            return nalepky;
+        }
     }
 }

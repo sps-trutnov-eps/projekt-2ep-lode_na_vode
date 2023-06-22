@@ -153,40 +153,40 @@ input[type=submit], #lobbycreate {
 .mena {
     font-size: 1.3em;
     text-align: center;
-    padding-top: 40px;
+    top: 80px;
     text-transform: uppercase;
     font-weight: 700;
+    position: fixed;
+    z-index: 999;
+    left: 1600px;
 }
 h1{
     text-align: center;
 }
+
+
 .btn-go {
-    width: 240px;
-    font-size: 24px;
+    font-size: 40px;
     position: fixed;
-    bottom: 40px;
-    left: calc(50vw - 120px);
-    padding: 8px;
+    bottom: 80px;
+    left: 1675px;
+    padding: 16px;
     color: white;
-    border-radius: 25px;
+    border-radius: 50%;
     text-decoration: none;
     background-color: #5ffa05;
     transition: .5s;
     text-align: center;
+    text-decoration: none;
 }
 
 .btn-go a{
-    color: white;
+   color: white;
     text-decoration: none;
     margin: 0 auto;
-   
+  
 }
 
-.btn-go:hover{
-   background-color: aquamarine;
-   
-   
-}
 
 .skupina-nazev h2 {
     text-align: center;

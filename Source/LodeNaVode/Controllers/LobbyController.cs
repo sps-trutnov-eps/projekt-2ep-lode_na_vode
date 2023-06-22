@@ -14,13 +14,20 @@ namespace LodeNaVode.Controllers
         public LobbyController(LobbyDbContext dbContext)
         {
             _lobbyDatabase = dbContext;
-            HttpContext.Session.GetString("playerid");
+            DateTime now = DateTime.Now;
+            Player user = _lobbyDatabase.Players.Where(p => p.PlayerCookie == HttpContext.Session.GetString("playerid")).First();
+            user.ExpirationDate = now.AddMinutes(15);
+            if (user.ExpirationDate < DateTime.Now) 
+            {
+                user.Active = false;
+            }
+            _lobbyDatabase.SaveChanges();
         }
 
         [HttpGet]
         public IActionResult Create(Lobby model)
         {
-            string lobbyOwnerId = HttpContext.Session.GetString("playerid");
+            string? lobbyOwnerId = HttpContext.Session.GetString("playerid");
 
             var lobbyOwner = _lobbyDatabase.Players
                 .Where(p => p.PlayerCookie == lobbyOwnerId)
@@ -109,7 +116,7 @@ namespace LodeNaVode.Controllers
                 if (!_lobbyDatabase.Players.Any(p => p.PlayerName == playerName))
                 {
                     string? playerCookie = HttpContext.Session.GetString("playerid");
-                    Player player = new Player() { PlayerCookie = playerCookie, PlayerName = playerName, Active = true};
+                    Player player = new Player() { PlayerCookie = playerCookie, PlayerName = playerName, Active = true, ExpirationDate = DateTime.Now.AddMinutes(15)};
                     _lobbyDatabase.Players.Add(player);
                     _lobbyDatabase.SaveChanges();
                     return View();

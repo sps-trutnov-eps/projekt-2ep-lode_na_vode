@@ -2,6 +2,18 @@
     List<string> nalepky = LodeNaVode.Controllers.Engin.engine.GetLog.Data.nalepky;
 }
 <h1>vyber si</h1>
+<div style="text-align:left; font-family:monospace;"> 
 @for(int i = 1; i < nalepky.Count(); i++){
-    <a href="/Tah/Policko/@(-100-i)">@nalepky[i]</a><br /><br />
+    @*<a href="/Tah/Policko/@(-100-i)">@nalepky[i]</a><br /><br />*@
+    <a href="/Tah/Policko/@(-100-i)">
+        @for (int j = 0; j < nalepky[i].Split("\n").Length; j++) {
+            @if(j > 0) {
+                <br />
+            }
+            @nalepky[i].Split("\n")[j];
+        }
+    </a>
+    <br />
+
 }
+</div>

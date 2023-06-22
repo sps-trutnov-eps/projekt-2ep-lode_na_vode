@@ -165,6 +165,12 @@ namespace LodeNaVode.Controllers
             int cislo = 0;
             
 
+            if (id < -100) {
+                engine.GetLog.ActivateNalepka(engine.DejMiAktualnehoHrace().Jmeno,-(id+100));
+
+                return View(bojisteTuple);
+            }
+
             // Pohyb lodě
             // Negativní id se používá jako ovládání
             // -1 == null
@@ -199,10 +205,6 @@ namespace LodeNaVode.Controllers
                 }
             }
 
-            if (id < -100) {
-                Lod l = engine.Lode[lodId];
-                engine.GetLog.ActivateNalepka(l,id+100);
-            }
 
             // Procházení bojištěm
             for (int y = 0; y < bojiste.GetLength(0); y++)

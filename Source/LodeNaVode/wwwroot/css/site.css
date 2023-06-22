@@ -97,6 +97,9 @@ input[type=submit], #lobbycreate {
     text-align: center;
     text-decoration: none;
 }
+.seznamhracu {
+    margin-bottom:1em;
+}
 
     input[type=submit]:hover {
         background-color: #45a049;

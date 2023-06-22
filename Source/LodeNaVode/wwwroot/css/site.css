@@ -84,7 +84,7 @@ input[type=submit], #lobbycreate {
     border-radius: 4px;
     cursor: pointer;
 }
-#lobbycreate {
+.tlacitko-vloz {
     display: inline-block;
     background-color: dodgerblue;
     text-align: center;

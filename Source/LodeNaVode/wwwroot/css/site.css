@@ -12,18 +12,11 @@ html {
   }
 }
 
-html {
-  position: relative;
-  min-height: 100%;
-}
 main {
     padding:1em;
     text-align:center;
 }
 
-html{
-    height:100%;
-}
 body {
   margin-bottom: none;
   background-image: url('textury/mlha-na-mori.png');

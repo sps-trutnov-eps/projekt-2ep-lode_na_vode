@@ -37,7 +37,11 @@ namespace main_api
         /// <param name="cestaKHlaskamLodi">cesta k jmenum a hlaskam lodi</param>
         ///  <param name="cestaKLodim">jo</param>
         /// <param name="cestaKNalepkam">cesta k hlaskam hracu</param>
-        public Engine(string[][] hraci, int maxX, int maxY, string cestaKLodim, string cestaKHlaskamLodi, string cestaKNalepkam)
+        public Engine(string[][] hraci, int maxX, int maxY,
+            string cestaKLodim = "../../Data/textury/tvary-lodi.TEXT",
+            string cestaKHlaskamLodi = "LodeNaVode/Lode/hlasky.txt",
+            string cestaKNalepkam = "LodeNaVode/Lode/nalepky.txt"
+            )
         {
             // načíst Log objekt
             GetLog = new Log(cestaKHlaskamLodi, cestaKNalepkam);

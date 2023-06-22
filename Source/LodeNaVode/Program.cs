@@ -1,10 +1,13 @@
 using LodeNaVode.Data;
+using main_api;
 using Microsoft.EntityFrameworkCore;
 
 namespace LodeNaVode
 {
     public class Program
     {
+        public static Dictionary<string, Engine> KolekceEnginu = new Dictionary<string, Engine>();
+
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);

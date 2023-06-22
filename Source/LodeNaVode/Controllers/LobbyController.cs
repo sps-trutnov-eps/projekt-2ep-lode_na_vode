@@ -14,17 +14,6 @@ namespace LodeNaVode.Controllers
         public LobbyController(LobbyDbContext dbContext)
         {
             _lobbyDatabase = dbContext;
-            if (HttpContext.Session.GetString("playerid") != null)
-            {
-                DateTime now = DateTime.Now;
-                Player user = _lobbyDatabase.Players.Where(p => p.PlayerCookie == HttpContext.Session.GetString("playerid")).First();
-                user.ExpirationDate = now.AddMinutes(15);
-                if (user.ExpirationDate < DateTime.Now)
-                {
-                    user.Active = false;
-                }
-                _lobbyDatabase.SaveChanges();
-            }
         }
 
         [HttpGet]

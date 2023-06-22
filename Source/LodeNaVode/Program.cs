@@ -22,6 +22,7 @@ namespace LodeNaVode
             var app = builder.Build();
 
             app.UseSession();
+            app.UseMiddleware<WatchDogWare>();
             app.UseStaticFiles();
             app.UseRouting();
             app.UseAuthorization();

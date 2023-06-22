@@ -449,5 +449,16 @@ namespace LodeNaVode.Controllers
             }
             return RedirectToAction("Zvolit");
         }
+
+        [HttpGet]
+        public IActionResult KliknutiMinusNemcova()
+        {
+            if (pocetLodiNemcova > 0)
+            {
+                pocetLodiNemcova--;
+                tokeny += cenaLodiNemcova;
+            }
+            return RedirectToAction("Zvolit");
+        }
     }
 }

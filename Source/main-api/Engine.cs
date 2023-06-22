@@ -9,7 +9,7 @@ namespace main_api
 		/// <summary>
 		/// Je tu sepsáno, jaká loď byla naposledy trefena
 		/// </summary>
-		public string NaposledyTrefenaLod = "Ѿ";
+		public Lod NaposledyTrefenaLod;
 
 		/// <summary>
 		/// je to log. chovej se k němu jako k logu
@@ -107,8 +107,8 @@ namespace main_api
             {
 						// zkusím centrálné bod
 						if (Lode[i].CentralneBod[0] == x && Lode[i].CentralneBod[1] == y){
-							// sepíšu spis
-							NaposledyTrefenaLod = Lode[i].Ucitel;
+							// sepíšu Lod
+							NaposledyTrefenaLod = Lode[i];
 							// když již zničen
 							if (Lode[i].CentralneBod[2] == 0)
 								return true;
@@ -126,6 +126,8 @@ namespace main_api
                     if (Lode[i].ZbytekBodu[j][0] + Lode[i].CentralneBod[0] == x
                             && Lode[i].ZbytekBodu[j][1] + Lode[i].CentralneBod[1] == y)
                     {
+                        // sepíšu Lod
+                        NaposledyTrefenaLod = Lode[i];
                         // když zničeno
                         if (Lode[i].ZbytekBodu[j][2] == 0)
                             return true;

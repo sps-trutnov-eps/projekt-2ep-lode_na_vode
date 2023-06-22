@@ -219,6 +219,8 @@ namespace LodeNaVode.Controllers
                         {
                             if (engine.StrelbaNaLod(x, y))
                             {
+                                Lod l = engine.NaposledyTrefenaLod;
+                                engine.GetLog.GetHitMessage(l.Hrac,l.Ucitel);
                                 for (int i = 0; i < engine.Lode.Count; i++)
                                 {
                                     var lod = engine.Lode[i];
@@ -226,8 +228,6 @@ namespace LodeNaVode.Controllers
                                     if (lod.CentralneBod[0] == x && lod.CentralneBod[1] == y)
                                     {
                                         policko = TypPolicka.ZasahLodCentalniBod;                                        
-                                        Lod l = engine.Lode[i];
-                                        engine.GetLog.GetHitMessage(l.Hrac,l.Ucitel);
                                     }
                                 }
                             }

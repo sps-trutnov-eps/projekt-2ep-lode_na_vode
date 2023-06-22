@@ -1,5 +1,6 @@
 ﻿using LodeNaVode.Data;
 using LodeNaVode.Models;
+using main_api;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -25,14 +26,11 @@ namespace LodeNaVode.Controllers
         public IActionResult JoinLobby(string playerName) 
         {
             bool vPocitaciNeexistujeHrac = HttpContext.Session.GetString("playerid") == null;
-            bool vDatabaziNejsouZadniHraci = _lobbyDatabase.Players.Count() == 0;
-
-            if (vPocitaciNeexistujeHrac && (vDatabaziNejsouZadniHraci ||
-                !_lobbyDatabase.Players
+            Player? hracTohotoJmenaVDatabazi = _lobbyDatabase.Players
                     .Where(p => p.PlayerName == playerName)
-                    .First()
-                    .Active
-            ))
+                    .FirstOrDefault();
+
+            if (vPocitaciNeexistujeHrac && (hracTohotoJmenaVDatabazi == null || !hracTohotoJmenaVDatabazi.Active))
             {
                 var dice = new Random();
                 int diceresult = dice.Next(1000000000, 2000000000);

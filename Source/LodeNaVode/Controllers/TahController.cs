@@ -37,6 +37,7 @@ namespace LodeNaVode.Controllers
     public class Engin{
 
         public static Engine engine = GetIT();
+        public static int pocetLodi; // jen pro log
         private static Engine GetIT()
         {
             string[][] mojeStringy = new string[][] {
@@ -50,8 +51,9 @@ namespace LodeNaVode.Controllers
             //engine.UmistitLod(5, 5, "L", "a", "c");
             engine.UmistitLod(0, 1, "L", "c", "kotek");
 
-            Debug.WriteLine("hi");
+            //Debug.WriteLine("hi");
 
+            pocetLodi = engine.Lode.Count();
             return engine;
 
         }
@@ -130,7 +132,7 @@ namespace LodeNaVode.Controllers
                     
                     for (int y = 0; y < lod.ZbytekBodu[x].Length; y++)
                     {
-                        Debug.WriteLine($"{x};{y}     {lod.ZbytekBodu[x][y]}");
+                        //Debug.WriteLine($"{x};{y}     {lod.ZbytekBodu[x][y]}");
 
                         if (y == 0)
                             bx = lod.ZbytekBodu[x][y];
@@ -140,7 +142,7 @@ namespace LodeNaVode.Controllers
                         //Debug.WriteLine($"{lod.ZbytekBodu[x][y]}    {lod.CentralneBod[1] + y};{lod.CentralneBod[0] + x}") ;
                     }
 
-                    Debug.WriteLine("-------------");
+                    //Debug.WriteLine("-------------");
                     //Debug.WriteLine($"{lod.CentralneBod[0]};{lod.CentralneBod[1]}   {lod.CentralneBod[0] + bx}({bx});{lod.CentralneBod[1] + by}({by})");
                     bojiste[lod.CentralneBod[1] + by, lod.CentralneBod[0] + bx] = TypPolicka.Lod;
                     if (lod.Smer == "sever")
@@ -153,14 +155,17 @@ namespace LodeNaVode.Controllers
                         config[lod.CentralneBod[1] + by, lod.CentralneBod[0] + bx] = "rot270";
                 }
             }
-
-            Debug.WriteLine($"RedrawCompleted");
+            //Debug.WriteLine($"RedrawCompleted");
         }
-        public IActionResult Policko(int id = -1)
-        {
-            Debug.WriteLine(id);
 
+        public IActionResult NalepkySiVyberTyMagor() {
+            return View();
+        }
+        public IActionResult Policko(int id = -1) {
             Engine engine = Engin.engine;
+
+            //Debug.WriteLine(id);
+
             ref int lodId = ref Pamet.lodId;
             ref bool oznacenaLod = ref Pamet.oznacenaLod;
             ref List<Tuple<int, int, TypPolicka>> odhalenePolicka = ref Pamet.odhalenePolicka;
@@ -177,6 +182,12 @@ namespace LodeNaVode.Controllers
             int cislo = 0;
             
 
+            if (id < -100) {
+                engine.GetLog.ActivateNalepka(engine.DejMiAktualnehoHrace().Jmeno,-(id+100));
+
+                return View(bojisteTuple);
+            }
+
             // Pohyb lodě
             // Negativní id se používá jako ovládání
             // -1 == null
@@ -184,6 +195,8 @@ namespace LodeNaVode.Controllers
             // -3 otočit pravá
             // -4 hore
             // -5 dolů
+
+            // -100 a nižší nalepky
             if(oznacenaLod) {
                 Lod l = engine.Lode[lodId];
                 oznacenaLod = false;
@@ -209,6 +222,7 @@ namespace LodeNaVode.Controllers
                 }
             }
 
+
             // Procházení bojištěm
             for (int y = 0; y < bojiste.GetLength(0); y++)
             {
@@ -220,8 +234,17 @@ namespace LodeNaVode.Controllers
 
                         if (policko == TypPolicka.Mlha)
                         {
-                            if (engine.StrelbaNaLod(x, y))
-                            {
+                            if (engine.StrelbaNaLod(x, y)) {
+                                // log
+                                if (engine.Lode.Count() < Engin.pocetLodi) {
+                                    Engin.pocetLodi = engine.Lode.Count();
+                                    Lod l = engine.NaposledyTrefenaLod;
+                                    engine.GetLog.GetDestructionMessage(engine.DejMiAktualnehoHrace().Jmeno,l.Ucitel);
+                                }
+                                else {
+                                    Lod l = engine.NaposledyTrefenaLod;
+                                    engine.GetLog.GetHitMessage(l.Hrac,l.Ucitel);
+                                }
                                 for (int i = 0; i < engine.Lode.Count; i++)
                                 {
                                     var lod = engine.Lode[i];

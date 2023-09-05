@@ -221,16 +221,16 @@ h1{
 
 }
 
-.lodicky .tlacitka .plus, .minus{
-    color: white;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    font-size: 1.2em;
-    border-radius: 25px;
-    width: 40px;
-}
+    .lodicky .tlacitka .plus, .lodicky .tlacitka .minus {
+        color: white;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        font-size: 1.2em;
+        border-radius: 25px;
+        width: 90%;
+    }
 
 .tlacitka .plus{
     background-color: dodgerblue;

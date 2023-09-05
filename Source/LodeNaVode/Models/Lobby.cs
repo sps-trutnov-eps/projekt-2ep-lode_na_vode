@@ -18,6 +18,7 @@ namespace LodeNaVode.Models
         [Required]
         public bool Ingame { get; set; }
 
+        [NotMapped]
         virtual public string[][] LodeHracu { get; set; }
 
         [Required]

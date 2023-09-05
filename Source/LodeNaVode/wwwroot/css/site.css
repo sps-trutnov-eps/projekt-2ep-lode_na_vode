@@ -74,7 +74,7 @@ input[type=text], select {
     box-sizing: border-box;
 }
 
-input[type=submit], #lobbycreate {
+input[type=submit], #lobbycreate, .tlacitko-vloz {
     width: 100%;
     background-color: #4CAF50;
     color: white;

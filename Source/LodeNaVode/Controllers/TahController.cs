@@ -50,7 +50,7 @@ namespace LodeNaVode.Controllers
                 new string[] { hrac, "b" },
                 new string[] { hrac2, "d" }
             };
-            Engine engine = new Engine(mojeStringy, 14, 9, "../../Data/textury/tvary-lodi.TEXT", "Lode/hlasky.txt", "/Lode/nalepky.txt");
+            Engine engine = new Engine(mojeStringy, 14, 9, "../../Data/textury/tvary-lodi.TEXT", "Lode/hlasky.txt", "Lode/nalepky.txt");
 
             engine.UmistitLod(2, 5, "L", hrac, "kotek");
             engine.UmistitLod(10, 5, "P", hrac, "kotek");

@@ -4,7 +4,7 @@ namespace log_test {
     internal class Program {
         static void Main(string[] args) {
             Console.WriteLine("Hello, World!");
-            Log log = new Log("../../../data/hlasky.txt", "../../../data/nalepky.txt");
+            Log log = new Log("./data/hlasky.txt", "./data/nalepky.txt");
             
             string hitMessage = log.GetHitMessage("hrac1", "curdova");
             Console.WriteLine(hitMessage);

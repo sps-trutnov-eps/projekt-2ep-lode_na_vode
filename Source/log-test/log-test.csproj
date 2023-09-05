@@ -12,4 +12,13 @@
     <ProjectReference Include="..\log-lib\log-lib.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="data\hlasky.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="data\nalepky.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

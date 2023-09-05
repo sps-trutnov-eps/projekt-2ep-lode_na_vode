@@ -240,6 +240,9 @@ h1{
 .tlacitka .minus {
     background-color: #dc3545;
 }
+.tlacitka p {
+    margin-top: 1rem;
+}
 
 .lodicky .tlacitka p{
     font-size: 25px;

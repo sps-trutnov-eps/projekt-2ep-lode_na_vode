@@ -20,17 +20,19 @@ namespace LodeNaVode
             {
                 LobbyDbContext dbContext = scope.ServiceProvider.GetRequiredService<LobbyDbContext>();
 
-                Player user = dbContext.Players.Where(p => p.PlayerCookie == httpContext.Session.GetString("playerid")).First();
-                if (user.ExpirationDate < DateTime.Now)
+                Player? user = dbContext.Players.Where(p => p.PlayerCookie == httpContext.Session.GetString("playerid")).FirstOrDefault();
+                if (user != null)
                 {
-                    user.Active = false;
-                    dbContext.SaveChanges();
+                    if (user.ExpirationDate < DateTime.Now)
+                    {
+                        user.Active = false;
+                        dbContext.SaveChanges();
+                    }
+                    else 
+                    {
+                        user.ExpirationDate = DateTime.Now.AddMinutes(15);
+                    }
                 }
-                else 
-                {
-                    user.ExpirationDate = DateTime.Now.AddMinutes(15);
-                }
-
 
                 await _next(httpContext);
             }

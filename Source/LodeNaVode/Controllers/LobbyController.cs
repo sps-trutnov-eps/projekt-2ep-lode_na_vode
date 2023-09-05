@@ -34,7 +34,7 @@ namespace LodeNaVode.Controllers
                 else
                 {
                     List<Player> players = new List<Player> { lobbyOwner };
-                    Lobby newLobby = new Lobby() { Owner = lobbyOwnerId, Players = players , Active = true , LodeHracu = new string[][] { } };
+                    Lobby newLobby = new Lobby() { Owner = lobbyOwnerId, Players = players , Active = true , LodeHracu = new string[,] { } };
 
                     _lobbyDatabase.Lobbies.Add(newLobby);
                     _lobbyDatabase.SaveChanges();

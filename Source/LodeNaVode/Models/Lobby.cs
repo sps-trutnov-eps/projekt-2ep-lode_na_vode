@@ -18,8 +18,6 @@ namespace LodeNaVode.Models
         [Required]
         public bool Ingame { get; set; }
 
-        virtual public string[][] LodeHracu { get; set; }
-
         [Required]
         virtual public ICollection<Player> Players { get; set; }
     }

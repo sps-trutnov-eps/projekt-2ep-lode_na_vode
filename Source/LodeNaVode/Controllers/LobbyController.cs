@@ -34,7 +34,7 @@ namespace LodeNaVode.Controllers
                 else
                 {
                     List<Player> players = new List<Player> { lobbyOwner };
-                    Lobby newLobby = new Lobby() { Owner = lobbyOwnerId, Players = players , Active = true , LodeHracu = new string[][] { } };
+                    Lobby newLobby = new Lobby() { Owner = lobbyOwnerId, Players = players , Active = true };
 
                     _lobbyDatabase.Lobbies.Add(newLobby);
                     _lobbyDatabase.SaveChanges();
@@ -124,8 +124,10 @@ namespace LodeNaVode.Controllers
                     if (!_lobbyDatabase.Players.Any(p => p.PlayerName == playerName))
                     {
                         string? playerCookie = HttpContext.Session.GetString("playerid");
-                        Player player = new Player() { PlayerCookie = playerCookie, PlayerName = playerName, Active = true, ExpirationDate = DateTime.Now.AddMinutes(15)};
+                        Player player = new Player() { PlayerCookie = playerCookie, PlayerName = playerName, Active = true, ExpirationDate = DateTime.Now.AddMinutes(15), PlayerBoats = new Dictionary<string, string> ()};
                         _lobbyDatabase.Players.Add(player);
+                        _lobbyDatabase.SaveChanges();
+                        _lobbyDatabase.Players.Where(p => p.PlayerCookie == HttpContext.Session.GetString("playerid")).FirstOrDefault().PlayerBoats.Add("playerid", playerCookie);
                         _lobbyDatabase.SaveChanges();
                         return View();
                     }

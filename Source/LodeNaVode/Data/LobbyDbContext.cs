@@ -18,6 +18,7 @@ namespace LodeNaVode.Data
                 .WithOne(p => p.Lobby)
                 .HasForeignKey(p => p.LobbyId)
                 .IsRequired(false);
+
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

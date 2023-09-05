@@ -24,5 +24,7 @@ namespace LodeNaVode.Models
 
         public int? LobbyId { get; set; }
         virtual public Lobby? Lobby { get; set; }
+
+        virtual public Dictionary<string, string>? PlayerBoats { get; set; }
     }
 }

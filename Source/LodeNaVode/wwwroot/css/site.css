@@ -108,10 +108,11 @@ input[type=submit], #lobbycreate, .tlacitko-vloz {
         background-color: #dc3545;
     }
 
-.nastenka{
-    background-color:black;
-    color:gray;
-    padding:1em;
+.nastenka {
+    background-color: black;
+    color: gray;
+    padding: 1em;
+    border-radius: 4px;
 }
 
 

@@ -82,12 +82,6 @@ namespace LodeNaVode.Controllers
         public TahController(LobbyDbContext dbContext)
         {
             _lobbyDatabase = dbContext;
-            // pri kazdem pozadavku na controller vyzvedneme ID prislusneho lobby
-            string? lobbyId = HttpContext.Session.GetString("lobbyid");
-
-            // pripravime si promennou, abychom meli pristup k enginu
-            engine = Program.KolekceEnginu["${lobbyId}"];
-            // ze by ID neexistovalo, neresime
         }
 
         public void Redraw(ref Tuple<TypPolicka[,], string[,]> bojisteTuple, ref Engine engine, ref List<Tuple<int, int, TypPolicka>> odhalenaPolicka)
@@ -186,6 +180,13 @@ namespace LodeNaVode.Controllers
             return View();
         }
         public IActionResult Policko(int id = -1) {
+            // Pohyb lodě
+            // Negativní id se používá jako ovládání
+            // -1 == null (nulova akce)
+            // -2 otočit levá
+            // -3 otočit pravá
+            // -4 hore
+            // -5 dolů
 
             // ze session zjistime ID naseho lobby
             int lobbyId = Convert.ToInt32(HttpContext.Session.GetString("lobbyid"));

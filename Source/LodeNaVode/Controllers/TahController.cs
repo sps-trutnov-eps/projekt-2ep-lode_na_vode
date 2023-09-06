@@ -37,34 +37,6 @@ namespace LodeNaVode.Controllers
     ////////////////////////
 
 
-    public class Engin{
-
-        public static Engine engine = GetIT();
-        public static int pocetLodi; // jen pro log
-        private static Engine GetIT()
-        {
-            string hrac = "ahoj9";
-            string hrac2 = "5ahoj";
-
-            string[][] mojeStringy = new string[][] {
-                new string[] { hrac, "b" },
-                new string[] { hrac2, "d" }
-            };
-            Engine engine = new Engine(mojeStringy, 14, 9, "../../Data/textury/tvary-lodi.TEXT", "Lode/hlasky.txt", "Lode/nalepky.txt");
-
-            engine.UmistitLod(2, 5, "L", hrac, "kotek");
-            engine.UmistitLod(10, 5, "P", hrac, "kotek");
-            //engine.UmistitLod(5, 5, "L", "a", "c");
-            engine.UmistitLod(0, 1, "L", hrac2, "kotek");
-
-            //Debug.WriteLine("hi");
-
-            pocetLodi = engine.Lode.Count();
-            return engine;
-
-        }
-    }
-
     public static class Pamet
     {
         public static List<Tuple<int, int, TypPolicka>> odhalenePolicka = new List<Tuple<int, int, TypPolicka>>();
@@ -177,6 +149,8 @@ namespace LodeNaVode.Controllers
         }
 
         public IActionResult NalepkySiVyberTyMagor() {
+            ViewBag.engine = this.engine;
+
             return View();
         }
         public IActionResult Policko(int id = -1) {
@@ -261,24 +235,28 @@ namespace LodeNaVode.Controllers
 
                         if (policko == TypPolicka.Mlha)
                         {
-                            if (engine.StrelbaNaLod(x, y)) {
+                            int pocetLodiPredStrelbou = engine.Lode.Count();
+                            bool lodZasazena = engine.StrelbaNaLod(x, y);
+                            int pocetLodiPoStrelbe = engine.Lode.Count();
+                            bool lodPotopena = pocetLodiPoStrelbe < pocetLodiPredStrelbou;
+
+                            if (lodZasazena) {
                                 // log
-                                if (engine.Lode.Count() < Engin.pocetLodi) {
-                                    Engin.pocetLodi = engine.Lode.Count();
-                                    Lod l = engine.NaposledyTrefenaLod;
+                                Lod l = engine.NaposledyTrefenaLod;
+                                
+                                if (lodPotopena) {
                                     engine.GetLog.GetDestructionMessage(engine.DejMiAktualnehoHrace().Jmeno,l.Ucitel);
                                 }
                                 else {
-                                    Lod l = engine.NaposledyTrefenaLod;
                                     engine.GetLog.GetHitMessage(l.Hrac,l.Ucitel);
                                 }
+
                                 for (int i = 0; i < engine.Lode.Count; i++)
                                 {
                                     var lod = engine.Lode[i];
                                     policko = TypPolicka.ZasahLodZbytekBod;
 
-                                    Lod l = engine.Lode[i];
-                                    engine.GetLog.GetHitMessage(l.Hrac, l.Ucitel);
+                                    engine.GetLog.GetHitMessage(lod.Hrac, lod.Ucitel);
 
                                     odhalenePolicka.Add(new Tuple<int, int, TypPolicka>(x, y, TypPolicka.ZasahLodZbytekBod));
                                     if (lod.CentralneBod[0] == x && lod.CentralneBod[1] == y)
@@ -286,7 +264,6 @@ namespace LodeNaVode.Controllers
                                         policko = TypPolicka.ZasahLodCentalniBod;
                                         odhalenePolicka.Add(new Tuple<int, int, TypPolicka>(x, y, TypPolicka.ZasahLodCentalniBod));
                                     }
-
                                 }
                             }
                             else
@@ -351,6 +328,8 @@ namespace LodeNaVode.Controllers
             }
 
             Redraw(ref bojisteTuple, ref engine, ref odhalenePolicka);
+
+            ViewBag.engine = this.engine;
 
             return View(bojisteTuple);
         }

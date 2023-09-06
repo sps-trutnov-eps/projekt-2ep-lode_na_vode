@@ -38,7 +38,7 @@ namespace main_api
         ///  <param name="cestaKLodim">jo</param>
         /// <param name="cestaKNalepkam">cesta k hlaskam hracu</param>
         public Engine(string[][] hraci, int maxX, int maxY,
-            string cestaKLodim = "../../Data/textury/tvary-lodi.TEXT",
+            string cestaKLodim = "Lode/tvary-cvicne.txt",
             string cestaKHlaskamLodi = "Lode/hlasky.txt",
             string cestaKNalepkam = "Lode/nalepky.txt"
             )
@@ -253,7 +253,10 @@ namespace main_api
         /// <returns>true když nic nebylo v cestě</returns>
         /// <exception cref="Exception"> asi je</exception>
         public bool PohybLode(int index, string smer)
-        { // sever/vychod/jih/zapad
+        {
+            Debug.WriteLine("\n\nPOHYB LODI VE SMERU: " + smer + "\n\n");
+
+            // sever/vychod/jih/zapad
             switch (smer)
             {
                 case "sever":

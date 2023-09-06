@@ -54,6 +54,8 @@ namespace main_api
             }
             catch
             {
+                Debug.WriteLine("\n\nADRESÁŘ, ODKUD HRACIALODE.CS ZAČÍNAJÍ: " + System.IO.Directory.GetCurrentDirectory() + "\n\n");
+                
                 throw new Exception("Chybné file! Prosím o opravu.");
             }
             // trimnu aby se nic nepokazilo

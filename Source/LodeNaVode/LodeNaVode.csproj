@@ -35,7 +35,7 @@
     <None Update="Lode\hlasky.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Lode\Lode.txt">
+    <None Update="Lode\tvary.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Lode\nalepky.txt">

@@ -20,5 +20,8 @@ namespace LodeNaVode.Models
 
         [Required]
         virtual public ICollection<Player> Players { get; set; }
+
+        [NotMapped]
+        virtual public List<string[]> PlayersBoats { get; set; }
     }
 }

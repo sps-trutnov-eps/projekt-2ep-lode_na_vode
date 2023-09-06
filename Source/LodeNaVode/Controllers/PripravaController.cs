@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using LodeNaVode.Lode;
+using LodeNaVode.Data;
 
 namespace LodeNaVode.Controllers
 {
@@ -49,6 +50,7 @@ namespace LodeNaVode.Controllers
         public static int cenaLodiNemcova = 25_000_000;
         public static int pocetLodiNemcova = 0;
 
+        private LobbyDbContext _lobbyDatabase;
 
         [HttpGet]
         public IActionResult Zvolit()
@@ -60,7 +62,21 @@ namespace LodeNaVode.Controllers
         public IActionResult Rozmisteni()
         {
             // rozmisteni lodi probiha v pomocne tride
-            List<int[]> L = RozmisteniClass.Rozmisti(pocetLodiMetodej, pocetLodiBorivoj, pocetLodiCyril, pocetLodiKrtecek, pocetLodiIlias, pocetLodiCapek, pocetLodiVaclavII, pocetLodiMacha, pocetLodiLibuse, pocetLodiPalach, pocetLodiMasaryk, pocetLodiSvatopluk, pocetLodiGott, pocetLodiZatopek, pocetLodiOdysea, pocetLodiKarelIV, pocetLodiZizka, pocetLodiNemcova);
+            //List<int[]> L = RozmisteniClass.Rozmisti(pocetLodiMetodej, pocetLodiBorivoj, pocetLodiCyril, pocetLodiKrtecek, pocetLodiIlias, pocetLodiCapek, pocetLodiVaclavII, pocetLodiMacha, pocetLodiLibuse, pocetLodiPalach, pocetLodiMasaryk, pocetLodiSvatopluk, pocetLodiGott, pocetLodiZatopek, pocetLodiOdysea, pocetLodiKarelIV, pocetLodiZizka, pocetLodiNemcova);
+            Lobby currentLobby = _lobbyDatabase.Lobbies.Where(l => l.Owner == HttpContext.Session.GetString("playerid")).First();
+            foreach (Player p in currentLobby.Players)
+            {
+                int index = 0;
+                int amountOfBoats = pocetLodiMetodej + pocetLodiBorivoj + pocetLodiCyril + pocetLodiKrtecek + pocetLodiIlias + pocetLodiCapek + pocetLodiVaclavII + pocetLodiMacha + pocetLodiLibuse + pocetLodiPalach + pocetLodiMasaryk + pocetLodiSvatopluk + pocetLodiGott + pocetLodiZatopek + pocetLodiOdysea + pocetLodiKarelIV + pocetLodiZizka + pocetLodiNemcova + 1;
+                string[] playerCookieAr = new string[] { p.PlayerCookie };
+                string[] playerBoatAmounts = new string[] { pocetLodiMetodej.ToString(), pocetLodiBorivoj.ToString(), pocetLodiCyril.ToString(), pocetLodiKrtecek.ToString(), pocetLodiIlias.ToString(), pocetLodiCapek.ToString(), pocetLodiVaclavII.ToString(), pocetLodiMacha.ToString(), pocetLodiLibuse.ToString(), pocetLodiPalach.ToString(), pocetLodiMasaryk.ToString(), pocetLodiSvatopluk.ToString(), pocetLodiGott.ToString(), pocetLodiZatopek.ToString(), pocetLodiOdysea.ToString(), pocetLodiKarelIV.ToString(), pocetLodiZizka.ToString(), pocetLodiNemcova.ToString() };
+                int totalArLenght = playerCookieAr.Length + playerBoatAmounts.Length;
+                string[] playerBoats = new string[totalArLenght];
+                Array.Copy(playerCookieAr, 0, playerBoats, 0, playerCookieAr.Length);
+                Array.Copy(playerBoatAmounts, 0, playerBoats, playerCookieAr.Length, playerBoatAmounts.Length);
+                currentLobby.PlayersBoats.Add(playerBoats);
+
+            }
 
             // automaticky pokracujeme na dalsi obrazovku
             return Redirect("/Tah/Policko/-1");

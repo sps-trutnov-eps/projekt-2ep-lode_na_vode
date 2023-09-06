@@ -17,6 +17,7 @@ namespace LodeNaVode.Models
         public string PlayerName { get; set; }
 
         [Required]
+        [DefaultValue(true)]
         public bool Active { get; set; }
 
         [Required]

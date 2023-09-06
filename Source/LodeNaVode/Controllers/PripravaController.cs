@@ -60,7 +60,10 @@ namespace LodeNaVode.Controllers
         [HttpGet]
         public IActionResult Zvolit()
         {
-            _lobbyDatabase.Lobbies.Where(l => l.Owner == HttpContext.Session.GetString("playerid")).First().Ingame = true;
+            Lobby currentLobby = _lobbyDatabase.Lobbies.Where(l => l.Owner == HttpContext.Session.GetString("playerid")).First();
+            currentLobby.Active = true;
+            currentLobby.LodeHracu = new string[currentLobby.Players.Count()][];
+            _lobbyDatabase.SaveChanges();
             return View();
         }
 
@@ -80,8 +83,16 @@ namespace LodeNaVode.Controllers
         {
             if (!(_lobbyDatabase.Players.Where(p => p.PlayerCookie == HttpContext.Session.GetString("playerid")).First().Active))
                 return RedirectToAction("Home", "Index");
+            int amountOfBoatsTotal = pocetLodiMetodej + pocetLodiBorivoj + pocetLodiCyril + pocetLodiKrtecek + pocetLodiIlias + pocetLodiCapek + pocetLodiVaclavII + pocetLodiMacha + pocetLodiLibuse + pocetLodiPalach + pocetLodiMasaryk + pocetLodiSvatopluk + pocetLodiGott + pocetLodiZatopek + pocetLodiOdysea + pocetLodiKarelIV + pocetLodiZizka + pocetLodiNemcova;
+            Debug.WriteLine("CELKOVY POCET VSECH LODI:");
+            Debug.WriteLine(amountOfBoatsTotal);
             //List<int[]> L = RozmisteniClass.Rozmisti(pocetLodiMetodej, pocetLodiBorivoj, pocetLodiCyril, pocetLodiKrtecek, pocetLodiIlias, pocetLodiCapek, pocetLodiVaclavII, pocetLodiMacha, pocetLodiLibuse, pocetLodiPalach, pocetLodiMasaryk, pocetLodiSvatopluk, pocetLodiGott, pocetLodiZatopek, pocetLodiOdysea, pocetLodiKarelIV, pocetLodiZizka, pocetLodiNemcova);
-
+            Lobby currentLobby = _lobbyDatabase.Lobbies.Where(l => l.Owner == HttpContext.Session.GetString("playerid")).First();
+            foreach (Player player in currentLobby.Players)
+            {
+                Player currentPlayer = _lobbyDatabase.Players.Where(p => p.PlayerCookie == HttpContext.Session.GetString("playerid")).First();
+                string[] playerBoats = new string[] { currentPlayer.PlayerCookie };
+            }
             //Malé
             for (int i = 0; i < pocetLodiMetodej; i++)
             {

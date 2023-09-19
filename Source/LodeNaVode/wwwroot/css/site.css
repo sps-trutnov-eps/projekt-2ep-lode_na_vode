@@ -74,7 +74,7 @@ input[type=text], select {
     box-sizing: border-box;
 }
 
-input[type=submit], #lobbycreate {
+input[type=submit], #lobbycreate, .tlacitko-vloz {
     width: 100%;
     background-color: #4CAF50;
     color: white;
@@ -84,7 +84,7 @@ input[type=submit], #lobbycreate {
     border-radius: 4px;
     cursor: pointer;
 }
-#lobbycreate {
+.tlacitko-vloz {
     display: inline-block;
     background-color: dodgerblue;
     text-align: center;
@@ -108,6 +108,12 @@ input[type=submit], #lobbycreate {
         background-color: #dc3545;
     }
 
+.nastenka {
+    background-color: black;
+    color: gray;
+    padding: 1em;
+    border-radius: 4px;
+}
 
 
 .pole-mlha {background-image: url('./textury/mlha.png');}
@@ -216,16 +222,16 @@ h1{
 
 }
 
-.lodicky .tlacitka .plus, .minus{
-    color: white;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    font-size: 1.2em;
-    border-radius: 25px;
-    width: 40px;
-}
+    .lodicky .tlacitka .plus, .lodicky .tlacitka .minus {
+        color: white;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        font-size: 1.2em;
+        border-radius: 25px;
+        width: 90%;
+    }
 
 .tlacitka .plus{
     background-color: dodgerblue;
@@ -234,6 +240,9 @@ h1{
 
 .tlacitka .minus {
     background-color: #dc3545;
+}
+.tlacitka p {
+    margin-top: 1rem;
 }
 
 .lodicky .tlacitka p{

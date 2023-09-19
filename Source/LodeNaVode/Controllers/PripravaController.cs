@@ -79,8 +79,11 @@ namespace LodeNaVode.Controllers
                 string[] playerBoats = new string[totalArLenght];
                 Array.Copy(playerCookieAr, 0, playerBoats, 0, playerCookieAr.Length);
                 Array.Copy(playerBoatAmounts, 0, playerBoats, playerCookieAr.Length, playerBoatAmounts.Length);
+                
                 currentLobby.PlayersBoats.Add(playerBoats);
             }
+
+            _lobbyDatabase.SaveChanges();
 
             // automaticky pokracujeme na dalsi obrazovku
             return Redirect("/Tah/Policko/-1");

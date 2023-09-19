@@ -14,7 +14,7 @@ namespace LodeNaVode
 
             builder.Services.AddControllersWithViews();
             builder.Services.AddDbContext<LobbyDbContext>(options =>
-                options.UseSqlServer(builder.Configuration.GetConnectionString("LobbyConnection")));
+                options.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
             builder.Services.AddSession(options =>
             {
                 options.Cookie.IsEssential = true;

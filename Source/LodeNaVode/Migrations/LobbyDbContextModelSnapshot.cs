@@ -80,6 +80,27 @@ namespace LodeNaVode.Migrations
                     b.ToTable("Players");
                 });
 
+            modelBuilder.Entity("LodeNaVode.Models.Ship", b =>
+                {
+                    b.Property<int>("ShipId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ShipId"));
+
+                    b.Property<int?>("PlayerId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ShipClass")
+                        .HasColumnType("int");
+
+                    b.HasKey("ShipId");
+
+                    b.HasIndex("PlayerId");
+
+                    b.ToTable("Ships");
+                });
+
             modelBuilder.Entity("LodeNaVode.Models.Player", b =>
                 {
                     b.HasOne("LodeNaVode.Models.Lobby", "Lobby")
@@ -89,9 +110,23 @@ namespace LodeNaVode.Migrations
                     b.Navigation("Lobby");
                 });
 
+            modelBuilder.Entity("LodeNaVode.Models.Ship", b =>
+                {
+                    b.HasOne("LodeNaVode.Models.Player", "Player")
+                        .WithMany("Ships")
+                        .HasForeignKey("PlayerId");
+
+                    b.Navigation("Player");
+                });
+
             modelBuilder.Entity("LodeNaVode.Models.Lobby", b =>
                 {
                     b.Navigation("Players");
+                });
+
+            modelBuilder.Entity("LodeNaVode.Models.Player", b =>
+                {
+                    b.Navigation("Ships");
                 });
 #pragma warning restore 612, 618
         }

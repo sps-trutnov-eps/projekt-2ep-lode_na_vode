@@ -4,6 +4,28 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LodeNaVode
 {
+    public enum JmenoLode
+    {
+        Metodej,
+        Borivoj,
+        Cyril,
+        Krtecek,
+        Ilias,
+        Capek,
+        VaclavII,
+        Macha,
+        Libuse,
+        Palach,
+        Masaryk,
+        Svatopluk,
+        Gott,
+        Zatopek,
+        Odysea,
+        KarelIV,
+        Zizka,
+        Nemcova,
+    }
+
     public class Program
     {
         public static Dictionary<string, Engine> KolekceEnginu = new Dictionary<string, Engine>();

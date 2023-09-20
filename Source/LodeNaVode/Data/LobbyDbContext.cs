@@ -9,6 +9,7 @@ namespace LodeNaVode.Data
     {
         public DbSet<Lobby> Lobbies { get; set; }
         public DbSet<Player> Players { get; set; }
+        public DbSet<Ship> Ships { get; set; }
 
         public LobbyDbContext(DbContextOptions<LobbyDbContext> options) : base(options) { }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -17,6 +18,12 @@ namespace LodeNaVode.Data
                 .HasMany(l => l.Players)
                 .WithOne(p => p.Lobby)
                 .HasForeignKey(p => p.LobbyId)
+                .IsRequired(false);
+
+            modelBuilder.Entity<Player>()
+                .HasMany(p => p.Ships)
+                .WithOne(s => s.Player)
+                .HasForeignKey(s => s.PlayerId)
                 .IsRequired(false);
         }
 

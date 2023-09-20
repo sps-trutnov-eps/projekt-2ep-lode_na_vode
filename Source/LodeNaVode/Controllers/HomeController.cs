@@ -27,6 +27,12 @@ namespace LodeNaVode.Controllers
         {
             while (_lobbyDatabase.Players.Count() > 0)
             {
+                while (_lobbyDatabase.Players.First().Ships.Count() > 0)
+                {
+                    _lobbyDatabase.Players.First().Ships.Remove(_lobbyDatabase.Players.First().Ships.First());
+                    _lobbyDatabase.SaveChanges();
+                }
+
                 _lobbyDatabase.Players.Remove(_lobbyDatabase.Players.First());
                 _lobbyDatabase.SaveChanges();
             }

@@ -57,7 +57,7 @@ namespace LodeNaVode.Controllers
         }
 
         [HttpGet]
-        public IActionResult Zvolit()
+        public IActionResult Vyber()
         {
             return View();
         }
@@ -65,30 +65,85 @@ namespace LodeNaVode.Controllers
         [HttpGet]
         public IActionResult Rozmisteni()
         {
-            // rozmisteni lodi probiha v pomocne tride
-            //List<int[]> L = RozmisteniClass.Rozmisti(pocetLodiMetodej, pocetLodiBorivoj, pocetLodiCyril, pocetLodiKrtecek, pocetLodiIlias, pocetLodiCapek, pocetLodiVaclavII, pocetLodiMacha, pocetLodiLibuse, pocetLodiPalach, pocetLodiMasaryk, pocetLodiSvatopluk, pocetLodiGott, pocetLodiZatopek, pocetLodiOdysea, pocetLodiKarelIV, pocetLodiZizka, pocetLodiNemcova);
-            Lobby currentLobby = _lobbyDatabase.Lobbies.Where(l => l.Owner == HttpContext.Session.GetString("playerid")).First();
-            currentLobby.PlayersBoats = new List<string[]>();
-            foreach (Player p in currentLobby.Players)
-            {
-                int index = 0;
-                int amountOfBoats = pocetLodiMetodej + pocetLodiBorivoj + pocetLodiCyril + pocetLodiKrtecek + pocetLodiIlias + pocetLodiCapek + pocetLodiVaclavII + pocetLodiMacha + pocetLodiLibuse + pocetLodiPalach + pocetLodiMasaryk + pocetLodiSvatopluk + pocetLodiGott + pocetLodiZatopek + pocetLodiOdysea + pocetLodiKarelIV + pocetLodiZizka + pocetLodiNemcova + 1;
-                string[] playerCookieAr = new string[] { p.PlayerCookie };
-                string[] playerBoatAmounts = new string[] { pocetLodiMetodej.ToString(), pocetLodiBorivoj.ToString(), pocetLodiCyril.ToString(), pocetLodiKrtecek.ToString(), pocetLodiIlias.ToString(), pocetLodiCapek.ToString(), pocetLodiVaclavII.ToString(), pocetLodiMacha.ToString(), pocetLodiLibuse.ToString(), pocetLodiPalach.ToString(), pocetLodiMasaryk.ToString(), pocetLodiSvatopluk.ToString(), pocetLodiGott.ToString(), pocetLodiZatopek.ToString(), pocetLodiOdysea.ToString(), pocetLodiKarelIV.ToString(), pocetLodiZizka.ToString(), pocetLodiNemcova.ToString() };
-                int totalArLenght = playerCookieAr.Length + playerBoatAmounts.Length;
-                string[] playerBoats = new string[totalArLenght];
-                Array.Copy(playerCookieAr, 0, playerBoats, 0, playerCookieAr.Length);
-                Array.Copy(playerBoatAmounts, 0, playerBoats, playerCookieAr.Length, playerBoatAmounts.Length);
-                
-                currentLobby.PlayersBoats.Add(playerBoats);
-            }
+            // zjistime, za koho hrajeme
+            Player currentPlayer = _lobbyDatabase.Players
+                .Where(p => p.PlayerCookie == HttpContext.Session.GetString("playerid"))
+                .First();
 
+            // pripravime si prazdnou flotilu
+            currentPlayer.Ships = new List<Ship>();
+
+            // podle udaju z View flotilu naplnime lodemi
+            for (int i = 0; i < pocetLodiMetodej; i++)
+                currentPlayer.Ships.Add(new Ship { ShipClass = JmenoLode.Metodej });
+            for (int i = 0; i < pocetLodiBorivoj; i++)
+                currentPlayer.Ships.Add(new Ship { ShipClass = JmenoLode.Borivoj });
+            for (int i = 0; i < pocetLodiCyril; i++)
+                currentPlayer.Ships.Add(new Ship { ShipClass = JmenoLode.Cyril });
+            for (int i = 0; i < pocetLodiKrtecek; i++)
+
+                currentPlayer.Ships.Add(new Ship { ShipClass = JmenoLode.Krtecek });
+            for (int i = 0; i < pocetLodiIlias; i++)
+                currentPlayer.Ships.Add(new Ship { ShipClass = JmenoLode.Ilias });
+            for (int i = 0; i < pocetLodiCapek; i++)
+                currentPlayer.Ships.Add(new Ship { ShipClass = JmenoLode.Capek });
+            for (int i = 0; i < pocetLodiVaclavII; i++)
+                currentPlayer.Ships.Add(new Ship { ShipClass = JmenoLode.VaclavII });
+            for (int i = 0; i < pocetLodiMacha; i++)
+                currentPlayer.Ships.Add(new Ship { ShipClass = JmenoLode.Macha });
+            for (int i = 0; i < pocetLodiLibuse; i++)
+                currentPlayer.Ships.Add(new Ship { ShipClass = JmenoLode.Libuse });
+            for (int i = 0; i < pocetLodiPalach; i++)
+                currentPlayer.Ships.Add(new Ship { ShipClass = JmenoLode.Palach });
+            for (int i = 0; i < pocetLodiMasaryk; i++)
+                currentPlayer.Ships.Add(new Ship { ShipClass = JmenoLode.Masaryk });
+            for (int i = 0; i < pocetLodiSvatopluk; i++)
+                currentPlayer.Ships.Add(new Ship { ShipClass = JmenoLode.Svatopluk });
+            for (int i = 0; i < pocetLodiGott; i++)
+                currentPlayer.Ships.Add(new Ship { ShipClass = JmenoLode.Gott });
+
+            for (int i = 0; i < pocetLodiZatopek; i++)
+                currentPlayer.Ships.Add(new Ship { ShipClass = JmenoLode.Zatopek });
+            for (int i = 0; i < pocetLodiOdysea; i++)
+                currentPlayer.Ships.Add(new Ship { ShipClass = JmenoLode.Odysea });
+            for (int i = 0; i < pocetLodiKarelIV; i++)
+                currentPlayer.Ships.Add(new Ship { ShipClass = JmenoLode.KarelIV });
+            for (int i = 0; i < pocetLodiZizka; i++)
+                currentPlayer.Ships.Add(new Ship { ShipClass = JmenoLode.Zizka });
+            for (int i = 0; i < pocetLodiNemcova; i++)
+                currentPlayer.Ships.Add(new Ship { ShipClass = JmenoLode.Nemcova });
+
+            // ulozime lode do databaze
             _lobbyDatabase.SaveChanges();
 
+            // rozmistime lode (TO DO - dela engine)
+            // List<int[]> L = RozmisteniClass.Rozmisti(pocetLodiMetodej, pocetLodiBorivoj, pocetLodiCyril, pocetLodiKrtecek, pocetLodiIlias, pocetLodiCapek, pocetLodiVaclavII, pocetLodiMacha, pocetLodiLibuse, pocetLodiPalach, pocetLodiMasaryk, pocetLodiSvatopluk, pocetLodiGott, pocetLodiZatopek, pocetLodiOdysea, pocetLodiKarelIV, pocetLodiZizka, pocetLodiNemcova);
+
             // automaticky pokracujeme na dalsi obrazovku
-            return Redirect("/Tah/Policko/-1");
+            return Redirect("/Priprava/Cekani");
         }
-        
+
+        [HttpGet]
+        public IActionResult Cekani()
+        {
+            // kdo jsem
+            Player? currentPlayer = _lobbyDatabase.Players
+                .Where(p => p.PlayerCookie == HttpContext.Session.GetString("playerid"))
+                .FirstOrDefault();
+            // kde jsem
+            Lobby currentLobby = _lobbyDatabase.Lobbies
+                .Where(l => l.Players.Contains(currentPlayer))
+                .First();
+
+            // kontrolujeme, jestli vsichni hraci v lobby uz maji sve lode
+            foreach (Player p in currentLobby.Players)
+                if (p.Ships.Count == 0)
+                    return View(); // vsichni jeste nejsou pripraveni
+
+            // hraci jsou vsichni pripraveni, jdeme do hry
+            return Redirect("/Tah/Policko");
+        }
+
         //Malé lodě
         [HttpGet]
         public IActionResult KliknutiPlusMetodej()
@@ -98,7 +153,7 @@ namespace LodeNaVode.Controllers
                 pocetLodiMetodej++;
                 tokeny -= cenaLodiMetodej;
             }
-            return RedirectToAction("Zvolit");
+            return RedirectToAction("Vyber");
         }
 
         [HttpGet]
@@ -109,7 +164,7 @@ namespace LodeNaVode.Controllers
                 pocetLodiMetodej--;
                 tokeny += cenaLodiMetodej;
             }
-            return RedirectToAction("Zvolit");
+            return RedirectToAction("Vyber");
         }
         [HttpGet]
         public IActionResult KliknutiPlusBorivoj()
@@ -119,7 +174,7 @@ namespace LodeNaVode.Controllers
                 pocetLodiBorivoj++;
                 tokeny -= cenaLodiBorivoj;
             }
-            return RedirectToAction("Zvolit");
+            return RedirectToAction("Vyber");
         }
 
         [HttpGet]
@@ -127,10 +182,10 @@ namespace LodeNaVode.Controllers
         {
             if (pocetLodiBorivoj > 0)
             {
-                pocetLodiBorivoj--; 
+                pocetLodiBorivoj--;
                 tokeny += cenaLodiBorivoj;
             }
-            return RedirectToAction("Zvolit");
+            return RedirectToAction("Vyber");
         }
         [HttpGet]
         public IActionResult KliknutiPlusCyril()
@@ -140,7 +195,7 @@ namespace LodeNaVode.Controllers
                 pocetLodiCyril++;
                 tokeny -= cenaLodiCyril;
             }
-            return RedirectToAction("Zvolit");
+            return RedirectToAction("Vyber");
         }
 
         [HttpGet]
@@ -151,7 +206,7 @@ namespace LodeNaVode.Controllers
                 pocetLodiCyril--;
                 tokeny += cenaLodiCyril;
             }
-            return RedirectToAction("Zvolit");
+            return RedirectToAction("Vyber");
         }
 
         //Střední lodě
@@ -163,7 +218,7 @@ namespace LodeNaVode.Controllers
                 pocetLodiKrtecek++;
                 tokeny -= cenaLodiKrtecek;
             }
-            return RedirectToAction("Zvolit");
+            return RedirectToAction("Vyber");
         }
 
         [HttpGet]
@@ -174,7 +229,7 @@ namespace LodeNaVode.Controllers
                 pocetLodiKrtecek--;
                 tokeny += cenaLodiKrtecek;
             }
-            return RedirectToAction("Zvolit");
+            return RedirectToAction("Vyber");
         }
 
         [HttpGet]
@@ -185,7 +240,7 @@ namespace LodeNaVode.Controllers
                 pocetLodiIlias++;
                 tokeny -= cenaLodiIlias;
             }
-            return RedirectToAction("Zvolit");
+            return RedirectToAction("Vyber");
         }
 
         [HttpGet]
@@ -196,7 +251,7 @@ namespace LodeNaVode.Controllers
                 pocetLodiIlias--;
                 tokeny += cenaLodiIlias;
             }
-            return RedirectToAction("Zvolit");
+            return RedirectToAction("Vyber");
         }
 
         [HttpGet]
@@ -207,7 +262,7 @@ namespace LodeNaVode.Controllers
                 pocetLodiCapek++;
                 tokeny -= cenaLodiCapek;
             }
-            return RedirectToAction("Zvolit");
+            return RedirectToAction("Vyber");
         }
 
         [HttpGet]
@@ -218,7 +273,7 @@ namespace LodeNaVode.Controllers
                 pocetLodiCapek--;
                 tokeny += cenaLodiCapek;
             }
-            return RedirectToAction("Zvolit");
+            return RedirectToAction("Vyber");
         }
 
         [HttpGet]
@@ -229,7 +284,7 @@ namespace LodeNaVode.Controllers
                 pocetLodiVaclavII++;
                 tokeny -= cenaLodiVaclavII;
             }
-            return RedirectToAction("Zvolit");
+            return RedirectToAction("Vyber");
         }
 
         [HttpGet]
@@ -240,7 +295,7 @@ namespace LodeNaVode.Controllers
                 pocetLodiVaclavII--;
                 tokeny += cenaLodiVaclavII;
             }
-            return RedirectToAction("Zvolit");
+            return RedirectToAction("Vyber");
         }
 
         [HttpGet]
@@ -251,7 +306,7 @@ namespace LodeNaVode.Controllers
                 pocetLodiMacha++;
                 tokeny -= cenaLodiMacha;
             }
-            return RedirectToAction("Zvolit");
+            return RedirectToAction("Vyber");
         }
 
         [HttpGet]
@@ -262,7 +317,7 @@ namespace LodeNaVode.Controllers
                 pocetLodiMacha--;
                 tokeny += cenaLodiMacha;
             }
-            return RedirectToAction("Zvolit");
+            return RedirectToAction("Vyber");
         }
 
         [HttpGet]
@@ -273,7 +328,7 @@ namespace LodeNaVode.Controllers
                 pocetLodiLibuse++;
                 tokeny -= cenaLodiLibuse;
             }
-            return RedirectToAction("Zvolit");
+            return RedirectToAction("Vyber");
         }
 
         [HttpGet]
@@ -284,7 +339,7 @@ namespace LodeNaVode.Controllers
                 pocetLodiLibuse--;
                 tokeny += cenaLodiLibuse;
             }
-            return RedirectToAction("Zvolit");
+            return RedirectToAction("Vyber");
         }
 
         [HttpGet]
@@ -295,7 +350,7 @@ namespace LodeNaVode.Controllers
                 pocetLodiPalach++;
                 tokeny -= cenaLodiPalach;
             }
-            return RedirectToAction("Zvolit");
+            return RedirectToAction("Vyber");
         }
 
         [HttpGet]
@@ -306,7 +361,7 @@ namespace LodeNaVode.Controllers
                 pocetLodiPalach--;
                 tokeny += cenaLodiPalach;
             }
-            return RedirectToAction("Zvolit");
+            return RedirectToAction("Vyber");
         }
 
         [HttpGet]
@@ -317,7 +372,7 @@ namespace LodeNaVode.Controllers
                 pocetLodiMasaryk++;
                 tokeny -= cenaLodiMasaryk;
             }
-            return RedirectToAction("Zvolit");
+            return RedirectToAction("Vyber");
         }
 
         [HttpGet]
@@ -328,7 +383,7 @@ namespace LodeNaVode.Controllers
                 pocetLodiMasaryk--;
                 tokeny += cenaLodiMasaryk;
             }
-            return RedirectToAction("Zvolit");
+            return RedirectToAction("Vyber");
         }
 
         [HttpGet]
@@ -339,7 +394,7 @@ namespace LodeNaVode.Controllers
                 pocetLodiSvatopluk++;
                 tokeny -= cenaLodiSvatopluk;
             }
-            return RedirectToAction("Zvolit");
+            return RedirectToAction("Vyber");
         }
 
         [HttpGet]
@@ -350,7 +405,7 @@ namespace LodeNaVode.Controllers
                 pocetLodiSvatopluk--;
                 tokeny += cenaLodiSvatopluk;
             }
-            return RedirectToAction("Zvolit");
+            return RedirectToAction("Vyber");
         }
 
         [HttpGet]
@@ -361,7 +416,7 @@ namespace LodeNaVode.Controllers
                 pocetLodiGott++;
                 tokeny -= cenaLodiGott;
             }
-            return RedirectToAction("Zvolit");
+            return RedirectToAction("Vyber");
         }
 
         [HttpGet]
@@ -372,7 +427,7 @@ namespace LodeNaVode.Controllers
                 pocetLodiGott--;
                 tokeny += cenaLodiGott;
             }
-            return RedirectToAction("Zvolit");
+            return RedirectToAction("Vyber");
         }
 
         //Velké
@@ -384,7 +439,7 @@ namespace LodeNaVode.Controllers
                 pocetLodiZatopek++;
                 tokeny -= cenaLodiZatopek;
             }
-            return RedirectToAction("Zvolit");
+            return RedirectToAction("Vyber");
         }
 
         [HttpGet]
@@ -395,7 +450,7 @@ namespace LodeNaVode.Controllers
                 pocetLodiZatopek--;
                 tokeny += cenaLodiZatopek;
             }
-            return RedirectToAction("Zvolit");
+            return RedirectToAction("Vyber");
         }
 
         [HttpGet]
@@ -406,7 +461,7 @@ namespace LodeNaVode.Controllers
                 pocetLodiOdysea++;
                 tokeny -= cenaLodiOdysea;
             }
-            return RedirectToAction("Zvolit");
+            return RedirectToAction("Vyber");
         }
 
         [HttpGet]
@@ -417,7 +472,7 @@ namespace LodeNaVode.Controllers
                 pocetLodiOdysea--;
                 tokeny += cenaLodiOdysea;
             }
-            return RedirectToAction("Zvolit");
+            return RedirectToAction("Vyber");
         }
 
         [HttpGet]
@@ -428,7 +483,7 @@ namespace LodeNaVode.Controllers
                 pocetLodiKarelIV++;
                 tokeny -= cenaLodiKarelIV;
             }
-            return RedirectToAction("Zvolit");
+            return RedirectToAction("Vyber");
         }
 
         [HttpGet]
@@ -439,7 +494,7 @@ namespace LodeNaVode.Controllers
                 pocetLodiKarelIV--;
                 tokeny += cenaLodiKarelIV;
             }
-            return RedirectToAction("Zvolit");
+            return RedirectToAction("Vyber");
         }
 
         [HttpGet]
@@ -450,7 +505,7 @@ namespace LodeNaVode.Controllers
                 pocetLodiZizka++;
                 tokeny -= cenaLodiZizka;
             }
-            return RedirectToAction("Zvolit");
+            return RedirectToAction("Vyber");
         }
 
         [HttpGet]
@@ -461,7 +516,7 @@ namespace LodeNaVode.Controllers
                 pocetLodiZizka--;
                 tokeny += cenaLodiZizka;
             }
-            return RedirectToAction("Zvolit");
+            return RedirectToAction("Vyber");
         }
 
         [HttpGet]
@@ -472,7 +527,7 @@ namespace LodeNaVode.Controllers
                 pocetLodiNemcova++;
                 tokeny -= cenaLodiNemcova;
             }
-            return RedirectToAction("Zvolit");
+            return RedirectToAction("Vyber");
         }
 
         [HttpGet]
@@ -483,7 +538,7 @@ namespace LodeNaVode.Controllers
                 pocetLodiNemcova--;
                 tokeny += cenaLodiNemcova;
             }
-            return RedirectToAction("Zvolit");
+            return RedirectToAction("Vyber");
         }
     }
 }

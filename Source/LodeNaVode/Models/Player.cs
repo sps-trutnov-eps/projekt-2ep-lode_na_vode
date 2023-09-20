@@ -22,6 +22,9 @@ namespace LodeNaVode.Models
         [Required]
         public DateTime ExpirationDate { get; set; }
 
+        [Required]
+        virtual public List<Ship> Ships { get; set; }
+
         public int? LobbyId { get; set; }
         virtual public Lobby? Lobby { get; set; }
     }

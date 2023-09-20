@@ -23,6 +23,16 @@ namespace LodeNaVode.Controllers
             return View();
         }
 
+        public IActionResult SmazatVsechnyHrace()
+        {
+            while (_lobbyDatabase.Players.Count() > 0)
+            {
+                _lobbyDatabase.Players.Remove(_lobbyDatabase.Players.First());
+                _lobbyDatabase.SaveChanges();
+            }
+
+            return Redirect("/Home/Index");
+        }
         public IActionResult JoinLobby(string playerName) 
         {
             bool vPocitaciNeexistujeHrac = HttpContext.Session.GetString("playerid") == null;

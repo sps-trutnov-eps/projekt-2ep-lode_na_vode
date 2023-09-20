@@ -11,7 +11,7 @@
     <p>Vítejte ve vašem LOBBY!</p>
     <p>ID tohoto LOBBY je: <b>@ViewData["lobbyId"]</b></p>
 
-    <h2>Zde vyberte herní mód:</h2>
+    <h2>Zde vyberte lodě do flotily:</h2>
     <div id="lobby">
         <form action="/Priprava/Vyber">
             <input type="submit" value="Sestavit flotilu!" class="game-mode-button" />
@@ -45,6 +45,13 @@ else
     <h1>LOBBY</h1>
     <p>Vítejte v LOBBY!</p>
     <p>ID tohoto LOBBY je: <b>@ViewData["lobbyId"]</b></p>
+
+    <h2>Zde vyberte lodě do flotily:</h2>
+    <div id="lobby">
+        <form action="/Priprava/Vyber">
+            <input type="submit" value="Sestavit flotilu!" class="game-mode-button" />
+        </form>
+    </div>
 
     <h2>Hráči v LOBBY:</h2>
     if (ViewData["vsichniHraciVLobby"] == null)

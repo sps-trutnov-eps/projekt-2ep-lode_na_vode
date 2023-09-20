@@ -5,11 +5,12 @@ namespace main_api
 {
     public class Engine
     {
+        static Random random = new Random();
 
-		/// <summary>
-		/// Je tu sepsáno, jaká loď byla naposledy trefena
-		/// </summary>
-		public Lod NaposledyTrefenaLod;
+        /// <summary>
+        /// Je tu sepsáno, jaká loď byla naposledy trefena
+        /// </summary>
+        public Lod NaposledyTrefenaLod;
 
 		/// <summary>
 		/// je to log. chovej se k němu jako k logu
@@ -74,6 +75,20 @@ namespace main_api
         {
             Console.WriteLine(x.ToString() + " " + y.ToString() + " " + tvar + " " + hrac + " " + ucitel);
             Lode.Add(LodneGenerator.NovaLod(x, y, tvar, hrac, ucitel, ZiskatTymZHraceStringu(hrac), Lode));
+        }
+
+        public bool UmistitLodNahodne(string tvar, string hrac, string ucitel)
+        {
+            // repeat for a while
+            while(true)
+            {
+                int x = random.Next(LodneGenerator.MaxX);
+                int y = random.Next(LodneGenerator.MaxY);
+
+
+            }
+
+            return true;
         }
 
         /// <summary>

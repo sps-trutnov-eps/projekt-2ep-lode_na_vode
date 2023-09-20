@@ -11,11 +11,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LodeNaVode.Controllers
 {
-    public enum TypLode
-    {
-        Center,
-        Left,
-    }
     public enum TypPolicka
     {
         Lod,

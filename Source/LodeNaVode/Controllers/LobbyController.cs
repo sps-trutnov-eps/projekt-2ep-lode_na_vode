@@ -20,6 +20,22 @@ namespace LodeNaVode.Controllers
         [HttpGet]
         public IActionResult Create(Lobby model)
         {
+            // Kontrola expiration date hráče
+            Player user = _lobbyDatabase.Players.Where(p => p.PlayerCookie == HttpContext.Session.GetString("playerid")).First();
+            if (user.ExpirationDate < DateTime.Now)
+            {
+                user.Active = false;
+                _lobbyDatabase.Players.Remove(user);
+                _lobbyDatabase.SaveChanges();
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                // Obnovení expiration date hráče
+                user.ExpirationDate = DateTime.Now.AddMinutes(15);
+                _lobbyDatabase.SaveChanges();
+            }
+
             string? lobbyOwnerId = HttpContext.Session.GetString("playerid");
 
             var lobbyOwner = _lobbyDatabase.Players
@@ -74,6 +90,22 @@ namespace LodeNaVode.Controllers
         [HttpGet]
         public IActionResult Join(string lobbyId)
         {
+            // Kontrola expiration date hráče
+            Player user = _lobbyDatabase.Players.Where(p => p.PlayerCookie == HttpContext.Session.GetString("playerid")).First();
+            if (user.ExpirationDate < DateTime.Now)
+            {
+                user.Active = false;
+                _lobbyDatabase.Players.Remove(user);
+                _lobbyDatabase.SaveChanges();
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                // Obnovení expiration date hráče
+                user.ExpirationDate = DateTime.Now.AddMinutes(15);
+                _lobbyDatabase.SaveChanges();
+            }
+
             if (lobbyId == null || lobbyId.Trim() == null)
             {
                 HttpContext.Session.SetString("from", "Lobby");
@@ -101,11 +133,10 @@ namespace LodeNaVode.Controllers
                 }
                 else
                 {
-                    Player player = _lobbyDatabase.Players.Where(p => p.PlayerCookie == playerCookie).First();
                     var lobbies = _lobbyDatabase.Lobbies;
                     var correctLobbies = lobbies.Where(l => l.LobbyId == id);
                     var playersOfLobby = correctLobbies.First().Players;
-                    playersOfLobby.Add(player);
+                    playersOfLobby.Add(user);
                     _lobbyDatabase.SaveChanges();
                     return RedirectToAction("Lobby");
                 }
@@ -116,14 +147,29 @@ namespace LodeNaVode.Controllers
 
         public IActionResult Lobby()
         {
-            Player? playercheck = _lobbyDatabase.Players.Where(p => p.PlayerCookie == HttpContext.Session.GetString("playerid")).FirstOrDefault();
-            Lobby currentLobby = _lobbyDatabase.Lobbies.Where(l => l.Players.Contains(playercheck)).First();
+            // Kontrola expiration date hráče
+            Player user = _lobbyDatabase.Players.Where(p => p.PlayerCookie == HttpContext.Session.GetString("playerid")).First();
+            if (user.ExpirationDate < DateTime.Now)
+            {
+                user.Active = false;
+                _lobbyDatabase.Players.Remove(user);
+                _lobbyDatabase.SaveChanges();
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                // Obnovení expiration date hráče
+                user.ExpirationDate = DateTime.Now.AddMinutes(15);
+                _lobbyDatabase.SaveChanges();
+            }
+
+            Lobby currentLobby = _lobbyDatabase.Lobbies.Where(l => l.Players.Contains(user)).First();
             ViewData["lobbyOwner"] = currentLobby.Owner;
-            ViewData["currentUser"] = playercheck.PlayerCookie;
+            ViewData["currentUser"] = user.PlayerCookie;
             ViewData["lobbyId"] = currentLobby.LobbyId;
-            ViewData["currentUserName"] = playercheck.PlayerName;
+            ViewData["currentUserName"] = user.PlayerName;
             ViewData["vsichniHraciVLobby"] = currentLobby.Players.ToList();
-            Lobby lobbyVeKteremJsme = _lobbyDatabase.Lobbies.Where(l => l.Players.Contains(playercheck)).First();
+            Lobby lobbyVeKteremJsme = _lobbyDatabase.Lobbies.Where(l => l.Players.Contains(user)).First();
             ICollection<Player> hraciNasehoLobby = lobbyVeKteremJsme.Players;
             return View();
         }
@@ -146,6 +192,11 @@ namespace LodeNaVode.Controllers
                 {
                     if (from == "Lobby")
                     {
+                        // Obnovení expiration date hráče
+                        Player user = _lobbyDatabase.Players.Where(p => p.PlayerCookie == HttpContext.Session.GetString("playerid")).First();
+                        user.ExpirationDate = DateTime.Now.AddMinutes(15);
+                        _lobbyDatabase.SaveChanges();
+
                         HttpContext.Session.Remove("from");
                         return View();
                     }
@@ -163,15 +214,30 @@ namespace LodeNaVode.Controllers
 
         public IActionResult Leave(string from)
         {
-            HttpContext.Session.SetString("from", from);
-            Player? playercheck = _lobbyDatabase.Players.Where(p => p.PlayerCookie == HttpContext.Session.GetString("playerid")).FirstOrDefault();
-            Lobby currentLobby = _lobbyDatabase.Lobbies.Where(l => l.Players.Contains(playercheck)).First();
-            if (playercheck != null)
+            // Kontrola expiration date hráče
+            Player user = _lobbyDatabase.Players.Where(p => p.PlayerCookie == HttpContext.Session.GetString("playerid")).First();
+            if (user.ExpirationDate < DateTime.Now)
             {
-                Lobby lobbyWithPlayer = _lobbyDatabase.Lobbies.Where(l => l.Players.Contains(playercheck)).First();
-                lobbyWithPlayer.Players.Remove(playercheck);
+                user.Active = false;
+                _lobbyDatabase.Players.Remove(user);
+                _lobbyDatabase.SaveChanges();
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                // Obnovení expiration date hráče
+                user.ExpirationDate = DateTime.Now.AddMinutes(15);
+                _lobbyDatabase.SaveChanges();
+            }
 
-                if (playercheck.PlayerCookie == currentLobby.Owner)
+            HttpContext.Session.SetString("from", from);;
+            Lobby currentLobby = _lobbyDatabase.Lobbies.Where(l => l.Players.Contains(user)).First();
+            if (user != null)
+            {
+                Lobby lobbyWithPlayer = _lobbyDatabase.Lobbies.Where(l => l.Players.Contains(user)).First();
+                lobbyWithPlayer.Players.Remove(user);
+
+                if (user.PlayerCookie == currentLobby.Owner)
                 {
                     if (currentLobby.Players.IsNullOrEmpty())
                     {
